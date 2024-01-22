@@ -5,11 +5,13 @@ using UnityEngine.AI;
 
 public class Monster : MonoBehaviour
 {
+    Animator anim;
     NavMeshAgent agent;
     public Transform finishPoint;
 
     private void Awake()
     {
+        anim = GetComponent<Animator>();
         agent = GetComponent<NavMeshAgent>();
     }
 
@@ -17,5 +19,17 @@ public class Monster : MonoBehaviour
     {
         finishPoint = GameObject.Find("Finish Point Box").transform;
         agent.SetDestination(finishPoint.position);
+    }
+
+    private void Update()
+    {
+        if (agent.remainingDistance <= agent.stoppingDistance)
+            OnAttack();
+    }
+
+    void OnAttack()
+    {
+        anim.SetBool("isAttack", true);
+        agent.speed = 0f;
     }
 }
