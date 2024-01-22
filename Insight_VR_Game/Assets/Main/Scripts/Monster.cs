@@ -32,4 +32,10 @@ public class Monster : MonoBehaviour
         anim.SetBool("isAttack", true);
         agent.speed = 0f;
     }
+
+    void Die()
+    {
+        anim.SetTrigger("isDie");
+        agent.enabled = false;
+    }
 }
