@@ -7,10 +7,18 @@ public class Monster : MonoBehaviour
 {
     Animator anim;
     NavMeshAgent agent;
+    
+    public Transform finishPoint;
+
+    //Monster Fade Out
     Renderer render;
     Color rendererColor;
-    public Transform finishPoint;
-    public float wfs;
+    [SerializeField]
+    float wfs;
+
+    [SerializeField]
+    int health = 5;
+    bool isHit = false;
 
     private void Awake()
     {
@@ -25,7 +33,6 @@ public class Monster : MonoBehaviour
         finishPoint = GameObject.Find("Finish Point Box").transform;
         int randZ = Random.Range(-2, 2);
         agent.SetDestination(finishPoint.position + new Vector3(0, 0, randZ));
-        Debug.Log(agent.destination);
 
         StartCoroutine(TestCode());
     }
@@ -49,6 +56,33 @@ public class Monster : MonoBehaviour
         Debug.Log("목적지 도착");
         anim.SetBool("isAttack", true);
         agent.speed = 0f;
+    }
+
+    void OnHit()
+    {
+        health -= 1;
+        if (health <= 0)
+        {
+            Die();
+            return;
+        }
+            
+        anim.SetBool("isHit", true);
+        isHit = true;
+
+        StartCoroutine("HitOut");
+    }
+
+    IEnumerator HitOut()
+    {
+        float saveSpeed = agent.speed;
+        agent.speed = 0;
+
+        float curAnimationTime = anim.GetCurrentAnimatorStateInfo(0).length;
+        yield return new WaitForSeconds(curAnimationTime);
+
+        anim.SetBool("isHit", false);
+        agent.speed = saveSpeed;
     }
 
     void Die()
@@ -83,7 +117,10 @@ public class Monster : MonoBehaviour
 
     IEnumerator TestCode()
     {
-        yield return new WaitForSeconds(5f);
-        Die();
+        while (true)
+        {
+            yield return new WaitForSeconds(2f);
+            OnHit();
+        }
     }
 }

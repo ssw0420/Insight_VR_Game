@@ -10,13 +10,13 @@ public class Spawner : MonoBehaviour
     private void Awake()
     {
         monsterPrefabs = new List<GameObject>();
+        monsterPrefabs.Add(Resources.Load("Prefabs/SlimePBR") as GameObject);
+        monsterPrefabs.Add(Resources.Load("Prefabs/TurtleShellPBR") as GameObject);
         monsterPrefabs.Add(Resources.Load("Prefabs/BeholderPBRDefault") as GameObject);
         monsterPrefabs.Add(Resources.Load("Prefabs/CactusPBR") as GameObject);
         monsterPrefabs.Add(Resources.Load("Prefabs/ChestMonsterPBRDefault") as GameObject);
         monsterPrefabs.Add(Resources.Load("Prefabs/MushroomAngryPBR") as GameObject);
         monsterPrefabs.Add(Resources.Load("Prefabs/MushroomSmilePBR") as GameObject);
-        monsterPrefabs.Add(Resources.Load("Prefabs/SlimePBR") as GameObject);
-        monsterPrefabs.Add(Resources.Load("Prefabs/TurtleShellPBR") as GameObject);
     }
 
     private void Start()

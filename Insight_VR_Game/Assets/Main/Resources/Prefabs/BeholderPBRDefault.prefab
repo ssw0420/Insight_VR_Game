@@ -1616,6 +1616,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   finishPoint: {fileID: 0}
+  wfs: 0
+  health: 10
 --- !u!65 &-7173143984094850392
 BoxCollider:
   m_ObjectHideFlags: 0
