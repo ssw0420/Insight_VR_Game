@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 2055562923975232855}
   - component: {fileID: 3190373000217630580}
   - component: {fileID: 4797812272251637675}
+  - component: {fileID: -2971224902332272454}
   m_Layer: 31
   m_Name: Arrow
   m_TagString: Untagged
@@ -111,8 +112,8 @@ Rigidbody:
     m_Bits: 0
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
-  m_UseGravity: 1
-  m_IsKinematic: 0
+  m_UseGravity: 0
+  m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 1
@@ -160,6 +161,21 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.02, y: 0.02, z: 0.62}
   m_Center: {x: 0, y: 0, z: 0.31}
+--- !u!114 &-2971224902332272454
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1485033661919127732}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 270c0d70146c07544951128db7bde22d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  crossbow: {fileID: 7144066539609156013, guid: 6df149cc378871e42a5568a2ff953b61, type: 3}
+  angle: 3
+  power: 3
 --- !u!1 &1606972069694784870
 GameObject:
   m_ObjectHideFlags: 0
