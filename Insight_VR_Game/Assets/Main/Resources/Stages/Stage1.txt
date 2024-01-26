@@ -1,0 +1,6 @@
+1,Slime,0
+1,Turtle,1
+2,Slime,0
+2,Slime,1
+5,Slime,0
+5,Slime,1

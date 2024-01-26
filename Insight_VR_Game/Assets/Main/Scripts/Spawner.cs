@@ -2,24 +2,32 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+struct SpawnData {
+    public float delay;
+    public string type;
+}
+
 public class Spawner : MonoBehaviour
 {
-    List<GameObject> monsterPrefabs;
-    bool isSpawn = false;
+    //리스폰 설정 변수
+    List<SpawnData> spawnDatas;
+
+    public List<GameObject> monsterPrefabs;
 
     private void Awake()
     {
-        monsterPrefabs = new List<GameObject>();
-        monsterPrefabs.Add(Resources.Load("Prefabs/SlimePBR") as GameObject);
-        monsterPrefabs.Add(Resources.Load("Prefabs/TurtleShellPBR") as GameObject);
-        monsterPrefabs.Add(Resources.Load("Prefabs/BeholderPBRDefault") as GameObject);
-        monsterPrefabs.Add(Resources.Load("Prefabs/CactusPBR") as GameObject);
-        monsterPrefabs.Add(Resources.Load("Prefabs/ChestMonsterPBRDefault") as GameObject);
-        monsterPrefabs.Add(Resources.Load("Prefabs/MushroomAngryPBR") as GameObject);
-        monsterPrefabs.Add(Resources.Load("Prefabs/MushroomSmilePBR") as GameObject);
+        spawnDatas = new List<SpawnData>();
     }
 
-    private void Start()
+    public void ReadSpawnData(float delay, string type)
+    {
+        SpawnData spawnData = new SpawnData();
+        spawnData.delay = delay;
+        spawnData.type = type;
+        spawnDatas.Add(spawnData);
+    }
+
+    public void Begin()
     {
         StartCoroutine(StartGame());
     }
@@ -27,17 +35,46 @@ public class Spawner : MonoBehaviour
     //임시 함수
     IEnumerator StartGame()
     {
-        while (true)
+        while(spawnDatas.Count > 0)
         {
-            yield return new WaitForSeconds(3f);
-            SpawnMonster();
+            float delay = spawnDatas[0].delay;
+            string type = spawnDatas[0].type;
+            spawnDatas.RemoveAt(0);
+            yield return new WaitForSeconds(delay);
+            SpawnMonster(type);
         }
     }
 
     //Spawner에 몬스터 소환
-    void SpawnMonster()
+    void SpawnMonster(string type)
     {
-        int monsterNum = Random.Range(0, monsterPrefabs.Count);
-        Instantiate(monsterPrefabs[monsterNum], transform);
+        int spawnType = 0;
+
+        switch (type)
+        {
+            case "Slime":
+                spawnType = 0;
+                break;
+            case "Turtle":
+                spawnType = 1;
+                break;
+            case "Beholder":
+                spawnType = 2;
+                break;
+            case "Cactus":
+                spawnType = 3;
+                break;
+            case "ChestMonster":
+                spawnType = 4;
+                break;
+            case "MushroomAngry":
+                spawnType = 5;
+                break;
+            case "MushroomSmile":
+                spawnType = 6;
+                break;
+        }
+
+        Instantiate(monsterPrefabs[spawnType], transform);
     }
 }
