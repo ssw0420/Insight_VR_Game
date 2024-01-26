@@ -5,20 +5,25 @@ using UnityEngine.AI;
 
 public class Monster : MonoBehaviour
 {
+    //테스트
+    GameManager manager;
+
     Animator anim;
     NavMeshAgent agent;
     
     public Transform finishPoint;
 
-    //Monster Fade Out
+    //Fade Out 관련 변수
     Renderer render;
     Color rendererColor;
     [SerializeField]
     float wfs;
 
     [SerializeField]
-    int health = 5;
-    bool isHit = false;
+    public int health = 5;
+
+    //Hit 관련 변수
+    float curHitAnimationTime;
 
     private void Awake()
     {
@@ -26,6 +31,9 @@ public class Monster : MonoBehaviour
         agent = GetComponent<NavMeshAgent>();
         render = gameObject.GetComponentInChildren<Renderer>();
         rendererColor = render.materials[0].color;
+
+        //테스트
+        manager = GameObject.Find("Game Manager").GetComponent<GameManager>();
     }
 
     private void Start()
@@ -34,7 +42,17 @@ public class Monster : MonoBehaviour
         int randZ = Random.Range(-2, 2);
         agent.SetDestination(finishPoint.position + new Vector3(0, 0, randZ));
 
-        StartCoroutine(TestCode());
+        //Hit 애니메이션 시간 구하기
+        RuntimeAnimatorController ac = anim.runtimeAnimatorController;
+        for (int i = 0; i < ac.animationClips.Length; i++)
+            if (ac.animationClips[i].name == "GetHit")
+                curHitAnimationTime = ac.animationClips[i].length;
+
+        //테스트 코드
+        //StartCoroutine(TestCode());
+
+        //테스트
+        manager.InputList(this);
     }
 
     private void Update()
@@ -51,6 +69,7 @@ public class Monster : MonoBehaviour
         }
     }
 
+    //공격 부분
     void OnAttack()
     {
         Debug.Log("목적지 도착");
@@ -58,8 +77,12 @@ public class Monster : MonoBehaviour
         agent.speed = 0f;
     }
 
-    void OnHit()
+    //맞는 부분
+    public void OnHit()
     {
+        if (anim.GetBool("isHit"))
+            return;
+
         health -= 1;
         if (health <= 0)
         {
@@ -68,7 +91,6 @@ public class Monster : MonoBehaviour
         }
             
         anim.SetBool("isHit", true);
-        isHit = true;
 
         StartCoroutine("HitOut");
     }
@@ -78,13 +100,13 @@ public class Monster : MonoBehaviour
         float saveSpeed = agent.speed;
         agent.speed = 0;
 
-        float curAnimationTime = anim.GetCurrentAnimatorStateInfo(0).length;
-        yield return new WaitForSeconds(curAnimationTime);
+        yield return new WaitForSeconds(curHitAnimationTime);
 
         anim.SetBool("isHit", false);
         agent.speed = saveSpeed;
     }
 
+    //죽는 부분
     void Die()
     {
         anim.SetTrigger("isDie");
@@ -115,6 +137,7 @@ public class Monster : MonoBehaviour
         Destroy(gameObject);
     }
 
+    //테스트 코드
     IEnumerator TestCode()
     {
         while (true)

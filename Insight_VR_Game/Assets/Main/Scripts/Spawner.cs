@@ -39,6 +39,5 @@ public class Spawner : MonoBehaviour
     {
         int monsterNum = Random.Range(0, monsterPrefabs.Count);
         Instantiate(monsterPrefabs[monsterNum], transform);
-        //monster.transform.position = transform.position;
     }
 }
