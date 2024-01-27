@@ -10,7 +10,7 @@ using UnityEngine.XR.Interaction.Toolkit;
 public class CrossbowController : MonoBehaviour
 {
     private Animator animator;
-    private bool isReload = false;
+    private bool isShoot = false;
 
     public float shootDelay = 1f;
 
@@ -24,39 +24,41 @@ public class CrossbowController : MonoBehaviour
 
     private void Awake()
     {
-        GameObject arrow = Instantiate(arrowPrefab, transform);
-        arrowManagerScript = arrow.GetComponent<ArrowManager>();
+        // GameObject arrow = Instantiate(arrowPrefab, transform);
+        // arrowManagerScript = arrow.GetComponent<ArrowManager>();
         // arrowManagerScript.GetCrossbow(gameObject);
+        LoadArrow();
     }
     private void Start()
     {
         animator = GetComponent<Animator>();
-        LoadArrow();
+        // LoadArrow();
     }
 
     private IEnumerator Fill()
     {
+        isShoot = false;
         var wfs = new WaitForSeconds(shootDelay);
         yield return wfs;
-
-        isReload = false;
+        
         LoadArrow();
     }
 
     public void Shoot()
     {
-        if(isReload)
+        if(!isShoot)
             return;
 
-        isReload = true;
         // StopAllCoroutines();
-        StartCoroutine(Fill());
         arrowManagerScript.Fire();
+        StartCoroutine(Fill());
     }
 
     void LoadArrow()
     {
         GameObject arrow = Instantiate(arrowPrefab, transform);
         arrowManagerScript = arrow.GetComponent<ArrowManager>();
+        // arrowManagerScript.GetCrossbow(gameObject);
+        isShoot = true;
     }
 }

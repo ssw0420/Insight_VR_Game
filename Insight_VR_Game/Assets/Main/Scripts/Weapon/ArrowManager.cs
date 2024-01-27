@@ -5,7 +5,7 @@ using UnityEngine;
 public class ArrowManager : MonoBehaviour
 {
 
-    [SerializeField] GameObject crossbow;
+    // [SerializeField] GameObject crossbow;
     Rigidbody rigid;
     TrailRenderer trailRenderer;
     public float angle;
@@ -14,10 +14,10 @@ public class ArrowManager : MonoBehaviour
     float Timedir;
     float gravity;
 
-    public void GetCrossbow(GameObject crossbow)
-    {
-        this.crossbow = crossbow;
-    }
+    // public void GetCrossbow(GameObject crossbow)
+    // {
+    //     this.crossbow = crossbow;
+    // }
 
     private void Awake()
     {
