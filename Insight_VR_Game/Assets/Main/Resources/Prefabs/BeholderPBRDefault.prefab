@@ -1618,6 +1618,7 @@ MonoBehaviour:
   finishPoint: {fileID: 0}
   wfs: 0
   health: 10
+  hitMaterial: {fileID: 2100000, guid: 916ccfb2d2a4f3744876e7ec7e830849, type: 2}
 --- !u!65 &-7173143984094850392
 BoxCollider:
   m_ObjectHideFlags: 0

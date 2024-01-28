@@ -1,19 +1,20 @@
 ﻿// Standard shader with stipple transparency
-// by Alex Ocias - https://ocias.com
+// by Alex Ocias - [https://ocias.com](https://ocias.com/)
 
 // based on an article by Digital Rune: https://www.digitalrune.com/Blog/Post/1743/Screen-Door-Transparency
 
 Shader "Ocias/Standard (Stipple Transparency)" {
-	Properties {
-		_Color ("Color", Color) = (1,1,1,1)
-		_MainTex ("Albedo (RGB)", 2D) = "white" {}
-		_Glossiness ("Smoothness", Range(0,1)) = 0.5
-		_Metallic ("Metallic", Range(0,1)) = 0.0
+	Properties{
+	_Color("Color", Color) = (1,1,1,1)
+	_MainTex("Albedo (RGB)", 2D) = "white" {}
+	_Glossiness("Smoothness", Range(0,1)) = 0.5
+	_Metallic("Metallic", Range(0,1)) = 0.0
 	}
-	SubShader {
-		Tags { "RenderType"="Opaque" }
+
+		SubShader{
+		Tags { "RenderType" = "Opaque" }
 		LOD 100
-		
+
 		CGPROGRAM
 		// Physically based Standard lighting model, and enable shadows on all light types
 		#pragma surface surf Standard fullforwardshadows
@@ -32,9 +33,9 @@ Shader "Ocias/Standard (Stipple Transparency)" {
 		half _Metallic;
 		fixed4 _Color;
 
-		void surf (Input IN, inout SurfaceOutputStandard o) {
+		void surf(Input IN, inout SurfaceOutputStandard o) {
 			// Albedo comes from a texture tinted by color
-			fixed4 c = tex2D (_MainTex, IN.uv_MainTex) * _Color;
+			fixed4 c = tex2D(_MainTex, IN.uv_MainTex) * _Color;
 			o.Albedo = c.rgb;
 			// Metallic and smoothness come from slider variables
 			o.Metallic = _Metallic;
@@ -43,9 +44,9 @@ Shader "Ocias/Standard (Stipple Transparency)" {
 			// Screen-door transparency: Discard pixel if below threshold.
 			float4x4 thresholdMatrix =
 			{  1.0 / 17.0,  9.0 / 17.0,  3.0 / 17.0, 11.0 / 17.0,
-			  13.0 / 17.0,  5.0 / 17.0, 15.0 / 17.0,  7.0 / 17.0,
-			   4.0 / 17.0, 12.0 / 17.0,  2.0 / 17.0, 10.0 / 17.0,
-			  16.0 / 17.0,  8.0 / 17.0, 14.0 / 17.0,  6.0 / 17.0
+				13.0 / 17.0,  5.0 / 17.0, 15.0 / 17.0,  7.0 / 17.0,
+				4.0 / 17.0, 12.0 / 17.0,  2.0 / 17.0, 10.0 / 17.0,
+				16.0 / 17.0,  8.0 / 17.0, 14.0 / 17.0,  6.0 / 17.0
 			};
 			float4x4 _RowAccess = { 1,0,0,0, 0,1,0,0, 0,0,1,0, 0,0,0,1 };
 			float2 pos = IN.screenPos.xy / IN.screenPos.w;
@@ -54,5 +55,6 @@ Shader "Ocias/Standard (Stipple Transparency)" {
 		}
 		ENDCG
 	}
-	FallBack "Diffuse"
+		FallBack "Diffuse"
+
 }

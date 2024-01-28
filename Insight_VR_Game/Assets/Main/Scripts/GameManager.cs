@@ -10,7 +10,7 @@ public class GameManager : MonoBehaviour
 
     //Stage 파일 입출력 관련
     public List<Spawner> spawner;
-    public int spawnerIndex;
+    public int stage;
 
     private void Awake()
     {
@@ -24,11 +24,8 @@ public class GameManager : MonoBehaviour
 
     void ReadSpawnFile()
     {
-        //변수 초기화
-        spawnerIndex = 0;
-
         //리스폰 파일 읽기
-        TextAsset textFile = Resources.Load("Stages/Stage1") as TextAsset;
+        TextAsset textFile = Resources.Load("Stages/Stage" + stage) as TextAsset;
         StringReader stringReader = new StringReader(textFile.text);
 
         while(stringReader != null)

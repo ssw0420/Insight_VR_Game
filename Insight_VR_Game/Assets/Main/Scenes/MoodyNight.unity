@@ -4031,7 +4031,7 @@ MonoBehaviour:
   spawner:
   - {fileID: 1692209917}
   - {fileID: 1333148530}
-  spawnerIndex: 0
+  stage: 2
 --- !u!114 &1333148530 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1407636342966099738, guid: 953a7bdb2444c1d4e87666ad5fc5881a, type: 3}

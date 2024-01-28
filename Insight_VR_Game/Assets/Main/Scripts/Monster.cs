@@ -8,9 +8,9 @@ public class Monster : MonoBehaviour
     //테스트
     GameManager manager;
 
+    //움직임 및 애니메이션
     Animator anim;
     NavMeshAgent agent;
-    
     public Transform finishPoint;
 
     //Fade Out 관련 변수
@@ -23,7 +23,9 @@ public class Monster : MonoBehaviour
     public int health = 5;
 
     //Hit 관련 변수
+    public Material hitMaterial;
     float curHitAnimationTime;
+
 
     private void Awake()
     {
@@ -49,7 +51,7 @@ public class Monster : MonoBehaviour
                 curHitAnimationTime = ac.animationClips[i].length;
 
         //테스트 코드
-        //StartCoroutine(TestCode());
+        StartCoroutine(TestCode());
 
         //테스트
         manager.InputList(this);
@@ -91,7 +93,6 @@ public class Monster : MonoBehaviour
         }
             
         anim.SetBool("isHit", true);
-
         StartCoroutine("HitOut");
     }
 
@@ -99,9 +100,12 @@ public class Monster : MonoBehaviour
     {
         float saveSpeed = agent.speed;
         agent.speed = 0;
+        Material saveMaterial = render.materials[0];
+        render.material = hitMaterial;
 
         yield return new WaitForSeconds(curHitAnimationTime);
 
+        render.material = saveMaterial;
         anim.SetBool("isHit", false);
         agent.speed = saveSpeed;
     }
