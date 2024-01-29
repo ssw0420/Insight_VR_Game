@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -12,13 +13,19 @@ public class GameManager : MonoBehaviour
     public List<Spawner> spawner;
     public int stage;
 
+    //FadeIn/Out º¯¼ö
+    [Header("FadeIn/Out")]
+    public FadeIO fade;
+
     private void Awake()
     {
         monster = new List<Monster>();
+        fade = GetComponent<FadeIO>();
     }
 
     private void Start()
     {
+        DontDestroyOnLoad(gameObject);
         ReadSpawnFile();
     }
 
@@ -62,5 +69,11 @@ public class GameManager : MonoBehaviour
     public void InputList(Monster monster)
     {
         this.monster.Add(monster);
+    }
+
+    public void SceneMove(int SceneNum)
+    {
+        SceneManager.LoadScene(SceneNum);
+        fade.StartFadeIn();
     }
 }
