@@ -1,0 +1,15 @@
+1,Beholder,0
+1,Beholder,1
+3,ChestMonster,3
+6,Beholder,0
+6,Beholder,1
+15,ChestMonster,2
+6,Beholder,0
+6,Beholder,1
+9,ChestMonster,3
+6,Beholder,0
+6,Beholder,1
+15,ChestMonster,2
+6,Beholder,0
+6,Beholder,1
+9,ChestMonster,3
