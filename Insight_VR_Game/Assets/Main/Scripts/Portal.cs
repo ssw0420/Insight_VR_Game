@@ -4,10 +4,8 @@ using UnityEngine;
 
 public class Portal : MonoBehaviour
 {
-    public GameManager gameManager;
-
-    void MoveStageScene()
+    public void MoveStageScene()
     {
-        gameManager.SceneMove(1);
+        SceneLoader.Instance.LoadScene("MoodyNight");
     }
 }

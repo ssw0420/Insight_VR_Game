@@ -13,14 +13,9 @@ public class GameManager : MonoBehaviour
     public List<Spawner> spawner;
     public int stage;
 
-    //FadeIn/Out º¯¼ö
-    [Header("FadeIn/Out")]
-    public FadeIO fade;
-
     private void Awake()
     {
         monster = new List<Monster>();
-        fade = GetComponent<FadeIO>();
     }
 
     private void Start()
@@ -58,22 +53,16 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetButtonDown("Fire1"))
-        {
-            monster[0].OnHit();
-            if (monster[0].health <= 0)
-                monster.Remove(monster[0]);
-        }
+        //if (Input.GetButtonDown("Fire1"))
+        //{
+        //    monster[0].OnHit();
+        //    if (monster[0].health <= 0)
+        //        monster.Remove(monster[0]);
+        //}
     }
 
     public void InputList(Monster monster)
     {
         this.monster.Add(monster);
-    }
-
-    public void SceneMove(int SceneNum)
-    {
-        SceneManager.LoadScene(SceneNum);
-        fade.StartFadeIn();
     }
 }

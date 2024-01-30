@@ -6,20 +6,16 @@ using UnityEngine.UI;
 public class FadeIO : MonoBehaviour
 {
     Image image;
+    [SerializeField]float fadeTime = 1;
 
     private void Awake()
     {
         image = GetComponent<Image>();
     }
 
-    private void Start()
-    {
-        DontDestroyOnLoad(gameObject);
-        DontDestroyOnLoad(gameObject.transform.parent);
-    }
-
     public void StartFadeIn()
     {
+        Debug.Log("FadeIn");
         StartCoroutine(FadeIn());
     }
 
@@ -31,20 +27,30 @@ public class FadeIO : MonoBehaviour
     IEnumerator FadeIn()
     {
         Color color = image.color;
+        float time = 0f;
 
-        for(int i = 0; i <= 100; i++)
+        while (color.a < 1f)
         {
-            color.a += Time.deltaTime * 0.01f;
+            time += Time.deltaTime / fadeTime;
+            color.a = Mathf.Lerp(0, 1, time);
             image.color = color;
 
-            if (image.color.a >= 1)
-                break;
+            yield return new WaitForSeconds(0.001f);
         }
-        yield return null;
     }
 
     IEnumerator FadeOut()
     {
-        yield return null;
+        Color color = image.color;
+        float time = 0f;
+
+        while (color.a > 0f)
+        {
+            time += Time.deltaTime / fadeTime;
+            color.a = Mathf.Lerp(1, 0, time);
+            image.color = color;
+
+            yield return new WaitForSeconds(0.001f);
+        }
     }
 }

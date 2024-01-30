@@ -15,9 +15,6 @@ public class Monster : MonoBehaviour
 
     //Fade Out 관련 변수
     Renderer render;
-    Color rendererColor;
-    [SerializeField]
-    float wfs;
 
     [SerializeField]
     public int health = 5;
@@ -32,7 +29,6 @@ public class Monster : MonoBehaviour
         anim = GetComponent<Animator>();
         agent = GetComponent<NavMeshAgent>();
         render = gameObject.GetComponentInChildren<Renderer>();
-        rendererColor = render.materials[0].color;
 
         //테스트
         manager = GameObject.Find("Game Manager").GetComponent<GameManager>();
@@ -123,19 +119,17 @@ public class Monster : MonoBehaviour
     {
         yield return new WaitForSeconds(3f);
 
-        float alpha = 1;
+        Color color = render.materials[0].color;
+        float time = 0f;
+        float fadeTime = 1f;
 
-        while (true)
+        while (color.a > 0f)
         {
-            alpha -= 0.001f;
-            
-            rendererColor.a = alpha;
-            render.materials[0].color = rendererColor;
+            time += Time.deltaTime / fadeTime;
+            color.a = Mathf.Lerp(1, 0, time);
+            render.materials[0].color = color;
 
-            if (alpha <= 0)
-                break;
-
-            yield return new WaitForSeconds(wfs);
+            yield return new WaitForSeconds(0.001f);
         }
 
         Destroy(gameObject);
