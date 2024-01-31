@@ -15,7 +15,7 @@ public class GameManager : MonoBehaviour
         instance = this;
     }
 
-    int stage;
+    [SerializeField]int stage = 1;
 
     private void Start()
     {

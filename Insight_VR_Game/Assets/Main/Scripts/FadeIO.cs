@@ -15,7 +15,6 @@ public class FadeIO : MonoBehaviour
 
     public void StartFadeIn()
     {
-        Debug.Log("FadeIn");
         StartCoroutine(FadeIn());
     }
 

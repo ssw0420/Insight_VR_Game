@@ -224,7 +224,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   finishPoint: {fileID: 0}
-  wfs: 0
   health: 5
   hitMaterial: {fileID: 2100000, guid: 916ccfb2d2a4f3744876e7ec7e830849, type: 2}
 --- !u!65 &-4316086226075108268

@@ -7,6 +7,12 @@ public class MonsterManager : MonoBehaviour
 {
     public List<Spawner> spawner;
 
+    //임시 게임 시작
+    private void Start()
+    {
+        GameStart();
+    }
+
     public void GameStart()
     {
         int stage = GameManager.Instance.GetStage();

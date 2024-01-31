@@ -61,7 +61,6 @@ public class SceneLoader : MonoBehaviour
         yield return new WaitForSeconds(1f);
         async.allowSceneActivation = true;
         fade.StartFadeOut();
-        
     }
 
 }

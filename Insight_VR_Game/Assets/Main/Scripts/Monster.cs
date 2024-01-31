@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -29,9 +30,6 @@ public class Monster : MonoBehaviour
         anim = GetComponent<Animator>();
         agent = GetComponent<NavMeshAgent>();
         render = gameObject.GetComponentInChildren<Renderer>();
-
-        //테스트
-        manager = GameObject.Find("Game Manager").GetComponent<GameManager>();
     }
 
     private void Start()
@@ -47,7 +45,7 @@ public class Monster : MonoBehaviour
                 curHitAnimationTime = ac.animationClips[i].length;
 
         //테스트 코드
-        StartCoroutine(TestCode());
+        //StartCoroutine(TestCode());
     }
 
     private void Update()
@@ -58,8 +56,10 @@ public class Monster : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.layer == LayerMask.NameToLayer("Monster"))
+        Debug.Log(other.gameObject.name);
+        if (other.gameObject.layer == LayerMask.NameToLayer("Finish Point"))
         {
+            Debug.Log("공격");
             OnAttack();
         }
     }
