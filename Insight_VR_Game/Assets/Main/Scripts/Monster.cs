@@ -48,9 +48,6 @@ public class Monster : MonoBehaviour
 
         //테스트 코드
         StartCoroutine(TestCode());
-
-        //테스트
-        manager.InputList(this);
     }
 
     private void Update()
