@@ -50,8 +50,8 @@ public class Monster : MonoBehaviour
 
     private void Update()
     {
-        //if (agent.remainingDistance < agent.stoppingDistance)
-        //    OnAttack();
+        if(agent.velocity.sqrMagnitude >= 0.2f * 0.2f && agent.remainingDistance <= 0.5f)
+            OnAttack();
     }
 
     void OnTriggerEnter(Collider other)
