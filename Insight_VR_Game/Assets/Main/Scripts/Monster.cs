@@ -54,20 +54,9 @@ public class Monster : MonoBehaviour
             OnAttack();
     }
 
-    void OnTriggerEnter(Collider other)
-    {
-        Debug.Log(other.gameObject.name);
-        if (other.gameObject.layer == LayerMask.NameToLayer("Finish Point"))
-        {
-            Debug.Log("공격");
-            OnAttack();
-        }
-    }
-
     //공격 부분
     void OnAttack()
     {
-        Debug.Log("목적지 도착");
         anim.SetBool("isAttack", true);
         agent.speed = 0f;
     }
