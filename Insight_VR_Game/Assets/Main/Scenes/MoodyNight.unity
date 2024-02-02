@@ -179,11 +179,13 @@ MonoBehaviour:
       m_Name: Position
       m_Type: 0
       m_ExpectedControlType: Vector3
+
       m_Id: 0159a179-798d-4a56-b505-e5191600bc77
       m_Processors: 
       m_Interactions: 
       m_SingletonActionBindings:
       - m_Name: 
+
         m_Id: 4606b1f1-fffc-470b-9311-ae7c5bbaac2d
         m_Path: <XRHMD>/centerEyePosition
         m_Interactions: 
@@ -327,7 +329,6 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
---- !u!114 &43855668
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
