@@ -5,6 +5,7 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     protected static GameManager instance;
+    
     public static GameManager Instance
     {
         get { return instance; }

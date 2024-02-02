@@ -80,19 +80,13 @@ public class ArrowManager : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        
-        // if (other.CompareTag("Monster"))
-        // {
-        //     Debug.Log("적중");
-        //     Destroy(gameObject);
 
-        //     var MonsterScript = other.GetComponent<Monster>();
-        //     MonsterScript.health -= 1;
-        //     if (MonsterScript.health <= 0)
-        //         MonsterScript.Die();
-        //     else
-        //         MonsterScript.Hit();
-        // }
+        if (other.gameObject.layer == LayerMask.NameToLayer("Monster"))
+        {
+            Debug.Log("적중");
+            other.GetComponent<Monster>().OnHit();
+            Destroy(gameObject);
+        }
 
         if (other.CompareTag("Terrain"))
         {
