@@ -108,11 +108,7 @@ NavMeshSettings:
     agentTypeID: 0
     agentRadius: 0.5
     agentHeight: 2
-<<<<<<< HEAD
     agentSlope: 45
-=======
-    agentSlope: 20
->>>>>>> parent of 42ec402 (Save Data)
     agentClimb: 0.4
     ledgeDropHeight: 0
     maxJumpAcrossDistance: 0
