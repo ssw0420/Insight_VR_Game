@@ -1,6 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Diagnostics;
+// using System.Diagnostics;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -12,9 +12,13 @@ public class CrossbowController : MonoBehaviour
     private Animator animator;
     private bool isShoot = false;
 
-    public float shootDelay = 1f;
+    public float shootDelay = 0.8f;
 
     public GameObject arrowPrefab;
+
+    private AudioSource audioSource;
+
+    private bool isFilling = false;
     // public Transform shootPoint;
 
     [SerializeField] ArrowManager arrowManagerScript;
@@ -27,38 +31,68 @@ public class CrossbowController : MonoBehaviour
         // GameObject arrow = Instantiate(arrowPrefab, transform);
         // arrowManagerScript = arrow.GetComponent<ArrowManager>();
         // arrowManagerScript.GetCrossbow(gameObject);
-        LoadArrow();
+        // LoadArrow();
+        Debug.Log("시작");
+        // animator.SetBool("isEmpty", true);
+        // LoadArrow();
     }
     private void Start()
     {
+        audioSource = GetComponent<AudioSource>();
         animator = GetComponent<Animator>();
+        Debug.Log("애니메이션, 오디오 호출");
+        StartCoroutine(Fill());
         // LoadArrow();
     }
 
     private IEnumerator Fill()
     {
+        isFilling = true;
+
+        DrawingBow();
+
         isShoot = false;
+
         var wfs = new WaitForSeconds(shootDelay);
         yield return wfs;
-        
+
+        animator.SetBool("isEmpty", false);
         LoadArrow();
+
+        isFilling = false;
+        Debug.Log("재장전 완료");
+        
     }
 
     public void Shoot()
     {
-        if(!isShoot)
+        if(!isShoot || isFilling)
             return;
 
-        // StopAllCoroutines();
+        animator.SetTrigger("ShootTrigger");
         arrowManagerScript.Fire();
-        StartCoroutine(Fill());
+        audioSource.Play();
+        Debug.Log("발사");
+        if(!isFilling)
+        {
+            StartCoroutine(Fill());
+        }
+        Debug.Log("재장전 시작");
     }
 
     void LoadArrow()
     {
+        
         GameObject arrow = Instantiate(arrowPrefab, transform);
         arrowManagerScript = arrow.GetComponent<ArrowManager>();
-        // arrowManagerScript.GetCrossbow(gameObject);
+
         isShoot = true;
+    }
+
+    void DrawingBow()
+    {
+        Debug.Log("장전");
+        animator.SetBool("isEmpty", true);
+        GameObject.Find("Bow Line").GetComponent<AudioSource>().Play();
     }
 }

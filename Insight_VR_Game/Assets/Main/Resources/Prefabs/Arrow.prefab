@@ -98,7 +98,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1485033661919127732}
   serializedVersion: 4
-  m_Mass: 0.01
+  m_Mass: 0.02
   m_Drag: 0.01
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -112,9 +112,9 @@ Rigidbody:
     m_Bits: 0
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
-  m_UseGravity: 0
+  m_UseGravity: 1
   m_IsKinematic: 1
-  m_Interpolate: 0
+  m_Interpolate: 2
   m_Constraints: 96
   m_CollisionDetection: 1
 --- !u!136 &3190373000217630580
@@ -155,7 +155,7 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
@@ -175,6 +175,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   angle: 45
   power: 0.01
+  speed: 1
 --- !u!1 &1606972069694784870
 GameObject:
   m_ObjectHideFlags: 0
@@ -253,7 +254,7 @@ TrailRenderer:
   m_PreviewTimeScale: 1
   m_Parameters:
     serializedVersion: 3
-    widthMultiplier: 0.1
+    widthMultiplier: 0.03
     widthCurve:
       serializedVersion: 2
       m_Curve:
