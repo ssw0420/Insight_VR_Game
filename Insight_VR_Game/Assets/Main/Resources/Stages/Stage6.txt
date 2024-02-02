@@ -1,0 +1,15 @@
+1,Cactus,0
+1,Cactus,1
+3,Beholder,3
+6,Cactus,0
+6,Cactus,1
+15,Beholder,2
+6,Cactus,0
+6,Cactus,1
+9,Beholder,3
+6,Cactus,0
+6,Cactus,1
+15,Beholder,2
+6,Cactus,0
+6,Cactus,1
+9,Beholder,3
