@@ -110,11 +110,7 @@ NavMeshSettings:
     agentHeight: 2
 <<<<<<< HEAD
 <<<<<<< HEAD
-<<<<<<< HEAD
     agentSlope: 45
-=======
-    agentSlope: 20
->>>>>>> parent of 42ec402 (Save Data)
 =======
     agentSlope: 20
 >>>>>>> parent of 42ec402 (Save Data)
