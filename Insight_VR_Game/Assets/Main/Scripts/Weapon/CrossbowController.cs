@@ -18,6 +18,7 @@ public class CrossbowController : MonoBehaviour
 
     private AudioSource audioSource;
 
+    //Transform pos;
     private bool isFilling = false;
     // public Transform shootPoint;
 
@@ -35,6 +36,7 @@ public class CrossbowController : MonoBehaviour
         Debug.Log("시작");
         // animator.SetBool("isEmpty", true);
         // LoadArrow();
+        //pos = GetComponent<Transform>();
     }
     private void Start()
     {
@@ -82,7 +84,7 @@ public class CrossbowController : MonoBehaviour
 
     void LoadArrow()
     {
-        
+
         GameObject arrow = Instantiate(arrowPrefab, transform);
         arrowManagerScript = arrow.GetComponent<ArrowManager>();
 
