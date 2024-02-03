@@ -16,15 +16,8 @@ public class GameManager : MonoBehaviour
         instance = this;
     }
 
-    [SerializeField] int stage = 1;
-
     private void Start()
     {
         DontDestroyOnLoad(gameObject);
-    }
-
-    public int GetStage()
-    {
-        return stage;
     }
 }

@@ -75,6 +75,7 @@ public class Spawner : MonoBehaviour
                 break;
         }
 
-        Instantiate(monsterPrefabs[spawnType], transform);
+        GameObject spawnMonster = Instantiate(monsterPrefabs[spawnType], transform);
+        MonsterManager.Instance.AddLiveMonsterList(spawnMonster);
     }
 }

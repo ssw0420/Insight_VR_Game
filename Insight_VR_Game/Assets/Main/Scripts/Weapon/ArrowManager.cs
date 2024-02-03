@@ -30,7 +30,6 @@ public class ArrowManager : MonoBehaviour
     private void Start()
     {
         transform.localPosition = new Vector3(0, 0.16572f, 0.20547f);
-        Debug.Log(transform.position);
         trailRenderer.enabled = false;
         Timedir = Time.deltaTime;
         gravity = -(1.0f * Timedir * Timedir / 4.0f);

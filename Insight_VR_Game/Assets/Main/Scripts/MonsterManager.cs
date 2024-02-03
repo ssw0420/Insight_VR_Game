@@ -5,17 +5,32 @@ using UnityEngine;
 
 public class MonsterManager : MonoBehaviour
 {
+    protected static MonsterManager instance;
+
+    public static MonsterManager Instance
+    {
+        get { return instance; }
+    }
+
+    private void Awake()
+    {
+        instance = this;
+    }
+
     public List<Spawner> spawner;
+    List<GameObject> liveMonster;
+    int stage;
 
     //임시 게임 시작
     private void Start()
     {
         GameStart();
+        liveMonster = new List<GameObject>();
     }
 
     public void GameStart()
     {
-        int stage = GameManager.Instance.GetStage();
+        stage = 1;
         ReadSpawnFile(stage);
     }
 
@@ -44,5 +59,21 @@ public class MonsterManager : MonoBehaviour
         }
 
         stringReader.Close();
+    }
+
+    public void AddLiveMonsterList(GameObject liveMonster)
+    {
+        this.liveMonster.Add(liveMonster);
+    }
+
+    public void DeleteLiveMonsterList(GameObject liveMonster)
+    {
+        this.liveMonster.Remove(liveMonster);
+
+        if (this.liveMonster.Count <= 0){
+            stage += 1;
+            ReadSpawnFile(stage);
+        }
+           
     }
 }

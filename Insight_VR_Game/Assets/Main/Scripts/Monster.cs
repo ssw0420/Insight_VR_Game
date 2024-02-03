@@ -119,6 +119,7 @@ public class Monster : MonoBehaviour
         }
 
         Destroy(gameObject);
+        MonsterManager.Instance.DeleteLiveMonsterList(this.gameObject);
     }
 
     //테스트 코드
