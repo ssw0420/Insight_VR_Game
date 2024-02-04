@@ -16,6 +16,8 @@ public class ArrowManager : MonoBehaviour
     float shootTime;
     float gravity;
 
+    bool isShoot;
+
     // public void GetCrossbow(GameObject crossbow)
     // {
     //     this.crossbow = crossbow;
@@ -38,45 +40,68 @@ public class ArrowManager : MonoBehaviour
 
     public void Fire()
     {
+        isShoot = true;
         rigid.isKinematic = false;
         trailRenderer.enabled = true;
         rigid.useGravity = true;
         gameObject.transform.SetParent(null);
 
-        StartCoroutine("Move");
+        // StartCoroutine("Move");
     }
 
-    IEnumerator Move()
+    private void FixedUpdate()
     {
-        while (true)
+        if(isShoot == true)
         {
-            yield return null;
-            shootTime += Time.deltaTime;
-            GetComponent<Rigidbody>().AddForce(transform.forward * speed);
-            // if(shootTime < 0.15f)
-            // {
-            //     GetComponent<Rigidbody>().AddForce(transform.forward * speed);
-            // }
-            // else
-            // {
-            //     Timedir += Time.deltaTime / 2;
-            //     rigid.isKinematic = false;
-            //     trailRenderer.enabled = true;
-            //     rigid.useGravity = true;
-            //     v1.z = power = Mathf.Cos(angle * Mathf.PI / 180.0f) * Timedir;
-            //     v1.y = power = Mathf.Cos(angle * Mathf.PI / 180.0f) * Timedir * gravity;
-            //     transform.Translate(v1);
-
-            //     transform.Rotate(new Vector3(Mathf.Cos(angle * Mathf.PI / 180.0f), 0, 0));
-            // }
-            // Timedir += Time.deltaTime;
-            // v1.z = power = Mathf.Cos(angle * Mathf.PI / 180.0f) * Timedir;
-            // v1.y = power = Mathf.Cos(angle * Mathf.PI / 180.0f) * Timedir * gravity;
-            // transform.Translate(v1);
-
-            // transform.Rotate(new Vector3(Mathf.Cos(angle * Mathf.PI / 180.0f), 0, 0));
+            ApplyForce();
         }
     }
+
+    private void ApplyForce()
+    {
+        shootTime += Time.fixedDeltaTime;
+        GetComponent<Rigidbody>().AddForce(transform.forward * speed);
+        if(shootTime >= 3.0f)
+        {
+            Destroy(gameObject);
+        }
+    }
+
+    // IEnumerator Move()
+    // {
+    //     while (true)
+    //     {
+    //         yield return new WaitForFixedUpdate();
+    //         shootTime += Time.deltaTime;
+    //         GetComponent<Rigidbody>().AddForce(transform.forward * speed);
+    //         // if(shootTime < 0.15f)
+    //         // {
+    //         //     GetComponent<Rigidbody>().AddForce(transform.forward * speed);
+    //         // }
+    //         // else
+    //         // {
+    //         //     Timedir += Time.deltaTime / 2;
+    //         //     rigid.isKinematic = false;
+    //         //     trailRenderer.enabled = true;
+    //         //     rigid.useGravity = true;
+    //         //     v1.z = power = Mathf.Cos(angle * Mathf.PI / 180.0f) * Timedir;
+    //         //     v1.y = power = Mathf.Cos(angle * Mathf.PI / 180.0f) * Timedir * gravity;
+    //         //     transform.Translate(v1);
+
+    //         //     transform.Rotate(new Vector3(Mathf.Cos(angle * Mathf.PI / 180.0f), 0, 0));
+    //         // }
+    //         // Timedir += Time.deltaTime;
+    //         // v1.z = power = Mathf.Cos(angle * Mathf.PI / 180.0f) * Timedir;
+    //         // v1.y = power = Mathf.Cos(angle * Mathf.PI / 180.0f) * Timedir * gravity;
+    //         // transform.Translate(v1);
+
+    //         // transform.Rotate(new Vector3(Mathf.Cos(angle * Mathf.PI / 180.0f), 0, 0));
+    //         if(shootTime >= 3.0f)
+    //         {
+    //             Destroy(gameObject);
+    //         }
+    //     }
+    // }
 
     private void OnTriggerEnter(Collider other)
     {
@@ -92,7 +117,8 @@ public class ArrowManager : MonoBehaviour
         {
             GetComponent<Rigidbody>().AddForce(transform.forward * 0);
             Debug.Log("지형 오브젝트에 적중");
-            Destroy(gameObject);
+            Destroy(gameObject, 1.0f);
         }
     }
+
 }
