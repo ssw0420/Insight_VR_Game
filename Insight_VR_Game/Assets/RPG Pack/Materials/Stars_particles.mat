@@ -7,13 +7,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-<<<<<<<< HEAD:Insight_VR_Game/Assets/RPG Pack/Materials/Stars_particles.mat
   m_Name: Stars_particles
   m_Shader: {fileID: 200, guid: 0000000000000000f000000000000000, type: 0}
-========
-  m_Name: DiffuseWithStipple
-  m_Shader: {fileID: 4800000, guid: 02fe8f632106e431e9dd405f02a23289, type: 3}
->>>>>>>> Version_1:Insight_VR_Game/Assets/Ocias/StippleShaders/Materials/DiffuseWithStipple.mat
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
@@ -22,7 +17,7 @@ Material:
   m_LightmapFlags: 1
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: 2000
+  m_CustomRenderQueue: -1
   stringTagMap: {}
   disabledShaderPasses: []
   m_LockedProperties: 
@@ -82,7 +77,6 @@ Material:
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
-    - _Transparency: 1
     - _UVSec: 0
     - _ZWrite: 1
     m_Colors:
