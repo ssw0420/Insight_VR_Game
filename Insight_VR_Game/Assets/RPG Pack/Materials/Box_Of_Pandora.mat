@@ -7,22 +7,14 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-<<<<<<<< HEAD:Insight_VR_Game/Assets/RPG Pack/Materials/Box_Of_Pandora.mat
   m_Name: Box_Of_Pandora
-========
-  m_Name: Light
->>>>>>>> Version_1:Insight_VR_Game/Assets/Main/Settings/Meterial/Light.mat
   m_Shader: {fileID: 46, guid: 0000000000000000f000000000000000, type: 0}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords:
   - _EMISSION
   m_InvalidKeywords: []
-<<<<<<<< HEAD:Insight_VR_Game/Assets/RPG Pack/Materials/Box_Of_Pandora.mat
   m_LightmapFlags: 1
-========
-  m_LightmapFlags: 0
->>>>>>>> Version_1:Insight_VR_Game/Assets/Main/Settings/Meterial/Light.mat
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: -1
@@ -87,11 +79,6 @@ Material:
     - _UVSec: 0
     - _ZWrite: 1
     m_Colors:
-<<<<<<<< HEAD:Insight_VR_Game/Assets/RPG Pack/Materials/Box_Of_Pandora.mat
     - _Color: {r: 0.75735295, g: 0.73523146, b: 0.707234, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-========
-    - _Color: {r: 0.041651815, g: 0.9811321, b: 0.9450868, a: 1}
-    - _EmissionColor: {r: 0.0033465356, g: 0.9559735, b: 0.8796226, a: 1}
->>>>>>>> Version_1:Insight_VR_Game/Assets/Main/Settings/Meterial/Light.mat
   m_BuildTextureStacks: []
