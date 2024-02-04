@@ -24,12 +24,15 @@ public class Monster : MonoBehaviour
     public Material hitMaterial;
     float curHitAnimationTime;
 
+    //몬스터 플레이어 회전
+    Camera camera;
 
     private void Awake()
     {
         anim = GetComponent<Animator>();
         agent = GetComponent<NavMeshAgent>();
         render = gameObject.GetComponentInChildren<Renderer>();
+        camera = Camera.main;
     }
 
     private void Start()
@@ -43,15 +46,25 @@ public class Monster : MonoBehaviour
         for (int i = 0; i < ac.animationClips.Length; i++)
             if (ac.animationClips[i].name == "GetHit")
                 curHitAnimationTime = ac.animationClips[i].length;
-
-        //테스트 코드
-        //StartCoroutine(TestCode());
     }
 
     private void Update()
     {
         if(agent.velocity.sqrMagnitude >= 0.2f * 0.2f && agent.remainingDistance <= 0.5f)
             OnAttack();
+    }
+
+    void FixedUpdate()
+    {
+        if (anim.GetBool("isAttack"))
+        {
+            Vector3 lookDir = (camera.transform.position - transform.position).normalized;
+
+            Quaternion from = transform.rotation;
+            Quaternion to = Quaternion.LookRotation(lookDir);
+
+            transform.rotation = Quaternion.Lerp(from, to, Time.fixedDeltaTime * 9f);
+        }
     }
 
     //공격 부분
@@ -120,15 +133,5 @@ public class Monster : MonoBehaviour
 
         Destroy(gameObject);
         MonsterManager.Instance.DeleteLiveMonsterList(this.gameObject);
-    }
-
-    //테스트 코드
-    IEnumerator TestCode()
-    {
-        while (true)
-        {
-            yield return new WaitForSeconds(2f);
-            OnHit();
-        }
     }
 }
