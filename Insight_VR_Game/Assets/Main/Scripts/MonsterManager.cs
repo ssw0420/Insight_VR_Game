@@ -74,6 +74,5 @@ public class MonsterManager : MonoBehaviour
             stage += 1;
             ReadSpawnFile(stage);
         }
-           
     }
 }

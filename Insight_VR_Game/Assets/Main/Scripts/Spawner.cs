@@ -13,6 +13,7 @@ public class Spawner : MonoBehaviour
     List<SpawnData> spawnDatas;
 
     public List<GameObject> monsterPrefabs;
+    public List<AudioClip> monsterAudio;
 
     private void Awake()
     {
@@ -76,6 +77,7 @@ public class Spawner : MonoBehaviour
         }
 
         GameObject spawnMonster = Instantiate(monsterPrefabs[spawnType], transform);
+        spawnMonster.GetComponent<Monster>().SetAudio(monsterAudio[0]);
         MonsterManager.Instance.AddLiveMonsterList(spawnMonster);
     }
 }
