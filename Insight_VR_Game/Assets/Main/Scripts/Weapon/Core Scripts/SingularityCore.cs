@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 [RequireComponent(typeof(SphereCollider))]
 public class SingularityCore : MonoBehaviour
 {
@@ -7,7 +8,7 @@ public class SingularityCore : MonoBehaviour
     //as this is much more performant than destroying the objects
     void OnTriggerStay (Collider other) {
         if(other.GetComponent<SingularityPullable>()){
-            other.gameObject.SetActive(false);
+            other.GetComponent<Monster>().OnHit();
         }
     }
 
