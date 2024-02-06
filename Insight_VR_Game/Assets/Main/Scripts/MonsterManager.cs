@@ -17,6 +17,7 @@ public class MonsterManager : MonoBehaviour
         instance = this;
     }
 
+    public List<Transform> bossFinishPoint;
     public List<Spawner> spawner;
     List<GameObject> liveMonster;
     int stage;
@@ -74,5 +75,10 @@ public class MonsterManager : MonoBehaviour
             stage += 1;
             ReadSpawnFile(stage);
         }
+    }
+
+    public List<Transform> GetBossPointList()
+    {
+        return bossFinishPoint;
     }
 }
