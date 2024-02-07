@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class RoundControlManager : MonoBehaviour
 {
     public static RoundControlManager instance;
-    private int CountNum = 1;
+    //private int CountNum = 1;
 
     GameObject Card_Prefab;
 
@@ -40,7 +40,8 @@ public class RoundControlManager : MonoBehaviour
     public void OpenCard(int Num)
     {
         GameObject card = MonoBehaviour.Instantiate(Card_Prefab);
-
+        Debug.Log("카운트 넘버 : " + RoundImage.instance.CountNum);
+        Debug.Log("라운드 넘버 : " + RoundImage.instance.RoundNumber);
         card.name = "Card";
 
         Vector3 pos = new Vector3(-0.267f, 2f, -0.64f);
