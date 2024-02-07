@@ -8,7 +8,7 @@ public class SingularityCore : MonoBehaviour
     //as this is much more performant than destroying the objects
     void OnTriggerStay (Collider other) {
         if(other.GetComponent<SingularityPullable>()){
-            other.GetComponent<Monster>().OnHit();
+            //other.GetComponent<Monster>().OnHit();
         }
     }
 

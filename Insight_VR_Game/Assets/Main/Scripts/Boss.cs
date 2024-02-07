@@ -7,15 +7,19 @@ using UnityEngine.AI;
 public class Boss : Monster
 {
     List<Transform> bossFinishPoint;
+    Transform bossSkillPos;
     int pointNum;
     int attackNum;
     bool isAttack = false;
     int savePoint = 0;
+    int maxHealth = 100;
+    bool isSkill = false;
 
     private void Start()
     {
-        health = 20;
+        health = maxHealth;
         finishPoint = GameObject.Find("Finish Point Box").transform;
+        bossSkillPos = GameObject.Find("BossSkillPos").transform;
         bossFinishPoint = MonsterManager.Instance.GetBossPointList().ToList();
         BossMove();
     }
@@ -40,6 +44,10 @@ public class Boss : Monster
         {
             if (isAttack)
                 StartCoroutine(OnAttack());
+            else if (isSkill)
+            {
+
+            }
             else
             {
                 savePoint++;
@@ -49,7 +57,14 @@ public class Boss : Monster
                 else
                     BossMove();
             }
-                
+        }
+
+        if(health <= (maxHealth * (75 / 100)))
+        {
+            if (isSkill)
+                return;
+
+            isSkill = true;
         }
     }
 
@@ -71,6 +86,16 @@ public class Boss : Monster
         isAttack = false;
         savePoint = 0;
         anim.SetBool("isAttack", isAttack);
+
+        if (isSkill)
+        {
+            OnSkill();
+        }
+    }
+
+    void OnSkill()
+    {
+        agent.SetDestination(bossSkillPos.position);
     }
 
     //보스 맞는 부분
