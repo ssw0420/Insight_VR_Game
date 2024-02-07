@@ -6,30 +6,34 @@ using UnityEngine.AI;
 
 public class Monster : MonoBehaviour
 {
-    //테스트
-    GameManager manager;
-
     //움직임 및 애니메이션
-    Animator anim;
-    NavMeshAgent agent;
+    protected Animator anim;
+    protected NavMeshAgent agent;
     public Transform finishPoint;
 
     //Fade Out 관련 변수
-    Renderer render;
+    protected Renderer render;
 
     [SerializeField]
     public int health = 5;
 
     //Hit 관련 변수
     public Material hitMaterial;
-    float curHitAnimationTime;
+    protected float curHitAnimationTime;
 
+    //몬스터 플레이어 회전
+    protected Camera camera;
+
+    //몬스터 소리
+    protected AudioSource monsterAudio;
 
     private void Awake()
     {
         anim = GetComponent<Animator>();
         agent = GetComponent<NavMeshAgent>();
-        render = gameObject.GetComponentInChildren<Renderer>();
+        render = GetComponentInChildren<Renderer>();
+        monsterAudio = GetComponent<AudioSource>();
+        camera = Camera.main;
     }
 
     private void Start()
@@ -43,15 +47,30 @@ public class Monster : MonoBehaviour
         for (int i = 0; i < ac.animationClips.Length; i++)
             if (ac.animationClips[i].name == "GetHit")
                 curHitAnimationTime = ac.animationClips[i].length;
+    }
 
-        //테스트 코드
-        //StartCoroutine(TestCode());
+    public void SetAudio(AudioClip hitAudio)
+    {
+        monsterAudio.clip = hitAudio;
     }
 
     private void Update()
     {
         if(agent.velocity.sqrMagnitude >= 0.2f * 0.2f && agent.remainingDistance <= 0.5f)
             OnAttack();
+    }
+
+    void FixedUpdate()
+    {
+        if (anim.GetBool("isAttack"))
+        {
+            Vector3 lookDir = (camera.transform.position - transform.position).normalized;
+
+            Quaternion from = transform.rotation;
+            Quaternion to = Quaternion.LookRotation(lookDir);
+
+            transform.rotation = Quaternion.Lerp(from, to, Time.fixedDeltaTime * 9f);
+        }
     }
 
     //공격 부분
@@ -62,12 +81,12 @@ public class Monster : MonoBehaviour
     }
 
     //맞는 부분
-    public void OnHit()
+    public void OnHit(int damage)
     {
         if (anim.GetBool("isHit"))
             return;
 
-        health -= 1;
+        health -= damage;
         if (health <= 0)
         {
             Die();
@@ -75,6 +94,8 @@ public class Monster : MonoBehaviour
         }
             
         anim.SetBool("isHit", true);
+        monsterAudio.time = 0f;
+        monsterAudio.Play();
         StartCoroutine("HitOut");
     }
 
@@ -89,11 +110,12 @@ public class Monster : MonoBehaviour
 
         render.material = saveMaterial;
         anim.SetBool("isHit", false);
+        monsterAudio.Stop();
         agent.speed = saveSpeed;
     }
 
     //죽는 부분
-    void Die()
+    protected void Die()
     {
         anim.SetTrigger("isDie");
         agent.enabled = false;
@@ -119,15 +141,6 @@ public class Monster : MonoBehaviour
         }
 
         Destroy(gameObject);
-    }
-
-    //테스트 코드
-    IEnumerator TestCode()
-    {
-        while (true)
-        {
-            yield return new WaitForSeconds(2f);
-            OnHit();
-        }
+        MonsterManager.Instance.DeleteLiveMonsterList(this.gameObject);
     }
 }

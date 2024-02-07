@@ -32,7 +32,6 @@ public class ArrowManager : MonoBehaviour
     private void Start()
     {
         transform.localPosition = new Vector3(0, 0.16572f, 0.20547f);
-        Debug.Log(transform.position);
         trailRenderer.enabled = false;
         Timedir = Time.deltaTime;
         gravity = -(1.0f * Timedir * Timedir / 4.0f);
@@ -109,7 +108,22 @@ public class ArrowManager : MonoBehaviour
         if (other.gameObject.layer == LayerMask.NameToLayer("Monster"))
         {
             Debug.Log("적중");
-            other.GetComponent<Monster>().OnHit();
+            other.GetComponent<Monster>().OnHit(1);
+            Destroy(gameObject);
+        }
+
+        if(other.gameObject.layer == LayerMask.NameToLayer("Boss Monster"))
+        {
+            Debug.Log("보스 적중");
+            if(other.gameObject.layer == LayerMask.NameToLayer("Boss Eye"))
+            {
+                other.GetComponentInParent<Boss>().OnHit(5);
+            }
+            else if(other.gameObject.layer == LayerMask.NameToLayer("Boss Leg"))
+            {
+                other.GetComponentInParent<Boss>().OnCriticalHit(1);
+            }
+            
             Destroy(gameObject);
         }
 

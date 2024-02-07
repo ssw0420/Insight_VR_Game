@@ -1,12 +1,8 @@
 fileFormatVersion: 2
-<<<<<<<< HEAD:Insight_VR_Game/Assets/RPG Pack/DemoSceneSettings.lighting.meta
-guid: 1c71749e720ff9b4c9d66aaa63052bae
-========
-guid: 4aa43f869ad7a1b478264f3f05a5de29
->>>>>>>> Version_1:Insight_VR_Game/Assets/Main/Settings/Meterial/Light.mat.meta
+guid: d37036552ee44d14b9f2a1f501c1a6b1
 NativeFormatImporter:
   externalObjects: {}
-  mainObjectFileID: 4890085278179872738
+  mainObjectFileID: 2100000
   userData: 
   assetBundleName: 
   assetBundleVariant: 
