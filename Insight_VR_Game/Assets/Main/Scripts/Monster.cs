@@ -81,12 +81,12 @@ public class Monster : MonoBehaviour
     }
 
     //맞는 부분
-    public virtual void OnHit(GameObject hitPoint)
+    public void OnHit(int damage)
     {
         if (anim.GetBool("isHit"))
             return;
 
-        health -= 1;
+        health -= damage;
         if (health <= 0)
         {
             Die();

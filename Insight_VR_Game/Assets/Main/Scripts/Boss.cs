@@ -6,19 +6,18 @@ using UnityEngine.AI;
 
 public class Boss : Monster
 {
-    int deathCount = 5;
-
     List<Transform> bossFinishPoint;
     int pointNum;
     int attackNum;
     bool isAttack = false;
+    int savePoint = 0;
 
     private void Start()
     {
+        health = 20;
         finishPoint = GameObject.Find("Finish Point Box").transform;
         bossFinishPoint = MonsterManager.Instance.GetBossPointList().ToList();
         BossMove();
-        StartCoroutine(PlayerAttack());
     }
 
     //보스 움직임
@@ -42,21 +41,25 @@ public class Boss : Monster
             if (isAttack)
                 StartCoroutine(OnAttack());
             else
-                BossMove();
+            {
+                savePoint++;
+
+                if (savePoint >= 2)
+                    StartCoroutine(PlayerAttack());
+                else
+                    BossMove();
+            }
+                
         }
     }
 
     //플레이어 공격
     IEnumerator PlayerAttack()
     {
-        while (true)
-        {
-            yield return new WaitForSeconds(20f);
-            isAttack = true;
-            attackNum = Random.Range(1, 3);
-            agent.SetDestination(finishPoint.position);
-        }
-        
+        yield return null;
+        agent.SetDestination(finishPoint.position);
+        isAttack = true;
+        attackNum = Random.Range(1, 3);
     }
 
     IEnumerator OnAttack()
@@ -66,23 +69,14 @@ public class Boss : Monster
 
         yield return new WaitForSeconds(0.733f);
         isAttack = false;
+        savePoint = 0;
         anim.SetBool("isAttack", isAttack);
     }
 
     //보스 맞는 부분
-    public override void OnHit(GameObject hitPoint)
+    public void OnCriticalHit(int damage)
     {
-        if (anim.GetBool("isHit"))
-            return;
-
-        deathCount++;
-        if (deathCount >= 6)
-            Die();
-
-        anim.SetBool("isHit", true);
-        Destroy(hitPoint);
         
-        StartCoroutine("HitOut");
     }
 
     IEnumerator HitOut()

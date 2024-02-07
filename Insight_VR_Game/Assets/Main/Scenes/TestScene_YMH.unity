@@ -707,7 +707,7 @@ CapsuleCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 1
   m_ProvidesContacts: 0
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.2
   m_Height: 0.1
@@ -3174,7 +3174,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4530003306004163328, guid: fda17499553af66448ba2759786716b0, type: 3}
       propertyPath: m_Layer
-      value: 15
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 4530003306004163330, guid: fda17499553af66448ba2759786716b0, type: 3}
       propertyPath: m_Layer
@@ -3190,7 +3190,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4530003306004163338, guid: fda17499553af66448ba2759786716b0, type: 3}
       propertyPath: m_Layer
-      value: 15
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 4530003306004163340, guid: fda17499553af66448ba2759786716b0, type: 3}
       propertyPath: m_Layer
@@ -3226,7 +3226,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4530003306004163356, guid: fda17499553af66448ba2759786716b0, type: 3}
       propertyPath: m_Layer
-      value: 15
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 4530003306004163358, guid: fda17499553af66448ba2759786716b0, type: 3}
       propertyPath: m_Layer
@@ -3246,11 +3246,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4530003306004163366, guid: fda17499553af66448ba2759786716b0, type: 3}
       propertyPath: m_Layer
-      value: 15
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 4530003306004163368, guid: fda17499553af66448ba2759786716b0, type: 3}
       propertyPath: m_Layer
-      value: 15
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 4530003306004163370, guid: fda17499553af66448ba2759786716b0, type: 3}
       propertyPath: m_Layer
@@ -3270,7 +3270,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4530003306004163378, guid: fda17499553af66448ba2759786716b0, type: 3}
       propertyPath: m_Layer
-      value: 15
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 4530003306004163380, guid: fda17499553af66448ba2759786716b0, type: 3}
       propertyPath: m_Layer
@@ -3334,7 +3334,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4530003306004163410, guid: fda17499553af66448ba2759786716b0, type: 3}
       propertyPath: m_Layer
-      value: 15
+      value: 31
       objectReference: {fileID: 0}
     - target: {fileID: 4530003306004163414, guid: fda17499553af66448ba2759786716b0, type: 3}
       propertyPath: m_Layer
@@ -3853,6 +3853,18 @@ PrefabInstance:
       value: 90
       objectReference: {fileID: 0}
     - target: {fileID: 4530003306004526970, guid: fda17499553af66448ba2759786716b0, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 4530003306004526970, guid: fda17499553af66448ba2759786716b0, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 4530003306004526970, guid: fda17499553af66448ba2759786716b0, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 4530003306004526970, guid: fda17499553af66448ba2759786716b0, type: 3}
       propertyPath: m_LocalPosition.x
       value: 33.44
       objectReference: {fileID: 0}
@@ -3899,6 +3911,18 @@ PrefabInstance:
     - target: {fileID: 4530003306004526972, guid: fda17499553af66448ba2759786716b0, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
       value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 8132681300461838092, guid: fda17499553af66448ba2759786716b0, type: 3}
+      propertyPath: m_Height
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8132681300461838092, guid: fda17499553af66448ba2759786716b0, type: 3}
+      propertyPath: m_WalkableMask
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 8132681300461838092, guid: fda17499553af66448ba2759786716b0, type: 3}
+      propertyPath: m_StoppingDistance
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

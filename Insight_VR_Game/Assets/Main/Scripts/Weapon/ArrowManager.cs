@@ -83,14 +83,22 @@ public class ArrowManager : MonoBehaviour
         if (other.gameObject.layer == LayerMask.NameToLayer("Monster"))
         {
             Debug.Log("적중");
-            other.GetComponent<Monster>().OnHit(other.gameObject);
+            other.GetComponent<Monster>().OnHit(1);
             Destroy(gameObject);
         }
 
         if(other.gameObject.layer == LayerMask.NameToLayer("Boss Monster"))
         {
             Debug.Log("보스 적중");
-            other.GetComponentInParent<Boss>().OnHit(other.gameObject);
+            if(other.gameObject.layer == LayerMask.NameToLayer("Boss Eye"))
+            {
+                other.GetComponentInParent<Boss>().OnHit(5);
+            }
+            else if(other.gameObject.layer == LayerMask.NameToLayer("Boss Leg"))
+            {
+                other.GetComponentInParent<Boss>().OnCriticalHit(1);
+            }
+            
             Destroy(gameObject);
         }
 
