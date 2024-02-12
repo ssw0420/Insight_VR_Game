@@ -6,6 +6,7 @@ public class IceLance : MonoBehaviour
 {
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     // Start is called before the first frame update
     void Start()
     {
@@ -27,6 +28,12 @@ public class IceLance : MonoBehaviour
     void Start()
     {
 >>>>>>> parent of 58c5b48 (.)
+=======
+    public ParticleSystem myParticleSystem;
+    // Start is called before the first frame update
+    void Start()
+    {
+>>>>>>> parent of 58c5b48 (.)
         myParticleSystem.GetComponent<ParticleSystem>();
         gameObject.transform.SetParent(null);
     }
@@ -40,6 +47,9 @@ public class IceLance : MonoBehaviour
     {
         myParticleSystem.Stop();
 <<<<<<< HEAD
+<<<<<<< HEAD
+>>>>>>> parent of 58c5b48 (.)
+=======
 >>>>>>> parent of 58c5b48 (.)
 =======
 >>>>>>> parent of 58c5b48 (.)
