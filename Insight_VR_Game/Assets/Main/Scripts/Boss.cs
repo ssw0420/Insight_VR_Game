@@ -31,6 +31,7 @@ public class Boss : Monster
     void BossMove()
     {
         savePoint++;
+        Debug.Log(savePoint + " 보스 이동");
         StartCoroutine(RandomMove());
     }
 
@@ -54,7 +55,7 @@ public class Boss : Monster
             }
             else
             {
-                if (savePoint >= 2)
+                if (savePoint >= 3)
                 {
                     if (isSkill)
                     {
@@ -149,7 +150,9 @@ public class Boss : Monster
         anim.SetBool("isAttack", true);
         anim.SetInteger("AttackNum", 3);
         Debug.Log("스킬 시전");
+
         yield return new WaitForSeconds(5f);
+
         anim.SetBool("isAttack", false);
         isSkill = false;
 
@@ -191,8 +194,14 @@ public class Boss : Monster
             Die();
 
         if (isSkill)
+        {
             StopAllCoroutines();
-
+            anim.SetBool("isHit", true);
+            anim.SetBool("isAttack", false);
+            isSkill = false;
+            BossMove();
+        }
+            
         StartCoroutine(CriticalHitOut());
     }
 
@@ -202,6 +211,7 @@ public class Boss : Monster
         agent.speed = 0;
         Material saveMeterial = render.materials[0];
         render.material = hitMaterial;
+        anim.SetBool("isHit", true);
         isHit = true;
 
         yield return new WaitForSeconds(1f);
