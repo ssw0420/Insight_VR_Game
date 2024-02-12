@@ -4,21 +4,29 @@ using UnityEngine;
 
 public class IceLance : MonoBehaviour
 {
-    public ParticleSystem myParticleSystem;
+    private float iceLance_start_time = 0.0f;
+    //public ParticleSystem myParticleSystem;
     // Start is called before the first frame update
     void Start()
     {
-        myParticleSystem.GetComponent<ParticleSystem>();
+        //myParticleSystem.GetComponent<ParticleSystem>();
         gameObject.transform.SetParent(null);
     }
 
-    void OnEnable()
-    {
-        myParticleSystem.Play();
-    }
+    // void OnEnable()
+    // {
+    //     myParticleSystem.Play();
+    // }
 
-    void OnDisable()
-    {
-        myParticleSystem.Stop();
+    // void OnDisable()
+    // {
+    //     myParticleSystem.Stop();
+    // }
+    private void FixedUpdate() {
+        iceLance_start_time += Time.fixedDeltaTime;
+        if(iceLance_start_time >= 3.0f)
+        {
+            Destroy(gameObject);
+        }
     }
 }
