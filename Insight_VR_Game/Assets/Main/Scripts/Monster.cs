@@ -115,7 +115,7 @@ public class Monster : MonoBehaviour
     }
 
     //Á×´Â ºÎºÐ
-    protected void Die()
+    protected virtual void Die()
     {
         anim.SetTrigger("isDie");
         agent.enabled = false;

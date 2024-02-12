@@ -19,6 +19,7 @@ public class MonsterManager : MonoBehaviour
 
     public List<Transform> bossFinishPoint;
     public List<Spawner> spawner;
+    public GameObject HealthPotion;
     List<GameObject> liveMonster;
     int stage;
 
@@ -80,5 +81,10 @@ public class MonsterManager : MonoBehaviour
     public List<Transform> GetBossPointList()
     {
         return bossFinishPoint;
+    }
+
+    public GameObject GetHealthPotionPrefab()
+    {
+        return HealthPotion;
     }
 }

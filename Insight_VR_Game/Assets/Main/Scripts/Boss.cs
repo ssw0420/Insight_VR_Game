@@ -7,6 +7,7 @@ using UnityEngine.AI;
 
 public class Boss : Monster
 {
+    ParticleSystem bossSkillEffect;
     List<Transform> bossFinishPoint;
     Transform bossSkillPos;
     int pointNum;
@@ -25,6 +26,7 @@ public class Boss : Monster
         finishPoint = GameObject.Find("Finish Point Box").transform;
         bossSkillPos = GameObject.Find("BossSkillPos").transform;
         bossFinishPoint = MonsterManager.Instance.GetBossPointList().ToList();
+        bossSkillEffect = GetComponentInChildren<ParticleSystem>();
         BossMove();
     }
 
@@ -82,7 +84,7 @@ public class Boss : Monster
         {
             index++;
             isSkill = true;
-            PlayerSkill();
+            GoToSkill();
         }
     }
 
@@ -107,12 +109,12 @@ public class Boss : Monster
         savePoint = 0;
 
         if (isSkill)
-            PlayerSkill();
+            GoToSkill();
         else
             BossMove();
     }
 
-    void PlayerSkill()
+    void GoToSkill()
     {
         if (isAttack)
             return;
@@ -120,21 +122,24 @@ public class Boss : Monster
         Debug.Log("스킬 시전하러 이동");
     }
 
-    //보스 맞는 부분
     IEnumerator OnSkill()
     {
         anim.SetBool("isAttack", true);
         anim.SetInteger("AttackNum", 3);
         Debug.Log("스킬 시전");
 
-        yield return new WaitForSeconds(5f);
+        yield return new WaitForSeconds(3f);
+        bossSkillEffect.Play();
 
+        yield return new WaitForSeconds(2f);
         anim.SetBool("isAttack", false);
         isSkill = false;
+        //bossSkillEffect.Stop();
 
         BossMove();
     }
 
+    //보스 맞는 부분
     public override void OnHit(int damage)
     {
         if (isHit)
@@ -175,6 +180,7 @@ public class Boss : Monster
             anim.SetBool("isHit", true);
             anim.SetBool("isAttack", false);
             isSkill = false;
+            bossSkillEffect.Stop();
             BossMove();
         }
 

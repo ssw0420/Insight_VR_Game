@@ -112,6 +112,12 @@ public class ArrowManager : MonoBehaviour
             Destroy(gameObject);
         }
 
+        if(other.gameObject.layer == LayerMask.NameToLayer("HealthMonster"))
+        {
+            other.GetComponent<HealthMonster>().OnHit(1);
+            Destroy(gameObject);
+        }
+
         if(other.gameObject.layer == LayerMask.NameToLayer("Boss Monster"))
         {
             other.GetComponentInParent<Boss>().OnHit(1);
