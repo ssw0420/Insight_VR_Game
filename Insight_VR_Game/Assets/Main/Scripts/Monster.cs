@@ -81,7 +81,7 @@ public class Monster : MonoBehaviour
     }
 
     //맞는 부분
-    public void OnHit(int damage)
+    public virtual void OnHit(int damage)
     {
         if (anim.GetBool("isHit"))
             return;

@@ -114,16 +114,17 @@ public class ArrowManager : MonoBehaviour
 
         if(other.gameObject.layer == LayerMask.NameToLayer("Boss Monster"))
         {
-            Debug.Log("보스 적중");
-            if(other.gameObject.layer == LayerMask.NameToLayer("Boss Eye"))
-            {
-                other.GetComponentInParent<Boss>().OnHit(5);
-            }
-            else if(other.gameObject.layer == LayerMask.NameToLayer("Boss Leg"))
-            {
-                other.GetComponentInParent<Boss>().OnCriticalHit(1);
-            }
-            
+            other.GetComponentInParent<Boss>().OnHit(1);
+            Destroy(gameObject);
+        }
+        else if(other.gameObject.layer == LayerMask.NameToLayer("Boss Eye"))
+        {
+            other.GetComponentInParent<Boss>().OnHit(5);
+            Destroy(gameObject);
+        }
+        else if(other.gameObject.layer == LayerMask.NameToLayer("Boss Leg"))
+        {
+            other.GetComponentInParent<Boss>().OnCriticalHit(3);
             Destroy(gameObject);
         }
 
@@ -134,5 +135,4 @@ public class ArrowManager : MonoBehaviour
             Destroy(gameObject, 1.0f);
         }
     }
-
 }
