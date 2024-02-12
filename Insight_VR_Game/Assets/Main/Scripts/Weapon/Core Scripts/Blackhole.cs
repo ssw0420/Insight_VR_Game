@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit;
 
-public class Blackhol : MonoBehaviour
+public class Blackhole : MonoBehaviour
 {
     MeshRenderer render;
 
