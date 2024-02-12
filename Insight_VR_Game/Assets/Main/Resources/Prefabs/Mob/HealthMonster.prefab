@@ -429,7 +429,7 @@ GameObject:
   - component: {fileID: 3613640308292930762}
   - component: {fileID: -12396286581029854}
   m_Layer: 8
-  m_Name: SlimePBR
+  m_Name: HealthMonster
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
