@@ -9,7 +9,6 @@ public class IceBall : MonoBehaviour
     [SerializeField] private float using_time = 4.0f;
     private float shoot_time;
     private float reload_time;
-    private float iceLance_time;
 
     [SerializeField] IceLance iceLanceScript;
 
@@ -29,20 +28,14 @@ public class IceBall : MonoBehaviour
     {
         audioSource = GetComponent<AudioSource>();
         _state = IceBallState.Idle;
-        Debug.Log("스킬 호출");
     }
 
     public void ShootIceLance()
     {
-        if(_state == IceBallState.Fire || _state == IceBallState.Cooldown)
-        {
-            return;
-        }
-        //GameObject iceLance = Instantiate(iceLancePrefab, transform);
-        //iceLanceScript = iceLance.GetComponent<IceLance>();
-        using_time = 4.0f;
+        GameObject iceLance = Instantiate(iceLancePrefab, transform);
+        iceLanceScript = iceLance.GetComponent<IceLance>();
+        cooldown_time = 8.0f;
         _state = IceBallState.Fire;
-        Debug.Log("스킬 사용");
     }
 
     private void FixedUpdate() {
@@ -69,20 +62,9 @@ public class IceBall : MonoBehaviour
     void UpdateFire()
     {
         using_time -= Time.fixedDeltaTime;
-        iceLance_time += Time.fixedDeltaTime;
-
-        if(iceLance_time >= 0.2f)
-        {
-            iceLance_time = 0.0f;
-            GameObject iceLance = Instantiate(iceLancePrefab, transform);
-            iceLanceScript = iceLance.GetComponent<IceLance>();
-        }
-
         if(using_time <= 0.0f)
         {
-            cooldown_time = 8.0f;
             _state = IceBallState.Cooldown;
-            Debug.Log("스킬 사용 종료");
         }
     }
 
@@ -92,7 +74,6 @@ public class IceBall : MonoBehaviour
         if(cooldown_time <= 0.0f)
         {
             _state = IceBallState.Idle;
-            Debug.Log("스킬 쿨타임 종료");
         }
     }
 }

@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class IceLance : MonoBehaviour
 {
+<<<<<<< HEAD
     private float iceLance_start_time = 2.0f;
     // public ParticleSystem myParticleSystem;
     // Start is called before the first frame update
@@ -22,4 +23,17 @@ public class IceLance : MonoBehaviour
     // {
     //     myParticleSystem.Stop();
     // }
+=======
+    // Start is called before the first frame update
+    void Start()
+    {
+        
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        
+    }
+>>>>>>> parent of 0b2654b (Skill, PoolManager)
 }
