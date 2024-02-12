@@ -4,21 +4,15 @@ using UnityEngine;
 
 public class IceLance : MonoBehaviour
 {
-    public ParticleSystem myParticleSystem;
     // Start is called before the first frame update
     void Start()
     {
-        myParticleSystem.GetComponent<ParticleSystem>();
-        gameObject.transform.SetParent(null);
+        
     }
 
-    void OnEnable()
+    // Update is called once per frame
+    void Update()
     {
-        myParticleSystem.Play();
-    }
-
-    void OnDisable()
-    {
-        myParticleSystem.Stop();
+        
     }
 }
