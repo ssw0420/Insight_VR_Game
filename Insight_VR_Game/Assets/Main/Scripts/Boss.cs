@@ -17,6 +17,7 @@ public class Boss : Monster
     bool isSkill = false;
     int index = 0;
     bool isHit = false;
+    bool isCritical = false;
 
     private void Start()
     {
@@ -45,14 +46,18 @@ public class Boss : Monster
 
     private void Update()
     {
+        //Arrive at the Destination
         if (agent.velocity.sqrMagnitude >= 0.2f * 0.2f && agent.remainingDistance <= 0.1f)
         {
+            //Attack Destination
             if (isAttack)
                 StartCoroutine(OnAttack());
+            //Skill Destination
             else if (isSkill)
             {
                 StartCoroutine(OnSkill());
             }
+            //Move Destination
             else
             {
                 if (savePoint >= 3)
@@ -72,42 +77,13 @@ public class Boss : Monster
             }   
         }
 
+        //Check Skill Health
         if(health <= (maxHealth * ((3-index) * 25) / 100))
         {
             index++;
             isSkill = true;
             PlayerSkill();
         }
-        //if(health <= (maxHealth * 75 / 100))
-        //{
-        //    if (skillHealth[0])
-        //        return;
-
-        //    isSkill = true;
-        //    skillHealth[0] = true;
-        //    PlayerSkill();
-        //    Debug.Log("체력 75% 남음");
-        //}
-        //else if (health <= (maxHealth * 50 / 100))
-        //{
-        //    if (skillHealth[1])
-        //        return;
-
-        //    isSkill = true;
-        //    skillHealth[1] = true;
-        //    PlayerSkill();
-        //    Debug.Log("체력 50% 남음");
-        //}
-        //else if (health <= (maxHealth * 25 / 100))
-        //{
-        //    if (skillHealth[2])
-        //        return;
-
-        //    isSkill = true;
-        //    skillHealth[2] = true;
-        //    PlayerSkill();
-        //    Debug.Log("체력 25% 남음");
-        //}
     }
 
     //플레이어 공격
@@ -193,7 +169,7 @@ public class Boss : Monster
         if (health <= 0)
             Die();
 
-        if (isSkill)
+        if (anim.GetBool("isAttack") && anim.GetInteger("AttackNum") == 3)
         {
             StopAllCoroutines();
             anim.SetBool("isHit", true);
@@ -201,8 +177,11 @@ public class Boss : Monster
             isSkill = false;
             BossMove();
         }
-            
-        StartCoroutine(CriticalHitOut());
+
+        if (isCritical)
+            HitOut();
+        else
+            StartCoroutine(CriticalHitOut());
     }
 
     IEnumerator CriticalHitOut()
@@ -213,6 +192,8 @@ public class Boss : Monster
         render.material = hitMaterial;
         anim.SetBool("isHit", true);
         isHit = true;
+        //Stop Critical Hit
+        StartCoroutine(StopCriticalHit());
 
         yield return new WaitForSeconds(1f);
 
@@ -220,5 +201,12 @@ public class Boss : Monster
         anim.SetBool("isHit", false);
         agent.speed = saveSpeed;
         isHit = false;
+    }
+
+    IEnumerator StopCriticalHit()
+    {
+        isCritical = true;
+        yield return new WaitForSeconds(3f);
+        isCritical = false;
     }
 }
