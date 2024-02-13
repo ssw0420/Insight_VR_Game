@@ -19,7 +19,9 @@ public class Monster : MonoBehaviour
 
     //Hit 관련 변수
     public Material hitMaterial;
+    [Serialize]float damage;
     protected float curHitAnimationTime;
+    private float curIdleAnimationTime;
 
     //몬스터 플레이어 회전
     protected Camera camera;
@@ -45,8 +47,14 @@ public class Monster : MonoBehaviour
         //Hit 애니메이션 시간 구하기
         RuntimeAnimatorController ac = anim.runtimeAnimatorController;
         for (int i = 0; i < ac.animationClips.Length; i++)
+        {
             if (ac.animationClips[i].name == "GetHit")
                 curHitAnimationTime = ac.animationClips[i].length;
+            else if (ac.animationClips[i].name == "IdleBattle")
+                curIdleAnimationTime = ac.animationClips[i].length;
+
+        }
+            
     }
 
     public void SetAudio(AudioClip hitAudio)
@@ -57,7 +65,7 @@ public class Monster : MonoBehaviour
     private void Update()
     {
         if(agent.velocity.sqrMagnitude >= 0.2f * 0.2f && agent.remainingDistance <= 0.5f)
-            OnAttack();
+            StartCoroutine(OnAttack());
     }
 
     void FixedUpdate()
@@ -74,10 +82,17 @@ public class Monster : MonoBehaviour
     }
 
     //공격 부분
-    void OnAttack()
+    IEnumerator OnAttack()
     {
-        anim.SetBool("isAttack", true);
         agent.speed = 0f;
+        while (true)
+        {
+            anim.SetBool("isAttack", true);
+            yield return new WaitForSeconds(curIdleAnimationTime);
+            anim.SetBool("isAttack", false);
+            PlayerStats.Instance.TakeDamage(damage);
+            yield return new WaitForSeconds(1f);
+        }
     }
 
     //맞는 부분
