@@ -425,7 +425,6 @@ GameObject:
   - component: {fileID: 4047972025199878}
   - component: {fileID: 95457531584545886}
   - component: {fileID: 594610269796451420}
-  - component: {fileID: -3021632398001523694}
   - component: {fileID: 3613640308292930762}
   - component: {fileID: -12396286581029854}
   - component: {fileID: 849881681602045612}
@@ -496,21 +495,6 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 1
---- !u!114 &-3021632398001523694
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1931298151966786}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 993dff020eee2174db59644da46b2fd9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  finishPoint: {fileID: 0}
-  health: 5
-  hitMaterial: {fileID: 2100000, guid: 51bc79759a0545c4dae4e0206bcbe2ab, type: 2}
 --- !u!65 &3613640308292930762
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -643,3 +627,5 @@ MonoBehaviour:
   finishPoint: {fileID: 0}
   health: 1
   hitMaterial: {fileID: 0}
+  damage: 1
+  hitDelay: 2

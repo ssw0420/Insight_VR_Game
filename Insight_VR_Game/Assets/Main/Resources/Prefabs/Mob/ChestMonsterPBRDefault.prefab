@@ -241,6 +241,8 @@ MonoBehaviour:
   finishPoint: {fileID: 0}
   health: 5
   hitMaterial: {fileID: 2100000, guid: 51bc79759a0545c4dae4e0206bcbe2ab, type: 2}
+  damage: 1
+  hitDelay: 2
 --- !u!65 &5902380069347661083
 BoxCollider:
   m_ObjectHideFlags: 0

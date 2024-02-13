@@ -16,8 +16,13 @@ public class HealthMonster : Monster
         //Hit 애니메이션 시간 구하기
         RuntimeAnimatorController ac = anim.runtimeAnimatorController;
         for (int i = 0; i < ac.animationClips.Length; i++)
+        {
             if (ac.animationClips[i].name == "GetHit")
                 curHitAnimationTime = ac.animationClips[i].length;
+            else if (ac.animationClips[i].name == "Attack01")
+                curAttackAnimationTime = ac.animationClips[i].length;
+
+        }
     }
 
     protected override void Die()

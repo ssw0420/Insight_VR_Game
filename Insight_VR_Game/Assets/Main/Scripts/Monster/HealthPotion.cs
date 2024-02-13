@@ -22,7 +22,7 @@ public class HealthPotion : MonoBehaviour
     {
         transform.position = Vector3.Lerp(gameObject.transform.position, player.transform.position, 0.05f);
 
-        if(Vector3.Distance(transform.position, player.transform.position) <= 0.01f)
+        if(Vector3.Distance(transform.position, player.transform.position) <= 0.1f)
         {
             PlayerStats.Instance.Heal(1);
             Destroy(gameObject);

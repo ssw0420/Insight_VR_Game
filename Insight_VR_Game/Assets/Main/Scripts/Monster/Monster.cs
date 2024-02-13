@@ -18,10 +18,13 @@ public class Monster : MonoBehaviour
     public int health = 5;
 
     //Hit 관련 변수
+    [Header("Hit variable")]
     public Material hitMaterial;
-    [Serialize]float damage;
+    [SerializeField]float damage;
+    [SerializeField]float hitDelay;
     protected float curHitAnimationTime;
-    private float curIdleAnimationTime;
+    protected float curAttackAnimationTime;
+    bool isAttack = false;
 
     //몬스터 플레이어 회전
     protected Camera camera;
@@ -50,8 +53,8 @@ public class Monster : MonoBehaviour
         {
             if (ac.animationClips[i].name == "GetHit")
                 curHitAnimationTime = ac.animationClips[i].length;
-            else if (ac.animationClips[i].name == "IdleBattle")
-                curIdleAnimationTime = ac.animationClips[i].length;
+            else if (ac.animationClips[i].name == "Attack01")
+                curAttackAnimationTime = ac.animationClips[i].length;
 
         }
             
@@ -65,7 +68,12 @@ public class Monster : MonoBehaviour
     private void Update()
     {
         if(agent.velocity.sqrMagnitude >= 0.2f * 0.2f && agent.remainingDistance <= 0.5f)
+        {
+            if (isAttack)
+                return;
+
             StartCoroutine(OnAttack());
+        }  
     }
 
     void FixedUpdate()
@@ -85,13 +93,14 @@ public class Monster : MonoBehaviour
     IEnumerator OnAttack()
     {
         agent.speed = 0f;
+        isAttack = true;
         while (true)
         {
             anim.SetBool("isAttack", true);
-            yield return new WaitForSeconds(curIdleAnimationTime);
+            yield return new WaitForSeconds(curAttackAnimationTime);
             anim.SetBool("isAttack", false);
             PlayerStats.Instance.TakeDamage(damage);
-            yield return new WaitForSeconds(1f);
+            yield return new WaitForSeconds(hitDelay);
         }
     }
 
