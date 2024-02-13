@@ -24,7 +24,7 @@ public class HealthMonster : Monster
     {
         base.Die();
         GameObject HealthPotion = Instantiate(HealthPotionPrefab);
-        HealthPotion.transform.position = this.gameObject.transform.position + Vector3.up;
+        HealthPotion.transform.position = this.gameObject.transform.position;
 
         HealthPotion.GetComponent<HealthPotion>().PotionMove();
     }
