@@ -47,6 +47,7 @@ public class PlayerStats : MonoBehaviour
 
     public void AddHealth()
     {
+        Debug.Log("1");
         if (maxHealth < maxTotalHealth)
         {
             maxHealth += 1;
