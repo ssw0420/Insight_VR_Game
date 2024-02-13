@@ -23,8 +23,8 @@ public class Boss : Monster
     private void Start()
     {
         health = maxHealth;
-        finishPoint = GameObject.Find("Finish Point Box").transform;
-        bossSkillPos = GameObject.Find("BossSkillPos").transform;
+        finishPoint = GameObject.Find("Boss Attack Pos").transform;
+        bossSkillPos = GameObject.Find("Boss Skill Pos").transform;
         bossFinishPoint = MonsterManager.Instance.GetBossPointList().ToList();
         bossSkillEffect = GetComponentInChildren<ParticleSystem>();
         BossMove();
