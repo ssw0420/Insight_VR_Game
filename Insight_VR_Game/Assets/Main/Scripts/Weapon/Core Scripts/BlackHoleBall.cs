@@ -1,29 +1,26 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.XR.Interaction.Toolkit;
 
-public class IceBall : MonoBehaviour
+public class BlackHoleBall : MonoBehaviour
 {
     [SerializeField] private float cooldown_time = 8.0f;
+    [SerializeField] private float using_time = 4.5f;
 
-    [SerializeField] private float using_time = 4.0f;
-    private float shoot_time;
-    private float reload_time;
-    private float iceLance_time;
+    [SerializeField] BlackHole BlackHoleScript;
 
-    [SerializeField] IceLance iceLanceScript;
+    public GameObject BlackHolePrefab;
 
-    public GameObject iceLancePrefab;
-
-    private AudioSource audioSource;
-    public enum IceBallState
+    // private AudioSource audioSource;
+    public enum BlackHoleBallState
     {
         Idle,
         Fire,
         Cooldown
     }
 
-    IceBallState _state;
+    BlackHoleBallState _state;
 
     public Material[] skillMaterials;
     ParticleSystem[] skillEffect = new ParticleSystem[2];
@@ -32,8 +29,8 @@ public class IceBall : MonoBehaviour
 
     private void Start()
     {
-        audioSource = GetComponent<AudioSource>();
-        _state = IceBallState.Idle;
+        // audioSource = GetComponent<AudioSource>();
+        _state = BlackHoleBallState.Idle;
         skillEffect = GetComponentsInChildren<ParticleSystem>();
         render = GetComponent<Renderer>();
         skillEffect[0].Stop();
@@ -41,29 +38,31 @@ public class IceBall : MonoBehaviour
         Debug.Log("스킬 호출");
     }
 
-    public void ShootIceLance()
+    public void ShootBlackHole()
     {
-        if(_state == IceBallState.Fire || _state == IceBallState.Cooldown)
+        if(_state == BlackHoleBallState.Fire || _state == BlackHoleBallState.Cooldown)
         {
             return;
         }
-        //GameObject iceLance = Instantiate(iceLancePrefab, transform);
-        //iceLanceScript = iceLance.GetComponent<IceLance>();
+        
+        GameObject BlackHole = Instantiate(BlackHolePrefab, transform);
+        BlackHoleScript = BlackHole.GetComponent<BlackHole>();
         using_time = 4.0f;
-        _state = IceBallState.Fire;
+        _state = BlackHoleBallState.Fire;
+        StartCoroutine(ChangeBall());
         Debug.Log("스킬 사용");
     }
 
     private void FixedUpdate() {
         switch(_state)
         {
-            case IceBallState.Idle:
+            case BlackHoleBallState.Idle:
                 UpdateIdle();
                 break;
-            case IceBallState.Fire:
+            case BlackHoleBallState.Fire:
                 UpdateFire();
                 break;
-            case IceBallState.Cooldown:
+            case BlackHoleBallState.Cooldown:
                 UpdateCooldown();
                 break;
         }
@@ -72,26 +71,18 @@ public class IceBall : MonoBehaviour
     void UpdateIdle()
     {
         cooldown_time = 8.0f;
-        using_time = 4.0f;
+        using_time = 4.5f;
     }
 
     void UpdateFire()
     {
         using_time -= Time.fixedDeltaTime;
-        iceLance_time += Time.fixedDeltaTime;
-
-        if(iceLance_time >= 0.45f)
-        {
-            iceLance_time = 0.0f;
-            GameObject iceLance = Instantiate(iceLancePrefab, transform);
-            iceLanceScript = iceLance.GetComponent<IceLance>();
-        }
 
         if(using_time <= 0.0f)
         {
             cooldown_time = 8.0f;
-            _state = IceBallState.Cooldown;
-            StartCoroutine(ChangeBall());          
+            _state = BlackHoleBallState.Cooldown;
+            // StartCoroutine(ChangeBall());          
             Debug.Log("스킬 사용 종료");
         }
     }
@@ -114,7 +105,7 @@ public class IceBall : MonoBehaviour
         }
         if(cooldown_time <= 0.0f)
         {
-            _state = IceBallState.Idle;
+            _state = BlackHoleBallState.Idle;
             Debug.Log("스킬 쿨타임 종료");
         }
     }
@@ -127,4 +118,31 @@ public class IceBall : MonoBehaviour
         yield return new WaitForSeconds(0.2f);
         renderChange = false;
     }
+    // MeshRenderer render;
+    
+    // private void Awake()
+    // {
+    //     render = GetComponent<MeshRenderer>();
+    // }
+
+    // public void Throw()
+    // {
+    //     var interactable = GetComponent<XRGrabInteractable>();
+    //     interactable.interactionManager.CancelInteractableSelection((IXRSelectInteractable)interactable);
+
+    //     var rb = GetComponent<Rigidbody>();
+    //     rb.AddRelativeForce(new Vector3(0f, 70f, 400f));
+    // }
+
+    // private void OnCollisionEnter(Collision collision)
+    // {   
+    //     StartSkill();
+    // }
+
+    // void StartSkill()
+    // {
+    //     transform.GetChild(0).gameObject.SetActive(true);
+    //     GetComponent<Rigidbody>().isKinematic = true;
+    //     render.enabled = false;
+    // }
 }

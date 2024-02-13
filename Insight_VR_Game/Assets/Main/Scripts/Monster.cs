@@ -6,25 +6,25 @@ using UnityEngine.AI;
 
 public class Monster : MonoBehaviour
 {
-    //¿òÁ÷ÀÓ ¹× ¾Ö´Ï¸ÞÀÌ¼Ç
+    //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½Ö´Ï¸ï¿½ï¿½Ì¼ï¿½
     protected Animator anim;
     protected NavMeshAgent agent;
     public Transform finishPoint;
 
-    //Fade Out °ü·Ã º¯¼ö
+    //Fade Out ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
     protected Renderer render;
 
     [SerializeField]
     public int health = 5;
 
-    //Hit °ü·Ã º¯¼ö
+    //Hit ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
     public Material hitMaterial;
     protected float curHitAnimationTime;
 
-    //¸ó½ºÅÍ ÇÃ·¹ÀÌ¾î È¸Àü
+    //ï¿½ï¿½ï¿½ï¿½ ï¿½Ã·ï¿½ï¿½Ì¾ï¿½ È¸ï¿½ï¿½
     protected Camera camera;
 
-    //¸ó½ºÅÍ ¼Ò¸®
+    //ï¿½ï¿½ï¿½ï¿½ ï¿½Ò¸ï¿½
     protected AudioSource monsterAudio;
 
     private void Awake()
@@ -42,7 +42,7 @@ public class Monster : MonoBehaviour
         int randZ = Random.Range(-2, 2);
         agent.SetDestination(finishPoint.position + new Vector3(0, 0, randZ));
 
-        //Hit ¾Ö´Ï¸ÞÀÌ¼Ç ½Ã°£ ±¸ÇÏ±â
+        //Hit ï¿½Ö´Ï¸ï¿½ï¿½Ì¼ï¿½ ï¿½Ã°ï¿½ ï¿½ï¿½ï¿½Ï±ï¿½
         RuntimeAnimatorController ac = anim.runtimeAnimatorController;
         for (int i = 0; i < ac.animationClips.Length; i++)
             if (ac.animationClips[i].name == "GetHit")
@@ -73,14 +73,14 @@ public class Monster : MonoBehaviour
         }
     }
 
-    //°ø°Ý ºÎºÐ
+    //ï¿½ï¿½ï¿½ï¿½ ï¿½Îºï¿½
     void OnAttack()
     {
         anim.SetBool("isAttack", true);
         agent.speed = 0f;
     }
 
-    //¸Â´Â ºÎºÐ
+    //ï¿½Â´ï¿½ ï¿½Îºï¿½
     public void OnHit(int damage)
     {
         if (anim.GetBool("isHit"))
@@ -114,7 +114,7 @@ public class Monster : MonoBehaviour
         agent.speed = saveSpeed;
     }
 
-    //Á×´Â ºÎºÐ
+    //ï¿½×´ï¿½ ï¿½Îºï¿½
     protected void Die()
     {
         anim.SetTrigger("isDie");
