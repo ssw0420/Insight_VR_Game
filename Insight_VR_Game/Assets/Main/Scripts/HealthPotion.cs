@@ -24,7 +24,7 @@ public class HealthPotion : MonoBehaviour
 
         if(Vector3.Distance(transform.position, player.transform.position) <= 0.01f)
         {
-            //Player.RecoveryHealth(1);
+            PlayerStats.Instance.Heal(1);
             Destroy(gameObject);
         }
     }
