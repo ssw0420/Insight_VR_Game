@@ -1389,7 +1389,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &311283219
 Transform:
   m_ObjectHideFlags: 0
@@ -1577,7 +1577,6 @@ GameObject:
   - component: {fileID: 402979509}
   - component: {fileID: 402979508}
   - component: {fileID: 402979507}
-  - component: {fileID: 402979512}
   m_Layer: 0
   m_Name: Right Controller
   m_TagString: Untagged
@@ -2007,7 +2006,7 @@ MonoBehaviour:
   m_UpdateTrackingType: 0
   m_EnableInputTracking: 1
   m_EnableInputActions: 1
-  m_ModelPrefab: {fileID: 3475118261464492563, guid: 9f3369e30fbd31f4bb596b1a99babe83, type: 3}
+  m_ModelPrefab: {fileID: 0}
   m_ModelParent: {fileID: 0}
   m_Model: {fileID: 0}
   m_AnimateModel: 0
@@ -2194,27 +2193,6 @@ MonoBehaviour:
       m_Flags: 0
     m_Reference: {fileID: 875253871413052681, guid: c348712bda248c246b8c49b3db54643f, type: 3}
   m_ButtonPressPoint: 0.5
---- !u!135 &402979512
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 402979505}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Radius: 0.50250006
-  m_Center: {x: -60.5, y: -3.1176, z: 65.000015}
 --- !u!114 &433788659 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3887614575168538465, guid: 6df149cc378871e42a5568a2ff953b61, type: 3}
@@ -3252,6 +3230,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: XR Device Simulator
       objectReference: {fileID: 0}
+    - target: {fileID: 6598815579406187037, guid: 18ddb545287c546e19cc77dc9fbb2189, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -4122,6 +4104,7 @@ MonoBehaviour:
   - {fileID: 1858703291}
   - {fileID: 1966237719}
   - {fileID: 1161603222}
+  HealthPotion: {fileID: 0}
 --- !u!1001 &2087917245
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4342,6 +4325,10 @@ PrefabInstance:
     - target: {fileID: 2566594208627893597, guid: 2744e8984cf4e5347a30d06349c43892, type: 3}
       propertyPath: m_Name
       value: BlackHole Sphere
+      objectReference: {fileID: 0}
+    - target: {fileID: 2566594208627893597, guid: 2744e8984cf4e5347a30d06349c43892, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2759103406726514426, guid: 2744e8984cf4e5347a30d06349c43892, type: 3}
       propertyPath: m_LocalPosition.x

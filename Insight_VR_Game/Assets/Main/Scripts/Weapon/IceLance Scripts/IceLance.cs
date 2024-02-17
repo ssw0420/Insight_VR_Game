@@ -36,4 +36,16 @@ public class IceLance : MonoBehaviour
             Destroy(gameObject);
         }
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.layer == LayerMask.NameToLayer("Monster"))
+        {
+            other.GetComponent<Monster>().OnHit(1);
+        }
+        else if(other.gameObject.layer == LayerMask.NameToLayer("HealthMonster"))
+        {
+            other.GetComponent<HealthMonster>().OnHit(1);
+        }
+    }
 }
