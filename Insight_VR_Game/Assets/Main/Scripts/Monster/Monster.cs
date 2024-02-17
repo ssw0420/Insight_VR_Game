@@ -4,8 +4,18 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 
+public enum MonsterState { 
+    Idle,
+    Walk,
+    Attack,
+    Hit,
+    Die,
+}
+
 public class Monster : MonoBehaviour
 {
+    MonsterState m_State;
+
     //움직임 및 애니메이션
     protected Animator anim;
     protected NavMeshAgent agent;
@@ -22,8 +32,8 @@ public class Monster : MonoBehaviour
     public Material hitMaterial;
     [SerializeField]float damage;
     [SerializeField]float hitDelay;
-    protected float curHitAnimationTime;
-    protected float curAttackAnimationTime;
+    [SerializeField]protected float curHitAnimationTime;
+    [SerializeField]protected float curAttackAnimationTime;
     bool isAttack = false;
 
     //몬스터 플레이어 회전
@@ -43,21 +53,39 @@ public class Monster : MonoBehaviour
 
     private void Start()
     {
+        m_State = MonsterState.Walk;
         finishPoint = GameObject.Find("Finish Point Box").transform;
         int randZ = Random.Range(-2, 2);
         agent.SetDestination(finishPoint.position + new Vector3(0, 0, randZ));
+    }
 
-        //Hit 애니메이션 시간 구하기
+    //Get AnimationTime;
+    protected float GetAnimationClipLenght()
+    {
+        Debug.Log("애니메이션 시간 측정 시작");
+        float time = 0;
+        string name;
+        switch (m_State) 
+        {
+            case MonsterState.Hit:
+                name = "GetHit";
+                break;
+            case MonsterState.Attack:
+                name = "Attack01";
+                break;
+            default:
+                name = "None";
+                break;
+        }
+        Debug.Log(name + " " + m_State);
         RuntimeAnimatorController ac = anim.runtimeAnimatorController;
         for (int i = 0; i < ac.animationClips.Length; i++)
         {
-            if (ac.animationClips[i].name == "GetHit")
-                curHitAnimationTime = ac.animationClips[i].length;
-            else if (ac.animationClips[i].name == "Attack01")
-                curAttackAnimationTime = ac.animationClips[i].length;
-
+            if (ac.animationClips[i].name == name)
+                time = ac.animationClips[i].length;
         }
-            
+        Debug.Log(time);
+        return time;
     }
 
     public void SetAudio(AudioClip hitAudio)
@@ -69,11 +97,8 @@ public class Monster : MonoBehaviour
     {
         if(agent.velocity.sqrMagnitude >= 0.2f * 0.2f && agent.remainingDistance <= 0.5f)
         {
-            if (isAttack)
-                return;
-
             StartCoroutine(OnAttack());
-        }  
+        }
     }
 
     void FixedUpdate()
@@ -94,12 +119,19 @@ public class Monster : MonoBehaviour
     {
         agent.speed = 0f;
         isAttack = true;
+
         while (true)
         {
             anim.SetBool("isAttack", true);
+            m_State = MonsterState.Attack;
+
+            curAttackAnimationTime = GetAnimationClipLenght();
             yield return new WaitForSeconds(curAttackAnimationTime);
+
             anim.SetBool("isAttack", false);
+            m_State = MonsterState.Idle;
             PlayerStats.Instance.TakeDamage(damage);
+
             yield return new WaitForSeconds(hitDelay);
         }
     }
@@ -130,6 +162,8 @@ public class Monster : MonoBehaviour
         Material saveMaterial = render.materials[0];
         render.material = hitMaterial;
 
+        m_State = MonsterState.Hit;
+        curHitAnimationTime = GetAnimationClipLenght();
         yield return new WaitForSeconds(curHitAnimationTime);
 
         render.material = saveMaterial;
