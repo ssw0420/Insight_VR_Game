@@ -4,15 +4,127 @@ using UnityEngine;
 
 public class IceBall : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField] private float cooldown_time = 8.0f;
+
+    [SerializeField] private float using_time = 4.0f;
+    private float shoot_time;
+    private float reload_time;
+    private float iceLance_time;
+
+    [SerializeField] IceLance iceLanceScript;
+
+    public GameObject iceLancePrefab;
+
+    private AudioSource audioSource;
+    public enum IceBallState
     {
-        
+        Idle,
+        Fire,
+        Cooldown
     }
 
-    // Update is called once per frame
-    void Update()
+    IceBallState _state;
+
+    public Material[] skillMaterials;
+    ParticleSystem[] skillEffect = new ParticleSystem[2];
+    Renderer render;
+    bool renderChange = false;
+
+    private void Start()
     {
-        
+        audioSource = GetComponent<AudioSource>();
+        _state = IceBallState.Idle;
+        skillEffect = GetComponentsInChildren<ParticleSystem>();
+        render = GetComponent<Renderer>();
+        skillEffect[0].Stop();
+        skillEffect[1].Stop();
+        Debug.Log("스킬 호출");
+    }
+
+    public void ShootIceLance()
+    {
+        if(_state == IceBallState.Fire || _state == IceBallState.Cooldown)
+        {
+            return;
+        }
+        //GameObject iceLance = Instantiate(iceLancePrefab, transform);
+        //iceLanceScript = iceLance.GetComponent<IceLance>();
+        using_time = 4.0f;
+        _state = IceBallState.Fire;
+        Debug.Log("스킬 사용");
+    }
+
+    private void FixedUpdate() {
+        switch(_state)
+        {
+            case IceBallState.Idle:
+                UpdateIdle();
+                break;
+            case IceBallState.Fire:
+                UpdateFire();
+                break;
+            case IceBallState.Cooldown:
+                UpdateCooldown();
+                break;
+        }
+    }
+
+    void UpdateIdle()
+    {
+        cooldown_time = 8.0f;
+        using_time = 4.0f;
+    }
+
+    void UpdateFire()
+    {
+        using_time -= Time.fixedDeltaTime;
+        iceLance_time += Time.fixedDeltaTime;
+
+        if(iceLance_time >= 0.45f)
+        {
+            iceLance_time = 0.0f;
+            GameObject iceLance = Instantiate(iceLancePrefab, transform);
+            iceLanceScript = iceLance.GetComponent<IceLance>();
+        }
+
+        if(using_time <= 0.0f)
+        {
+            cooldown_time = 8.0f;
+            _state = IceBallState.Cooldown;
+            StartCoroutine(ChangeBall());          
+            Debug.Log("스킬 사용 종료");
+        }
+    }
+
+    IEnumerator ChangeBall(){
+        skillEffect[0].Play();
+        yield return new WaitForSeconds(0.8f);
+        render.material = skillMaterials[1];
+    }
+
+    void UpdateCooldown()
+    {
+        cooldown_time -= Time.fixedDeltaTime;
+        if(cooldown_time <= 1.3f){
+            if(renderChange)
+                return;
+
+            renderChange = true;
+            StartCoroutine(Reload());
+        }
+        if(cooldown_time <= 0.0f)
+        {
+            _state = IceBallState.Idle;
+            Debug.Log("스킬 쿨타임 종료");
+        }
+    }
+
+    IEnumerator Reload()
+    {
+        skillEffect[1].Play();
+        yield return new WaitForSeconds(1.3f);
+        render.material = skillMaterials[0];
+        yield return new WaitForSeconds(0.2f);
+        renderChange = false;
     }
 }
