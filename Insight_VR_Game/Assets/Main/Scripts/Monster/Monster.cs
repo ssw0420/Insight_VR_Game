@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -34,13 +35,14 @@ public class Monster : MonoBehaviour
     [SerializeField]float hitDelay;
     [SerializeField]protected float curHitAnimationTime;
     [SerializeField]protected float curAttackAnimationTime;
-    bool isAttack = false;
 
     //몬스터 플레이어 회전
-    protected Camera camera;
+    protected Camera player;
 
     //몬스터 소리
     protected AudioSource monsterAudio;
+
+    float saveSpeed;
 
     private void Awake()
     {
@@ -48,21 +50,21 @@ public class Monster : MonoBehaviour
         agent = GetComponent<NavMeshAgent>();
         render = GetComponentInChildren<Renderer>();
         monsterAudio = GetComponent<AudioSource>();
-        camera = Camera.main;
+        player = Camera.main;
     }
 
-    private void Start()
+    protected virtual void Start()
     {
         m_State = MonsterState.Walk;
         finishPoint = GameObject.Find("Finish Point Box").transform;
         int randZ = Random.Range(-2, 2);
         agent.SetDestination(finishPoint.position + new Vector3(0, 0, randZ));
+        saveSpeed = agent.speed;
     }
 
     //Get AnimationTime;
     protected float GetAnimationClipLenght()
     {
-        Debug.Log("애니메이션 시간 측정 시작");
         float time = 0;
         string name;
         switch (m_State) 
@@ -77,14 +79,14 @@ public class Monster : MonoBehaviour
                 name = "None";
                 break;
         }
-        Debug.Log(name + " " + m_State);
+
         RuntimeAnimatorController ac = anim.runtimeAnimatorController;
         for (int i = 0; i < ac.animationClips.Length; i++)
         {
             if (ac.animationClips[i].name == name)
                 time = ac.animationClips[i].length;
         }
-        Debug.Log(time);
+
         return time;
     }
 
@@ -95,41 +97,54 @@ public class Monster : MonoBehaviour
 
     private void Update()
     {
-        if(agent.velocity.sqrMagnitude >= 0.2f * 0.2f && agent.remainingDistance <= 0.5f)
+        switch (m_State)
         {
-            StartCoroutine(OnAttack());
+            case MonsterState.Walk:
+                if (agent.velocity.sqrMagnitude >= 0.2f * 0.2f && agent.remainingDistance <= 0.5f)
+                {
+                    StartCoroutine(OnAttack());
+                }
+                break;
         }
     }
 
     void FixedUpdate()
     {
-        if (anim.GetBool("isAttack"))
+        switch (m_State)
         {
-            Vector3 lookDir = (camera.transform.position - transform.position).normalized;
-
-            Quaternion from = transform.rotation;
-            Quaternion to = Quaternion.LookRotation(lookDir);
-
-            transform.rotation = Quaternion.Lerp(from, to, Time.fixedDeltaTime * 9f);
+            case MonsterState.Attack:
+            case MonsterState.Idle:
+                MonsterVision();
+                break;
         }
+    }
+
+    void MonsterVision()
+    {
+        Vector3 lookDir = (player.transform.position - transform.position).normalized;
+
+        Quaternion from = transform.rotation;
+        Quaternion to = Quaternion.LookRotation(lookDir);
+
+        transform.rotation = Quaternion.Lerp(from, to, Time.fixedDeltaTime * 9f);
     }
 
     //공격 부분
     IEnumerator OnAttack()
     {
         agent.speed = 0f;
-        isAttack = true;
+        anim.SetBool("isWalk", false);
 
         while (true)
         {
-            anim.SetBool("isAttack", true);
+            anim.SetTrigger("isAttack");    
             m_State = MonsterState.Attack;
 
             curAttackAnimationTime = GetAnimationClipLenght();
             yield return new WaitForSeconds(curAttackAnimationTime);
 
-            anim.SetBool("isAttack", false);
             m_State = MonsterState.Idle;
+
             PlayerStats.Instance.TakeDamage(damage);
 
             yield return new WaitForSeconds(hitDelay);
@@ -139,17 +154,21 @@ public class Monster : MonoBehaviour
     //맞는 부분
     public virtual void OnHit(int damage)
     {
-        if (anim.GetBool("isHit"))
+        if (m_State == MonsterState.Hit)
+            return;
+        if (m_State == MonsterState.Die)
             return;
 
         health -= damage;
         if (health <= 0)
         {
+            m_State = MonsterState.Die;
             Die();
             return;
         }
             
         anim.SetBool("isHit", true);
+        m_State = MonsterState.Hit;
         monsterAudio.time = 0f;
         monsterAudio.Play();
         StartCoroutine("HitOut");
@@ -168,8 +187,8 @@ public class Monster : MonoBehaviour
 
         render.material = saveMaterial;
         anim.SetBool("isHit", false);
+        anim.SetTrigger("isAttack");
         monsterAudio.Stop();
-        agent.speed = saveSpeed;
     }
 
     //죽는 부분
