@@ -39,12 +39,12 @@ public class RoundControlManager : MonoBehaviour
 
     public void OpenCard(int Num)
     {
-        GameObject card = MonoBehaviour.Instantiate(Card_Prefab);
+        GameObject card = (GameObject)MonoBehaviour.Instantiate(Card_Prefab);
         Debug.Log("카운트 넘버 : " + RoundImage.instance.CountNum);
         Debug.Log("라운드 넘버 : " + RoundImage.instance.RoundNumber);
         card.name = "Card";
 
-        Vector3 pos = new Vector3(-0.267f, 2f, -0.64f);
+        Vector3 pos = new Vector3(63.0f, 3f, 62.0f);
         card.transform.position = pos;
     }
 }

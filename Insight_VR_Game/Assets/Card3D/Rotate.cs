@@ -7,7 +7,7 @@ public class Rotate : MonoBehaviour {
     public int maskNumber = 1;
 
     [Tooltip("Horizontal Rotation Speed")]
-    [Range(-1, 1)]
+    [Range(0, 9)]
     public float rotationSpeedH = 0.7f;
 
     [Tooltip("Horizontal Rotation Speed")]
