@@ -15,12 +15,13 @@ public class IceBall : MonoBehaviour
 
     public GameObject iceLancePrefab;
 
-    private AudioSource audioSource;
+    // private AudioSource audioSource;
     public enum IceBallState
     {
         Idle,
         Fire,
-        Cooldown
+        Cooldown,
+        Reloading
     }
 
     IceBallState _state;
@@ -28,14 +29,18 @@ public class IceBall : MonoBehaviour
     public Material[] skillMaterials;
     ParticleSystem[] skillEffect = new ParticleSystem[2];
     Renderer render;
+    // public Material[] materials = new Material[2];
+
     bool renderChange = false;
 
     private void Start()
     {
-        audioSource = GetComponent<AudioSource>();
+        // audioSource = GetComponent<AudioSource>();
         _state = IceBallState.Idle;
         skillEffect = GetComponentsInChildren<ParticleSystem>();
+        // gameObject.GetComponent<MeshRenderer>().material = materials[0];
         render = GetComponent<Renderer>();
+        render.material = skillMaterials[0];
         skillEffect[0].Stop();
         skillEffect[1].Stop();
         Debug.Log("스킬 호출");
@@ -43,12 +48,10 @@ public class IceBall : MonoBehaviour
 
     public void ShootIceLance()
     {
-        if(_state == IceBallState.Fire || _state == IceBallState.Cooldown)
+        if(_state == IceBallState.Fire || _state == IceBallState.Cooldown || _state == IceBallState.Reloading)
         {
             return;
         }
-        //GameObject iceLance = Instantiate(iceLancePrefab, transform);
-        //iceLanceScript = iceLance.GetComponent<IceLance>();
         using_time = 4.0f;
         _state = IceBallState.Fire;
         Debug.Log("스킬 사용");
@@ -65,6 +68,8 @@ public class IceBall : MonoBehaviour
                 break;
             case IceBallState.Cooldown:
                 UpdateCooldown();
+                break;
+            case IceBallState.Reloading:
                 break;
         }
     }
@@ -100,31 +105,42 @@ public class IceBall : MonoBehaviour
         skillEffect[0].Play();
         yield return new WaitForSeconds(0.8f);
         render.material = skillMaterials[1];
+        // gameObject.GetComponent<MeshRenderer>().material = materials[0];
     }
 
     void UpdateCooldown()
     {
         cooldown_time -= Time.fixedDeltaTime;
-        if(cooldown_time <= 1.3f){
-            if(renderChange)
-                return;
+        // if(cooldown_time <= 1.8f){
+        //     if(renderChange)
+        //         return;
 
-            renderChange = true;
-            StartCoroutine(Reload());
-        }
+        //     // renderChange = true;
+        //     StartCoroutine(Reload());
+        // }
         if(cooldown_time <= 0.0f)
         {
-            _state = IceBallState.Idle;
+            StartCoroutine(Reload());
+            _state = IceBallState.Reloading;
             Debug.Log("스킬 쿨타임 종료");
         }
     }
 
+    // void UpdateReloading()
+    // {
+    //     _state = IceBallState.Cooldown;
+    // }
+
     IEnumerator Reload()
     {
+        Debug.Log("스킬 재장전 중");
         skillEffect[1].Play();
-        yield return new WaitForSeconds(1.3f);
+        yield return new WaitForSeconds(1.7f);
+        // skillEffect[1].Stop();
         render.material = skillMaterials[0];
-        yield return new WaitForSeconds(0.2f);
-        renderChange = false;
+        _state = IceBallState.Idle;
+        // gameObject.GetComponent<MeshRenderer>().material = materials[1];
+        //yield return new WaitForSeconds(0.2f);
+
     }
 }

@@ -75,9 +75,9 @@ GameObject:
   - component: {fileID: 535702951195797787}
   - component: {fileID: 5876949206263575393}
   - component: {fileID: -1645839444546105716}
-  - component: {fileID: -3858427311937460032}
   - component: {fileID: -643203282904333752}
   - component: {fileID: -1645102496474189216}
+  - component: {fileID: -9102205444722937462}
   m_Layer: 8
   m_Name: MushroomAngryPBR
   m_TagString: Untagged
@@ -145,23 +145,6 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 1
---- !u!114 &-3858427311937460032
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 875073071404757921}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 993dff020eee2174db59644da46b2fd9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  finishPoint: {fileID: 0}
-  health: 5
-  hitMaterial: {fileID: 2100000, guid: 51bc79759a0545c4dae4e0206bcbe2ab, type: 2}
-  damage: 1
-  hitDelay: 2
 --- !u!65 &-643203282904333752
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -279,6 +262,25 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &-9102205444722937462
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 875073071404757921}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3ebf84a337c377f43b5892f7dca68e4b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  finishPoint: {fileID: 0}
+  health: 5
+  hitMaterial: {fileID: 0}
+  damage: 1
+  hitDelay: 1
+  curHitAnimationTime: 0
+  curAttackAnimationTime: 0
 --- !u!1 &1326775223490303571
 GameObject:
   m_ObjectHideFlags: 0

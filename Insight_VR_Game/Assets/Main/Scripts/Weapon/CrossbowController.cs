@@ -12,7 +12,8 @@ public class CrossbowController : MonoBehaviour
     private Animator animator;
     private bool isShoot = false;
 
-    public float shootDelay = 0.8f;
+    public float shootDelay = 0.55f;
+    private float animaitionShootDelay = 0.1f;
 
     public GameObject arrowPrefab;
 
@@ -59,6 +60,7 @@ public class CrossbowController : MonoBehaviour
         yield return wfs;
 
         animator.SetBool("isEmpty", false);
+        yield return new WaitForSeconds(animaitionShootDelay);
         LoadArrow();
 
         isFilling = false;

@@ -8,9 +8,10 @@ public class ArrowManager : MonoBehaviour
     // [SerializeField] GameObject crossbow;
     Rigidbody rigid;
     TrailRenderer trailRenderer;
+    BoxCollider boxCollider;
     public float angle;
     public float power;
-    public float speed = 0.5f;
+    public float speed = 1.1f;
     Vector3 v1;
     float Timedir;
     float shootTime;
@@ -27,12 +28,14 @@ public class ArrowManager : MonoBehaviour
     {
         rigid = GetComponent<Rigidbody>();
         trailRenderer = transform.Find("MoveTrack").GetComponent<TrailRenderer>();
+        boxCollider = GetComponent<BoxCollider>();
     }
 
     private void Start()
     {
         transform.localPosition = new Vector3(0, 0.16572f, 0.20547f);
         trailRenderer.enabled = false;
+        boxCollider.enabled = false;
         Timedir = Time.deltaTime;
         gravity = -(1.0f * Timedir * Timedir / 4.0f);
     }
@@ -42,6 +45,7 @@ public class ArrowManager : MonoBehaviour
         isShoot = true;
         rigid.isKinematic = false;
         trailRenderer.enabled = true;
+        boxCollider.enabled = true;
         rigid.useGravity = true;
         gameObject.transform.SetParent(null);
 
