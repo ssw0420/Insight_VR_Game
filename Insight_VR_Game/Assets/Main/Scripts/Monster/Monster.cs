@@ -168,15 +168,15 @@ public class Monster : MonoBehaviour
         }
             
         anim.SetBool("isHit", true);
-        m_State = MonsterState.Hit;
         monsterAudio.time = 0f;
-        monsterAudio.Play();
         StartCoroutine("HitOut");
     }
 
     IEnumerator HitOut()
     {
+        monsterAudio.Play();
         float saveSpeed = agent.speed;
+        MonsterState saveState = m_State;
         agent.speed = 0;
         Material saveMaterial = render.materials[0];
         render.material = hitMaterial;
@@ -185,10 +185,11 @@ public class Monster : MonoBehaviour
         curHitAnimationTime = GetAnimationClipLenght();
         yield return new WaitForSeconds(curHitAnimationTime);
 
+        monsterAudio.Stop();
+        agent.speed = saveSpeed;
+        m_State = saveState;
         render.material = saveMaterial;
         anim.SetBool("isHit", false);
-        anim.SetTrigger("isAttack");
-        monsterAudio.Stop();
     }
 
     //Á×´Â ºÎºÐ
@@ -197,7 +198,20 @@ public class Monster : MonoBehaviour
         anim.SetTrigger("isDie");
         agent.enabled = false;
 
+        StartCoroutine("MonsterHitEffect");
         StartCoroutine(MonsterFadeOut());
+    }
+
+    IEnumerator MonsterHitEffect()
+    {
+        monsterAudio.Play();
+        Material saveMaterial = render.materials[0];
+        render.material = hitMaterial;
+
+        yield return new WaitForSeconds(0.677f);
+
+        render.material = saveMaterial;
+        monsterAudio.Stop();
     }
 
     IEnumerator MonsterFadeOut()

@@ -88,6 +88,11 @@ public class Boss : Monster
         }
     }
 
+    private void FixedUpdate()
+    {
+        
+    }
+
     //플레이어 공격
     IEnumerator PlayerAttack()
     {
@@ -95,6 +100,7 @@ public class Boss : Monster
         agent.SetDestination(finishPoint.position);
         isAttack = true;
         attackNum = Random.Range(1, 2);
+        PlayerStats.Instance.TakeDamage(1);
         Debug.Log("공격 시전 이동");
     }
 

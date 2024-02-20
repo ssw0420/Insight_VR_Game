@@ -21,7 +21,7 @@ public class MonsterManager : MonoBehaviour
     public List<Spawner> spawner;
     public GameObject HealthPotion;
     List<GameObject> liveMonster;
-    int stage;
+    [SerializeField]int stage;
 
     //임시 게임 시작
     private void Start()
@@ -32,7 +32,6 @@ public class MonsterManager : MonoBehaviour
 
     public void GameStart()
     {
-        stage = 1;
         ReadSpawnFile(stage);
     }
 
