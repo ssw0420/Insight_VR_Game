@@ -6,7 +6,7 @@ public class IceBall : MonoBehaviour
 {
     [SerializeField] private float cooldown_time = 8.0f;
 
-    [SerializeField] private float using_time = 4.0f;
+    [SerializeField] private float using_time = 4.5f;
     private float shoot_time;
     private float reload_time;
     private float iceLance_time;
@@ -52,7 +52,7 @@ public class IceBall : MonoBehaviour
         {
             return;
         }
-        using_time = 4.0f;
+        using_time = 4.5f;
         _state = IceBallState.Fire;
         Debug.Log("스킬 사용");
     }
@@ -77,7 +77,7 @@ public class IceBall : MonoBehaviour
     void UpdateIdle()
     {
         cooldown_time = 8.0f;
-        using_time = 4.0f;
+        using_time = 4.5f;
     }
 
     void UpdateFire()
@@ -85,7 +85,7 @@ public class IceBall : MonoBehaviour
         using_time -= Time.fixedDeltaTime;
         iceLance_time += Time.fixedDeltaTime;
 
-        if(iceLance_time >= 0.45f)
+        if(iceLance_time >= 0.13f)
         {
             iceLance_time = 0.0f;
             GameObject iceLance = Instantiate(iceLancePrefab, transform);
