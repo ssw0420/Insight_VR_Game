@@ -20,6 +20,7 @@ public class MonsterManager : MonoBehaviour
     public List<Transform> bossFinishPoint;
     public List<Spawner> spawner;
     public GameObject HealthPotion;
+    public Material hitMaterial;
     List<GameObject> liveMonster;
     [SerializeField]int stage;
 
@@ -85,5 +86,10 @@ public class MonsterManager : MonoBehaviour
     public GameObject GetHealthPotionPrefab()
     {
         return HealthPotion;
+    }
+
+    public Material GetHitMaterial()
+    {
+        return hitMaterial;
     }
 }

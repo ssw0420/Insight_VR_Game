@@ -3744,6 +3744,7 @@ MonoBehaviour:
   - {fileID: 1909228062}
   - {fileID: 1831599620}
   HealthPotion: {fileID: 526852975642702880, guid: d32f9ddeaff1cf341a29bbe0a379e098, type: 3}
+  hitMaterial: {fileID: 2100000, guid: 51bc79759a0545c4dae4e0206bcbe2ab, type: 2}
   stage: 1
 --- !u!1 &982270547
 GameObject:

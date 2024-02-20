@@ -33,8 +33,8 @@ public class Monster : MonoBehaviour
     public Material hitMaterial;
     [SerializeField]float damage;
     [SerializeField]float hitDelay;
-    protected float curHitAnimationTime;
-    protected float curAttackAnimationTime;
+    [SerializeField] protected float curHitAnimationTime;
+    [SerializeField] protected float curAttackAnimationTime;
 
     //몬스터 플레이어 회전
     protected Camera player;
@@ -60,6 +60,7 @@ public class Monster : MonoBehaviour
         int randZ = Random.Range(-2, 2);
         agent.SetDestination(finishPoint.position + new Vector3(0, 0, randZ));
         saveSpeed = agent.speed;
+        hitMaterial = MonsterManager.Instance.GetHitMaterial();
     }
 
     //Get AnimationTime;
@@ -183,7 +184,6 @@ public class Monster : MonoBehaviour
         render.material = hitMaterial;
 
         m_State = MonsterState.Hit;
-        curHitAnimationTime = GetAnimationClipLenght();
         yield return new WaitForSeconds(curHitAnimationTime);
 
         monsterAudio.Stop();
