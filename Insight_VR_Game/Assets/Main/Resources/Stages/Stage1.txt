@@ -1,1 +1,4 @@
-1,Boss,1
+1,HealthMonster,1
+1,HealthMonster,0
+1,Cactus,1
+1,Cactus,2

@@ -1,24 +1,32 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Unity.Collections.LowLevel.Unsafe;
 using UnityEditor.Rendering;
 using UnityEngine;
 using UnityEngine.AI;
 
+public enum BossState
+{
+    Walk,
+    Attack,
+    Skill,
+    Hit,
+    Die,
+}
+
 public class Boss : Monster
 {
+    BossState b_State;
+
     ParticleSystem bossSkillEffect;
     List<Transform> bossFinishPoint;
     Transform bossSkillPos;
-    int pointNum;
-    int attackNum;
-    bool isAttack = false;
-    int savePoint = 0;
+    int checkPoint = 0;
     int maxHealth = 100;
-    bool isSkill = false;
-    int index = 0;
+    int skillCount = 0;
     bool isHit = false;
-    bool isCritical = false;
 
     private void Start()
     {
@@ -27,94 +35,95 @@ public class Boss : Monster
         bossSkillPos = GameObject.Find("Boss Skill Pos").transform;
         bossFinishPoint = MonsterManager.Instance.GetBossPointList().ToList();
         bossSkillEffect = GetComponentInChildren<ParticleSystem>();
+        b_State = BossState.Walk;
         BossMove();
+    }
+
+    private void Update()
+    {
+        if (Input.GetButtonDown("Jump"))
+            health -= 25;
+
+        switch (b_State)
+        {
+            case BossState.Walk:
+                if(agent.velocity.sqrMagnitude >= 0.2f * 0.2f && agent.remainingDistance <= 0.1f)
+                {
+                    if (checkPoint >= 3)
+                        StartCoroutine(PlayerAttack());
+                    else
+                        BossMove();
+                }
+                break;
+            case BossState.Attack:
+                if (agent.velocity.sqrMagnitude >= 0.2f * 0.2f && agent.remainingDistance <= 0.1f)
+                {
+                    if (anim.GetBool("isAttack"))
+                        return;
+
+                    StartCoroutine("OnAttack");
+                }
+                break;
+            case BossState.Skill:
+                if (agent.velocity.sqrMagnitude >= 0.2f * 0.2f && agent.remainingDistance <= 0.1f)
+                {
+                    StartCoroutine(OnSkill());
+                }
+                break;
+        }
+
+        if (health <= (maxHealth * ((3 - skillCount) * 25) / 100))
+        {
+            skillCount++;
+            b_State = BossState.Skill;
+            GoToSkill();
+        }
     }
 
     //보스 움직임
     void BossMove()
     {
-        savePoint++;
-        Debug.Log(savePoint + " 보스 이동");
+        b_State = BossState.Walk;
+        checkPoint++;
+        Debug.Log(checkPoint + " 보스 이동");
         StartCoroutine(RandomMove());
     }
 
     IEnumerator RandomMove()
     {
-        pointNum = Random.Range(0, 4);
+        int pointNum = UnityEngine.Random.Range(0, 4);
         agent.SetDestination(bossFinishPoint[pointNum].position);
 
         yield return new WaitForSeconds(0.5f);
     }
 
-    private void Update()
-    {
-        //Arrive at the Destination
-        if (agent.velocity.sqrMagnitude >= 0.2f * 0.2f && agent.remainingDistance <= 0.1f)
-        {
-            //Attack Destination
-            if (isAttack)
-                StartCoroutine(OnAttack());
-            //Skill Destination
-            else if (isSkill)
-            {
-                StartCoroutine(OnSkill());
-            }
-            //Move Destination
-            else
-            {
-                if (savePoint >= 3)
-                {
-                    if (isSkill)
-                    {
-                        savePoint = 0;
-                        return;
-                    }
-
-                    StartCoroutine(PlayerAttack());
-                }
-                else
-                {
-                    BossMove();
-                }
-            }   
-        }
-
-        //Check Skill Health
-        if(health <= (maxHealth * ((3-index) * 25) / 100))
-        {
-            index++;
-            isSkill = true;
-            GoToSkill();
-        }
-    }
-
     private void FixedUpdate()
     {
-        
+        if (anim.GetBool("isAttack"))
+            MonsterVision();
     }
 
     //플레이어 공격
     IEnumerator PlayerAttack()
     {
         yield return null;
+        b_State = BossState.Attack;
+        checkPoint = 0;
         agent.SetDestination(finishPoint.position);
-        isAttack = true;
-        attackNum = Random.Range(1, 2);
-        PlayerStats.Instance.TakeDamage(1);
         Debug.Log("공격 시전 이동");
     }
 
     IEnumerator OnAttack()
-    {  
+    {
+        int attackNum = UnityEngine.Random.Range(1, 2);
         anim.SetInteger("AttackNum", attackNum);
         anim.SetBool("isAttack", true);
         Debug.Log("공격 시전");
         yield return new WaitForSeconds(0.733f);
+        PlayerStats.Instance.TakeDamage(1);
         anim.SetBool("isAttack", false);
-        isAttack = false;
-        savePoint = 0;
 
-        if (isSkill)
+        if (b_State == BossState.Skill)
             GoToSkill();
         else
             BossMove();
@@ -122,14 +131,16 @@ public class Boss : Monster
 
     void GoToSkill()
     {
-        if (isAttack)
+        if (b_State == BossState.Attack)
             return;
+
         agent.SetDestination(bossSkillPos.position);
         Debug.Log("스킬 시전하러 이동");
     }
 
     IEnumerator OnSkill()
     {
+        b_State = BossState.Skill;
         anim.SetBool("isAttack", true);
         anim.SetInteger("AttackNum", 3);
         Debug.Log("스킬 시전");
@@ -139,8 +150,6 @@ public class Boss : Monster
 
         yield return new WaitForSeconds(2f);
         anim.SetBool("isAttack", false);
-        isSkill = false;
-        //bossSkillEffect.Stop();
 
         BossMove();
     }
@@ -148,7 +157,7 @@ public class Boss : Monster
     //보스 맞는 부분
     public override void OnHit(int damage)
     {
-        if (isHit)
+        if (isHit || b_State == BossState.Die)
             return;
 
         health -= damage;
@@ -173,27 +182,29 @@ public class Boss : Monster
 
     public void OnCriticalHit(int damage)
     {
-        if (isHit)
+        if (isHit || b_State == BossState.Die)
             return;
 
+        isHit = true;
         health -= damage;
         if (health <= 0)
+        {
+            b_State = BossState.Die;
             Die();
+        }
+            
 
-        if (anim.GetBool("isAttack") && anim.GetInteger("AttackNum") == 3)
+        if (b_State == BossState.Skill)
         {
             StopAllCoroutines();
             anim.SetBool("isHit", true);
             anim.SetBool("isAttack", false);
-            isSkill = false;
             bossSkillEffect.Stop();
+            StartCoroutine(CriticalHitOut());
             BossMove();
         }
 
-        if (isCritical)
-            HitOut();
-        else
-            StartCoroutine(CriticalHitOut());
+        StartCoroutine(CriticalHitOut());
     }
 
     IEnumerator CriticalHitOut()
@@ -203,22 +214,12 @@ public class Boss : Monster
         Material saveMeterial = render.materials[0];
         render.material = hitMaterial;
         anim.SetBool("isHit", true);
-        isHit = true;
-        //Stop Critical Hit
-        StartCoroutine(StopCriticalHit());
 
         yield return new WaitForSeconds(1f);
 
+        isHit = false;
         render.material = saveMeterial;
         anim.SetBool("isHit", false);
         agent.speed = saveSpeed;
-        isHit = false;
-    }
-
-    IEnumerator StopCriticalHit()
-    {
-        isCritical = true;
-        yield return new WaitForSeconds(3f);
-        isCritical = false;
     }
 }

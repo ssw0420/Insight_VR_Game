@@ -33,8 +33,8 @@ public class Monster : MonoBehaviour
     public Material hitMaterial;
     [SerializeField]float damage;
     [SerializeField]float hitDelay;
-    [SerializeField]protected float curHitAnimationTime;
-    [SerializeField]protected float curAttackAnimationTime;
+    protected float curHitAnimationTime;
+    protected float curAttackAnimationTime;
 
     //몬스터 플레이어 회전
     protected Camera player;
@@ -119,7 +119,7 @@ public class Monster : MonoBehaviour
         }
     }
 
-    void MonsterVision()
+    protected void MonsterVision()
     {
         Vector3 lookDir = (player.transform.position - transform.position).normalized;
 
@@ -137,6 +137,7 @@ public class Monster : MonoBehaviour
 
         while (true)
         {
+            Debug.Log("공격");
             anim.SetTrigger("isAttack");    
             m_State = MonsterState.Attack;
 
@@ -195,6 +196,7 @@ public class Monster : MonoBehaviour
     //죽는 부분
     protected virtual void Die()
     {
+        m_State = MonsterState.Die;
         anim.SetTrigger("isDie");
         agent.enabled = false;
 
