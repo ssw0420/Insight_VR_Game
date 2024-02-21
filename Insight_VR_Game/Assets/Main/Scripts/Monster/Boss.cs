@@ -41,9 +41,6 @@ public class Boss : Monster
 
     private void Update()
     {
-        if (Input.GetButtonDown("Jump"))
-            health -= 25;
-
         switch (b_State)
         {
             case BossState.Walk:
