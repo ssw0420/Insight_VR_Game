@@ -10,7 +10,7 @@ public class RoundImage : MonoBehaviour
     public Sprite EndImg;
     public int RoundNumber = 0;
     public Image ThisImg;
-    public int CountNum = 0;
+    //public int CountNum = 0;
 
     public void Awake()
     {
@@ -24,20 +24,27 @@ public class RoundImage : MonoBehaviour
     }
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            CountNum++;
-            //RoundNumber++;
-            if (CountNum == RoundNumber)
-            {
-                ThisImg.sprite = ChangeImg;
-            }
-            else if (CountNum == RoundNumber + 1)
-                ThisImg.sprite = EndImg;
-            if (CountNum-1 == RoundNumber)
-                RoundControlManager.instance.OpenCard(CountNum);
-            else if(CountNum == RoundNumber-1)
-                GameCardDestroy.instance.CardDestroy();
-        }
+        //if (Input.GetKeyDown(KeyCode.Space))
+        //{
+        //    CountNum++;
+        //    //RoundNumber++;
+        //    if (CountNum == RoundNumber)
+        //    {
+        //        ThisImg.sprite = ChangeImg;
+        //    }
+        //    else if (CountNum == RoundNumber + 1)
+        //        ThisImg.sprite = EndImg;
+        //    if (CountNum-1 == RoundNumber)
+        //        RoundControlManager.instance.OpenCard(CountNum);
+        //    else if(CountNum == RoundNumber-1)
+        //        GameCardDestroy.instance.CardDestroy();
+        //}
+    }
+    public void ChangeImgs()
+    {
+        if (RoundControlManager.instance.CountNum == RoundNumber)
+            ThisImg.sprite = ChangeImg;
+        else if (RoundControlManager.instance.CountNum == RoundNumber + 1)
+            ThisImg.sprite = EndImg;
     }
 }
