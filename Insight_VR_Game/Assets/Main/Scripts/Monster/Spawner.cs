@@ -53,25 +53,25 @@ public class Spawner : MonoBehaviour
 
         switch (type)
         {
-            case "Slime":
+            case "HealthMonster":
                 spawnType = 0;
                 break;
             case "Turtle":
                 spawnType = 1;
                 break;
-            case "Beholder":
+            case "Cactus":
                 spawnType = 2;
                 break;
-            case "Cactus":
+            case "ChestMonster":
                 spawnType = 3;
                 break;
-            case "ChestMonster":
+            case "MushroomAngry":
                 spawnType = 4;
                 break;
-            case "MushroomAngry":
+            case "MushroomSmile":
                 spawnType = 5;
                 break;
-            case "MushroomSmile":
+            case "Boss":
                 spawnType = 6;
                 break;
         }

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -32,15 +33,16 @@ public class Monster : MonoBehaviour
     public Material hitMaterial;
     [SerializeField]float damage;
     [SerializeField]float hitDelay;
-    [SerializeField]protected float curHitAnimationTime;
-    [SerializeField]protected float curAttackAnimationTime;
-    bool isAttack = false;
+    [SerializeField] protected float curHitAnimationTime;
+    [SerializeField] protected float curAttackAnimationTime;
 
     //몬스터 플레이어 회전
-    protected Camera camera;
+    protected Camera player;
 
     //몬스터 소리
     protected AudioSource monsterAudio;
+
+    float saveSpeed;
 
     private void Awake()
     {
@@ -48,21 +50,22 @@ public class Monster : MonoBehaviour
         agent = GetComponent<NavMeshAgent>();
         render = GetComponentInChildren<Renderer>();
         monsterAudio = GetComponent<AudioSource>();
-        camera = Camera.main;
+        player = Camera.main;
     }
 
-    private void Start()
+    protected virtual void Start()
     {
         m_State = MonsterState.Walk;
         finishPoint = GameObject.Find("Finish Point Box").transform;
         int randZ = Random.Range(-2, 2);
         agent.SetDestination(finishPoint.position + new Vector3(0, 0, randZ));
+        saveSpeed = agent.speed;
+        hitMaterial = MonsterManager.Instance.GetHitMaterial();
     }
 
     //Get AnimationTime;
     protected float GetAnimationClipLenght()
     {
-        Debug.Log("애니메이션 시간 측정 시작");
         float time = 0;
         string name;
         switch (m_State) 
@@ -77,14 +80,14 @@ public class Monster : MonoBehaviour
                 name = "None";
                 break;
         }
-        Debug.Log(name + " " + m_State);
+
         RuntimeAnimatorController ac = anim.runtimeAnimatorController;
         for (int i = 0; i < ac.animationClips.Length; i++)
         {
             if (ac.animationClips[i].name == name)
                 time = ac.animationClips[i].length;
         }
-        Debug.Log(time);
+
         return time;
     }
 
@@ -95,41 +98,55 @@ public class Monster : MonoBehaviour
 
     private void Update()
     {
-        if(agent.velocity.sqrMagnitude >= 0.2f * 0.2f && agent.remainingDistance <= 0.5f)
+        switch (m_State)
         {
-            StartCoroutine(OnAttack());
+            case MonsterState.Walk:
+                if (agent.velocity.sqrMagnitude >= 0.2f * 0.2f && agent.remainingDistance <= 0.5f)
+                {
+                    StartCoroutine(OnAttack());
+                }
+                break;
         }
     }
 
     void FixedUpdate()
     {
-        if (anim.GetBool("isAttack"))
+        switch (m_State)
         {
-            Vector3 lookDir = (camera.transform.position - transform.position).normalized;
-
-            Quaternion from = transform.rotation;
-            Quaternion to = Quaternion.LookRotation(lookDir);
-
-            transform.rotation = Quaternion.Lerp(from, to, Time.fixedDeltaTime * 9f);
+            case MonsterState.Attack:
+            case MonsterState.Idle:
+                MonsterVision();
+                break;
         }
+    }
+
+    protected void MonsterVision()
+    {
+        Vector3 lookDir = (player.transform.position - transform.position).normalized;
+
+        Quaternion from = transform.rotation;
+        Quaternion to = Quaternion.LookRotation(lookDir);
+
+        transform.rotation = Quaternion.Lerp(from, to, Time.fixedDeltaTime * 9f);
     }
 
     //공격 부분
     IEnumerator OnAttack()
     {
         agent.speed = 0f;
-        isAttack = true;
+        anim.SetBool("isWalk", false);
 
         while (true)
         {
-            anim.SetBool("isAttack", true);
+            Debug.Log("공격");
+            anim.SetTrigger("isAttack");    
             m_State = MonsterState.Attack;
 
             curAttackAnimationTime = GetAnimationClipLenght();
             yield return new WaitForSeconds(curAttackAnimationTime);
 
-            anim.SetBool("isAttack", false);
             m_State = MonsterState.Idle;
+
             PlayerStats.Instance.TakeDamage(damage);
 
             yield return new WaitForSeconds(hitDelay);
@@ -139,46 +156,64 @@ public class Monster : MonoBehaviour
     //맞는 부분
     public virtual void OnHit(int damage)
     {
-        if (anim.GetBool("isHit"))
+        if (m_State == MonsterState.Hit)
+            return;
+        if (m_State == MonsterState.Die)
             return;
 
         health -= damage;
         if (health <= 0)
         {
+            m_State = MonsterState.Die;
             Die();
             return;
         }
             
         anim.SetBool("isHit", true);
         monsterAudio.time = 0f;
-        monsterAudio.Play();
         StartCoroutine("HitOut");
     }
 
     IEnumerator HitOut()
     {
+        monsterAudio.Play();
         float saveSpeed = agent.speed;
+        MonsterState saveState = m_State;
         agent.speed = 0;
         Material saveMaterial = render.materials[0];
         render.material = hitMaterial;
 
         m_State = MonsterState.Hit;
-        curHitAnimationTime = GetAnimationClipLenght();
         yield return new WaitForSeconds(curHitAnimationTime);
 
-        render.material = saveMaterial;
-        anim.SetBool("isHit", false);
         monsterAudio.Stop();
         agent.speed = saveSpeed;
+        m_State = saveState;
+        render.material = saveMaterial;
+        anim.SetBool("isHit", false);
     }
 
     //죽는 부분
     protected virtual void Die()
     {
+        m_State = MonsterState.Die;
         anim.SetTrigger("isDie");
         agent.enabled = false;
 
+        StartCoroutine("MonsterHitEffect");
         StartCoroutine(MonsterFadeOut());
+    }
+
+    IEnumerator MonsterHitEffect()
+    {
+        monsterAudio.Play();
+        Material saveMaterial = render.materials[0];
+        render.material = hitMaterial;
+
+        yield return new WaitForSeconds(0.677f);
+
+        render.material = saveMaterial;
+        monsterAudio.Stop();
     }
 
     IEnumerator MonsterFadeOut()

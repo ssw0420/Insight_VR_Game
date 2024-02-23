@@ -603,6 +603,8 @@ MonoBehaviour:
   hitMaterial: {fileID: 2100000, guid: 51bc79759a0545c4dae4e0206bcbe2ab, type: 2}
   damage: 1
   hitDelay: 2
+  curHitAnimationTime: 0.833
+  curAttackAnimationTime: 0
 --- !u!65 &-3046148016730461094
 BoxCollider:
   m_ObjectHideFlags: 0

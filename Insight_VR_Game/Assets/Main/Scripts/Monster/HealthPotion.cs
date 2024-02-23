@@ -5,11 +5,13 @@ using UnityEngine;
 public class HealthPotion : MonoBehaviour
 {
     Camera player;
+    Vector3 eatPos;
     bool isMove = false;
 
     private void Start()
     {
         player = Camera.main;
+        eatPos = player.transform.position + Vector3.down;
     }
 
     private void FixedUpdate()
@@ -20,9 +22,9 @@ public class HealthPotion : MonoBehaviour
 
     void MoveToPlayer()
     {
-        transform.position = Vector3.Lerp(gameObject.transform.position, player.transform.position, 0.05f);
+        transform.position = Vector3.Lerp(gameObject.transform.position, eatPos, 0.05f);
 
-        if(Vector3.Distance(transform.position, player.transform.position) <= 0.1f)
+        if(Vector3.Distance(transform.position, eatPos) <= 0.1f)
         {
             PlayerStats.Instance.Heal(1);
             Destroy(gameObject);

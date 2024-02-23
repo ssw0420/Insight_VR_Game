@@ -629,3 +629,5 @@ MonoBehaviour:
   hitMaterial: {fileID: 0}
   damage: 1
   hitDelay: 2
+  curHitAnimationTime: 0.833
+  curAttackAnimationTime: 0.833
