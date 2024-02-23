@@ -85,7 +85,7 @@ public class IceBall : MonoBehaviour
         using_time -= Time.fixedDeltaTime;
         iceLance_time += Time.fixedDeltaTime;
 
-        if(iceLance_time >= 0.13f)
+        if(iceLance_time >= 0.2f)
         {
             iceLance_time = 0.0f;
             GameObject iceLance = Instantiate(iceLancePrefab, transform);

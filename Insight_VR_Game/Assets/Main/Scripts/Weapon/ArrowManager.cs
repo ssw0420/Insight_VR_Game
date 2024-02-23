@@ -46,7 +46,7 @@ public class ArrowManager : MonoBehaviour
         rigid.isKinematic = false;
         trailRenderer.enabled = true;
         boxCollider.enabled = true;
-        rigid.useGravity = true;
+        rigid.useGravity = false;
         gameObject.transform.SetParent(null);
 
         // StartCoroutine("Move");

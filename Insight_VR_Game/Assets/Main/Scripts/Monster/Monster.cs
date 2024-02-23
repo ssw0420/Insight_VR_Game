@@ -236,4 +236,10 @@ public class Monster : MonoBehaviour
         Destroy(gameObject);
         MonsterManager.Instance.DeleteLiveMonsterList(this.gameObject);
     }
+
+    private void OnParticleCollision(GameObject other)
+    {
+        Debug.Log("몬스터 스킬 히트 판정");
+        OnHit(1);
+    }
 }

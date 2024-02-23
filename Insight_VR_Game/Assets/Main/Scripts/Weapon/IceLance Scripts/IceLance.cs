@@ -39,12 +39,19 @@ public class IceLance : MonoBehaviour
     //         other.GetComponent<HealthMonster>().OnHit(1);
     //     }
     // }
-    private void OnParticleCollision(GameObject other) {
-        other.GetComponent<Monster>().OnHit(1);
+    private void OnParticleCollision(GameObject other)
+    {
+        if(other.layer == LayerMask.NameToLayer("Monster"))
+        {
+            Debug.Log("몬스터 스킬 히트 판정");
+            other.GetComponent<Monster>().OnHit(1);
+        }
+            
     }
-    // private void OnParticleTrigger() {
-    //     Debug.Log("IceLance Trigger");
-        
-    // }
+
+    //private void OnParticleTrigger()
+    //{
+    //    Debug.Log("IceLance Trigger");
+    //}
 
 }
