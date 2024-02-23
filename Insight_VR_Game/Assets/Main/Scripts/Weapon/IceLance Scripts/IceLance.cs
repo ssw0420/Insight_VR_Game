@@ -20,15 +20,6 @@ public class IceLance : MonoBehaviour
         audioSource.Play();
     }
 
-    // void OnEnable()
-    // {
-    //     myParticleSystem.Play();
-    // }
-
-    // void OnDisable()
-    // {
-    //     myParticleSystem.Stop();
-    // }
     private void FixedUpdate() {
         iceLance_time += Time.fixedDeltaTime;
         if(iceLance_time >= 3.0f)
@@ -37,15 +28,23 @@ public class IceLance : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.gameObject.layer == LayerMask.NameToLayer("Monster"))
-        {
-            other.GetComponent<Monster>().OnHit(1);
-        }
-        else if(other.gameObject.layer == LayerMask.NameToLayer("HealthMonster"))
-        {
-            other.GetComponent<HealthMonster>().OnHit(1);
-        }
+    // private void OnTriggerEnter(Collider other)
+    // {
+    //     if (other.gameObject.layer == LayerMask.NameToLayer("Monster"))
+    //     {
+    //         other.GetComponent<Monster>().OnHit(1);
+    //     }
+    //     else if(other.gameObject.layer == LayerMask.NameToLayer("HealthMonster"))
+    //     {
+    //         other.GetComponent<HealthMonster>().OnHit(1);
+    //     }
+    // }
+    private void OnParticleCollision(GameObject other) {
+        other.GetComponent<Monster>().OnHit(1);
     }
+    // private void OnParticleTrigger() {
+    //     Debug.Log("IceLance Trigger");
+        
+    // }
+
 }

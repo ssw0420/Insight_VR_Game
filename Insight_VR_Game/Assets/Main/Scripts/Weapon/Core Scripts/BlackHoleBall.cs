@@ -17,7 +17,8 @@ public class BlackHoleBall : MonoBehaviour
     {
         Idle,
         Fire,
-        Cooldown
+        Cooldown,
+        Reloading
     }
 
     BlackHoleBallState _state;
@@ -40,7 +41,7 @@ public class BlackHoleBall : MonoBehaviour
 
     public void ShootBlackHole()
     {
-        if(_state == BlackHoleBallState.Fire || _state == BlackHoleBallState.Cooldown)
+        if(_state == BlackHoleBallState.Fire || _state == BlackHoleBallState.Cooldown || _state == BlackHoleBallState.Reloading)
         {
             return;
         }
@@ -64,6 +65,8 @@ public class BlackHoleBall : MonoBehaviour
                 break;
             case BlackHoleBallState.Cooldown:
                 UpdateCooldown();
+                break;
+            case BlackHoleBallState.Reloading:
                 break;
         }
     }
@@ -96,15 +99,16 @@ public class BlackHoleBall : MonoBehaviour
     void UpdateCooldown()
     {
         cooldown_time -= Time.fixedDeltaTime;
-        if(cooldown_time <= 1.3f){
-            if(renderChange)
-                return;
+        // if(cooldown_time <= 1.3f){
+        //     if(renderChange)
+        //         return;
 
-            renderChange = true;
-            StartCoroutine(Reload());
-        }
+        //     renderChange = true;
+        //     StartCoroutine(Reload());
+        // }
         if(cooldown_time <= 0.0f)
         {
+            StartCoroutine(Reload());
             _state = BlackHoleBallState.Idle;
             Debug.Log("스킬 쿨타임 종료");
         }
@@ -113,10 +117,11 @@ public class BlackHoleBall : MonoBehaviour
     IEnumerator Reload()
     {
         skillEffect[1].Play();
-        yield return new WaitForSeconds(1.3f);
+        yield return new WaitForSeconds(1.5f);
         render.material = skillMaterials[0];
-        yield return new WaitForSeconds(0.2f);
-        renderChange = false;
+        // yield return new WaitForSeconds(0.2f);
+        // renderChange = false;
+        _state = BlackHoleBallState.Idle;
     }
     // MeshRenderer render;
     

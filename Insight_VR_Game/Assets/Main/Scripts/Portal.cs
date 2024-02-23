@@ -6,6 +6,6 @@ public class Portal : MonoBehaviour
 {
     public void MoveStageScene()
     {
-        SceneLoader.Instance.LoadScene("MoodyNight");
+        SceneLoader.Instance.LoadScene("SSW_BugFix");
     }
 }
