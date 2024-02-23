@@ -14,6 +14,6 @@ public class GameCardDestroy : MonoBehaviour
 
     public void CardDestroy()
     {
-        Destroy(gameObject);
+        //Destroy(gameObject);
     }
 }
