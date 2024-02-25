@@ -12,18 +12,7 @@ public class CardControlManager : MonoBehaviour
             instance = this;
         }
     }
-        //GameObject Card_BlackHole;
-        //GameObject Card_Ice;
-        //GameObject Card_Upgrade1;
-        //GameObject Card_Upgrade2;
-
-        //public void Start()
-        //{
-        //    Card_BlackHole = Resources.Load("Prefabs/Card/GameCard_Skill_blackHole") as GameObject;
-        //    Card_Ice = Resources.Load("Prefabs/Card/GameCard_Skill_ice") as GameObject;
-        //    Card_Upgrade1 = Resources.Load("Prefabs/Card/GameCard_Upgrade_1") as GameObject;
-        //    Card_Upgrade2 = Resources.Load("Prefabs/Card/GameCard_Upgrade_2") as GameObject;
-        //}
+       
     public void OpenCard()
     {
         Debug.Log("opencard ½ÇÇà");
