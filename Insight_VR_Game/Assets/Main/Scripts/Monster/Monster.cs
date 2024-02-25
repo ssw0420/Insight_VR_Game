@@ -160,8 +160,6 @@ public class Monster : MonoBehaviour
     //맞는 부분
     public virtual void OnHit(int damage)
     {
-        Debug.Log("온히트데미지 = " + damage);
-        Debug.Log("체력 = " + health);
         if (m_State == MonsterState.Hit)
             return;
         if (m_State == MonsterState.Die)

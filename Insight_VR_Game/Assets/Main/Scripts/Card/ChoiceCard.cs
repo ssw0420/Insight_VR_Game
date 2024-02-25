@@ -49,7 +49,7 @@ public class ChoiceCard : MonoBehaviour
     {
         GameObject[] allObjects = UnityEngine.Object.FindObjectsOfType<GameObject>();
 
-        // 가져온 GameObject들 중 레이어가 "Card"인 것들을 파괴합니다.
+        
         foreach (GameObject obj in allObjects)
         {
             if (obj.layer == LayerMask.NameToLayer("Card"))
