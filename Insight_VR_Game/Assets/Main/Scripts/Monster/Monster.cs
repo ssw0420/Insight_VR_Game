@@ -16,7 +16,7 @@ public enum MonsterState {
 public class Monster : MonoBehaviour
 {
     MonsterState m_State;
-
+    public static Monster instance;
     //움직임 및 애니메이션
     protected Animator anim;
     protected NavMeshAgent agent;
@@ -51,6 +51,10 @@ public class Monster : MonoBehaviour
         render = GetComponentInChildren<Renderer>();
         monsterAudio = GetComponent<AudioSource>();
         player = Camera.main;
+        if (instance == null)
+        {
+            instance = this;
+        }
     }
 
     protected virtual void Start()
@@ -156,6 +160,8 @@ public class Monster : MonoBehaviour
     //맞는 부분
     public virtual void OnHit(int damage)
     {
+        Debug.Log("온히트데미지 = " + damage);
+        Debug.Log("체력 = " + health);
         if (m_State == MonsterState.Hit)
             return;
         if (m_State == MonsterState.Die)
