@@ -45,17 +45,18 @@ public class PlayerStats : MonoBehaviour
         ClampHealth();
     }
 
-    public void AddHealth(int add)
-    {
-        if (maxHealth < maxTotalHealth)
-        {
-            maxHealth += add;
-            health = maxHealth;
+    //public void AddHealth()
+    //{
+    //    Debug.Log("1");
+    //    if (maxHealth < maxTotalHealth)
+    //    {
+    //        maxHealth += 1;
+    //        health = maxHealth;
 
-            if (onHealthChangedCallback != null)
-                onHealthChangedCallback.Invoke();
-        }
-    }
+    //        if (onHealthChangedCallback != null)
+    //            onHealthChangedCallback.Invoke();
+    //    }   
+    //}
 
     void ClampHealth()
     {

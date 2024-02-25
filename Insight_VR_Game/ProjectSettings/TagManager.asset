@@ -6,10 +6,6 @@ TagManager:
   tags:
   - Terrain
   - Monster
-  - Ice
-  - BlackHole
-  - Upgrade_1
-  - Upgrade_2
   layers:
   - Default
   - TransparentFX
@@ -31,7 +27,7 @@ TagManager:
   - 
   - 
   - 
-  - Card
+  - 
   - 
   - 
   - 

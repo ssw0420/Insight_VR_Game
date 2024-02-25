@@ -16,10 +16,6 @@ public class ArrowManager : MonoBehaviour
     float Timedir;
     float shootTime;
     float gravity;
-    //private int dmgstate;
-    // public bool dmgstate = false;
-
-
 
     bool isShoot;
 
@@ -28,17 +24,11 @@ public class ArrowManager : MonoBehaviour
     //     this.crossbow = crossbow;
     // }
 
-    public static ArrowManager instance;
-
     private void Awake()
     {
         rigid = GetComponent<Rigidbody>();
         trailRenderer = transform.Find("MoveTrack").GetComponent<TrailRenderer>();
         boxCollider = GetComponent<BoxCollider>();
-        if (instance == null)
-        {
-            instance = this;
-        }
     }
 
     private void Start()
@@ -58,7 +48,7 @@ public class ArrowManager : MonoBehaviour
         boxCollider.enabled = true;
         rigid.useGravity = false;
         gameObject.transform.SetParent(null);
-        
+
         // StartCoroutine("Move");
     }
 
@@ -116,62 +106,35 @@ public class ArrowManager : MonoBehaviour
     //     }
     // }
 
-    
     private void OnTriggerEnter(Collider other)
     {
-        
-        if (other.gameObject.layer == LayerMask.NameToLayer("Monster") && !PlayerController.instance.DmgState)
+
+        if (other.gameObject.layer == LayerMask.NameToLayer("Monster"))
         {
-            Debug.Log("1 적중");
+            Debug.Log("적중");
             other.GetComponent<Monster>().OnHit(1);
             Destroy(gameObject);
         }
-        else if(other.gameObject.layer == LayerMask.NameToLayer("Monster") && PlayerController.instance.DmgState)
-        {
-            Debug.Log("2 적중");
-            other.GetComponent<Monster>().OnHit(2);
-            Destroy(gameObject);
-        }
 
-        if(other.gameObject.layer == LayerMask.NameToLayer("HealthMonster") && !PlayerController.instance.DmgState)
+        if(other.gameObject.layer == LayerMask.NameToLayer("HealthMonster"))
         {
             other.GetComponent<HealthMonster>().OnHit(1);
             Destroy(gameObject);
         }
-        else if(other.gameObject.layer == LayerMask.NameToLayer("HealthMonster") && PlayerController.instance.DmgState)
-        {
-            other.GetComponent<HealthMonster>().OnHit(2);
-            Destroy(gameObject);
-        }
 
-        if(other.gameObject.layer == LayerMask.NameToLayer("Boss Monster") && !PlayerController.instance.DmgState)
+        if(other.gameObject.layer == LayerMask.NameToLayer("Boss Monster"))
         {
             other.GetComponentInParent<Boss>().OnHit(1);
             Destroy(gameObject);
         }
-        else if(other.gameObject.layer == LayerMask.NameToLayer("Boss Monster") && PlayerController.instance.DmgState)
-        {
-            other.GetComponentInParent<Boss>().OnHit(2);
-            Destroy(gameObject);
-        }
-        else if(other.gameObject.layer == LayerMask.NameToLayer("Boss Eye") && !PlayerController.instance.DmgState)
+        else if(other.gameObject.layer == LayerMask.NameToLayer("Boss Eye"))
         {
             other.GetComponentInParent<Boss>().OnHit(5);
             Destroy(gameObject);
         }
-        else if(other.gameObject.layer == LayerMask.NameToLayer("Boss Eye") && PlayerController.instance.DmgState)
-        {
-            other.GetComponentInParent<Boss>().OnHit(10);
-            Destroy(gameObject);
-        }
-        else if(other.gameObject.layer == LayerMask.NameToLayer("Boss Leg") && !PlayerController.instance.DmgState)
+        else if(other.gameObject.layer == LayerMask.NameToLayer("Boss Leg"))
         {
             other.GetComponentInParent<Boss>().OnCriticalHit(3);
-            Destroy(gameObject);
-        }
-        else if(other.gameObject.layer == LayerMask.NameToLayer("Boss Leg") && PlayerController.instance.DmgState)
-        {
-            other.GetComponentInParent<Boss>().OnCriticalHit(6);
             Destroy(gameObject);
         }
 
@@ -180,46 +143,6 @@ public class ArrowManager : MonoBehaviour
             GetComponent<Rigidbody>().AddForce(transform.forward * 0);
             Debug.Log("지형 오브젝트에 적중");
             Destroy(gameObject, 1.0f);
-        }
-
-
-
-        
-
-
-        if (other.CompareTag("BlackHole"))
-        {
-            Debug.Log("블랙홀");
-            ChoiceCard.instance.ChoiceBlackHole();
-            //Destroy(gameObject);
-        }
-        else if (other.CompareTag("Ice"))
-        {
-            Debug.Log("아이스");
-            ChoiceCard.instance.ChoiceIceBall();
-            //Destroy(gameObject);
-        }
-        else if (other.CompareTag("Upgrade_1"))
-        {
-            Debug.Log("공격력 2배");
-            Debug.Log("PlayerController.instance.dmgstate = " + PlayerController.instance.DmgState);
-            ChoiceCard.instance.ChoiceUpgrade_1();
-            //Destroy(gameObject);
-        }
-        else if (other.CompareTag("Upgrade_2"))
-        {
-            Debug.Log("최대 체력 회복");
-            ChoiceCard.instance.ChoiceUpgrade_2();
-            //Destroy(gameObject);
-        }
-
-    }
-    private void OnTriggerExit(Collider other)
-    {
-        if (other.CompareTag("Upgrade_1"))
-        {
-            Debug.Log("dmg업글1 exit 실행");
-            PlayerController.instance.DmgState = true;
         }
     }
 }
