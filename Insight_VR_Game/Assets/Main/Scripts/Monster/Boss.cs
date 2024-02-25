@@ -28,7 +28,7 @@ public class Boss : Monster
     int skillCount = 0;
     bool isHit = false;
 
-    private void Start()
+    protected override void Start()
     {
         health = maxHealth;
         finishPoint = GameObject.Find("Boss Attack Pos").transform;

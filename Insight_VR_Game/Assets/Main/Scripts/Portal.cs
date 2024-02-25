@@ -4,8 +4,10 @@ using UnityEngine;
 
 public class Portal : MonoBehaviour
 {
+    public string SceneName;
+
     public void MoveStageScene()
     {
-        SceneLoader.Instance.LoadScene("SSW_BugFix");
+        SceneLoader.Instance.LoadScene(SceneName);
     }
 }
