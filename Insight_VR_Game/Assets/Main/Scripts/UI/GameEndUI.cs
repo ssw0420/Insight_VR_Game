@@ -21,15 +21,15 @@ public class GameEndUI : MonoBehaviour
         clearTime.text = minute + " : " + second;
     }
 
-    public void ClickRestart()
-    {
-        Debug.Log("Restart");
-        SceneLoader.Instance.LoadScene("YMH_MoodyNight 1");
-    }
-
     public void ClickHome()
     {
         Debug.Log("Home");
         SceneLoader.Instance.LoadScene("Home");
+    }
+
+    public void ClickExit()
+    {
+        Debug.Log("Exit");
+        Application.Quit();
     }
 }
