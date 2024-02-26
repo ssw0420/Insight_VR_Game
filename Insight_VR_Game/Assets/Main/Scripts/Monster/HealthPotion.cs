@@ -27,8 +27,10 @@ public class HealthPotion : MonoBehaviour
 
         if(Vector3.Distance(transform.position, eatPos) <= 0.1f)
         {
-            //PlayerStats.Instance.Heal(1);
-            ProgressBarInspectorTest.instance.progress += 0.1f;
+            if(PlayerController.instance.HealthState == false)
+                ProgressBarInspectorTest.instance.progress += 0.1f;
+            else if (PlayerController.instance.HealthState == true)
+                ProgressBarInspectorTest.instance.progress += 0.05f;
             Destroy(gameObject);
         }
     }
