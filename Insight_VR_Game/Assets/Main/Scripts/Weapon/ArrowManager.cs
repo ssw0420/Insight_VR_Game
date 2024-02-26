@@ -156,7 +156,7 @@ public class ArrowManager : MonoBehaviour
         }
         else if(other.gameObject.layer == LayerMask.NameToLayer("Boss Eye") && !PlayerController.instance.DmgState)
         {
-            //other.GetComponentInParent<Boss>().OnHit(5);
+            other.GetComponentInParent<Boss>().OnHit(5);
             Destroy(gameObject);
         }
         else if(other.gameObject.layer == LayerMask.NameToLayer("Boss Eye") && PlayerController.instance.DmgState)
