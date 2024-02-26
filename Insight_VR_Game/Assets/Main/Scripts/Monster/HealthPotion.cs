@@ -1,3 +1,4 @@
+using MagicPigGames;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -26,7 +27,8 @@ public class HealthPotion : MonoBehaviour
 
         if(Vector3.Distance(transform.position, eatPos) <= 0.1f)
         {
-            PlayerStats.Instance.Heal(1);
+            //PlayerStats.Instance.Heal(1);
+            ProgressBarInspectorTest.instance.progress += 0.1f;
             Destroy(gameObject);
         }
     }

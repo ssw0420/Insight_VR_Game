@@ -1,3 +1,4 @@
+using MagicPigGames;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -156,7 +157,11 @@ public class Monster : MonoBehaviour
 
             m_State = MonsterState.Idle;
 
-            PlayerStats.Instance.TakeDamage(damage);
+            //PlayerStats.Instance.TakeDamage(damage);
+            if(PlayerController.instance.HealthState == false)
+                ProgressBarInspectorTest.instance.progress -= damage;
+            else if(PlayerController.instance.HealthState == true)
+                ProgressBarInspectorTest.instance.progress -= damage / 2.0f;
 
             yield return new WaitForSeconds(hitDelay);
         }
@@ -205,6 +210,7 @@ public class Monster : MonoBehaviour
     //Á×´Â ºÎºÐ
     protected virtual void Die()
     {
+        //StopCoroutineall
         m_State = MonsterState.Die;
         anim.SetTrigger("isDie");
         agent.enabled = false;

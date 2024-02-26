@@ -5,6 +5,14 @@ namespace MagicPigGames
 {
     public class ProgressBarInspectorTest : MonoBehaviour
     {
+        public static ProgressBarInspectorTest instance;
+        private void Awake()
+        {
+            if (instance == null)
+            {
+                instance = this;
+            }
+        }
         [Header("Test Zone")]
         [Tooltip("Toggle on to test the progress bar in the editor, during play mode.")]
         public bool enableTesting = false;

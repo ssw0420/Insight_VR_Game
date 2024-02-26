@@ -41,7 +41,8 @@ public class ChoiceCard : MonoBehaviour
     {
         Debug.Log("업그레이드 2 함수 활성화");
         PlayerController.instance.HealthState = true;
-        PlayerStats.Instance.AddHealth(5);
+
+        //PlayerStats.Instance.AddHealth(5);
         DestroyCards();
     }
 
