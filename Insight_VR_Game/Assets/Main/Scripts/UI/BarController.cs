@@ -26,8 +26,8 @@ public class BarController : MonoBehaviour
         Bar3 = Resources.Load("Prefabs/UI/Bar_3") as GameObject;
         Bar4 = Resources.Load("Prefabs/UI/Bar_4") as GameObject;
 
-        Vector3 pos = new Vector3(58.25f, 7.62f, 56.73f);
-        Quaternion rot = Quaternion.Euler(-20.0f, -110.0f, 0f);
+        Vector3 pos = new Vector3(57.1f, 5.7f, 57.55f);
+        Quaternion rot = Quaternion.Euler(-20.0f, -115.0f, 0f);
 
         if(PlayerController.instance.RoundCount == 1)
         {

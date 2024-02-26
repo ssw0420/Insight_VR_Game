@@ -39,11 +39,11 @@ public class CardControlManager : MonoBehaviour
         Card_Upgrade1_no = Resources.Load("Prefabs/Card/GameCard_Upgrade_1_no") as GameObject;
         Card_Upgrade2_no = Resources.Load("Prefabs/Card/GameCard_Upgrade_2_no") as GameObject;
 
-        Vector3 pos1 = new Vector3(64.1f, 3.087f, 58.698f);
-        Vector3 pos2 = new Vector3(63.764f, 3.083f, 59.662f);
-        Vector3 pos3 = new Vector3(63.419f, 3.083f, 60.602f);
-        Vector3 pos4 = new Vector3(63.076f, 3.083f, 61.535f);
-        Quaternion rot = Quaternion.Euler(0f, -110.0f, 0f);
+        Vector3 pos1 = new Vector3(61.19f, 3.087f, 58.14f);
+        Vector3 pos2 = new Vector3(60.854f, 3.083f, 59.104f);
+        Vector3 pos3 = new Vector3(60.509f, 3.083f, 60.044f);
+        Vector3 pos4 = new Vector3(60.116f, 3.083f, 60.977f);
+        Quaternion rot = Quaternion.Euler(0f, -115.0f, 0f);
 
 
         if (PlayerController.instance.BlackHoleState == false)
