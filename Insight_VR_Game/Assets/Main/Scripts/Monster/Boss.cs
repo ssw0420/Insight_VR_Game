@@ -36,6 +36,7 @@ public class Boss : Monster
         bossSkillPos = GameObject.Find("Boss Skill Pos").transform;
         bossFinishPoint = MonsterManager.Instance.GetBossPointList().ToList();
         bossSkillEffect = GetComponentInChildren<ParticleSystem>();
+        render = GetComponentsInChildren<Renderer>()[3];
         b_State = BossState.Walk;
         BossMove();
     }
@@ -163,9 +164,13 @@ public class Boss : Monster
             return;
 
         health -= damage;
+        BossHealthBar.Instance.HealthUIUpdate(maxHealth, health);
         Debug.Log(health);
         if (health <= 0)
+        {
             Die();
+        }
+            
 
         StartCoroutine(HitOut());
     }
@@ -189,6 +194,7 @@ public class Boss : Monster
 
         isHit = true;
         health -= damage;
+        BossHealthBar.Instance.HealthUIUpdate(maxHealth, health);
         if (health <= 0)
         {
             b_State = BossState.Die;
