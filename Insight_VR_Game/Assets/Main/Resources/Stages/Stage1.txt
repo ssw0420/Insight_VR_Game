@@ -1,7 +1,1 @@
 1,HealthMonster,0
-1,Turtle,1
-1,Cactus,2
-1,ChestMonster,3
-1,MushroomAngry,0
-1,MushroomSmile,1
-1,Boss,2

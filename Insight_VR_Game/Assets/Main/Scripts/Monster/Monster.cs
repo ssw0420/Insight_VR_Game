@@ -11,6 +11,7 @@ public enum MonsterState {
     Attack,
     Hit,
     Die,
+    Win,
 }
 
 public class Monster : MonoBehaviour
@@ -72,7 +73,7 @@ public class Monster : MonoBehaviour
     {
         float time = 0;
         string name;
-        switch (m_State) 
+        switch (m_State)
         {
             case MonsterState.Hit:
                 name = "GetHit";
@@ -139,9 +140,13 @@ public class Monster : MonoBehaviour
     {
         agent.speed = 0f;
         anim.SetBool("isWalk", false);
+        m_State = MonsterState.Attack;
 
         while (true)
         {
+            if (m_State == MonsterState.Win)
+                break;
+
             Debug.Log("공격");
             anim.SetTrigger("isAttack");    
             m_State = MonsterState.Attack;
@@ -245,5 +250,12 @@ public class Monster : MonoBehaviour
     {
         Debug.Log("몬스터 스킬 히트 판정");
         OnHit(1);
+    }
+
+    public void Win()
+    {
+        m_State = MonsterState.Win;
+
+        anim.SetTrigger("GameLose");
     }
 }

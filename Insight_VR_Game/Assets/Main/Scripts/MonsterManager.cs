@@ -22,7 +22,10 @@ public class MonsterManager : MonoBehaviour
     public GameObject HealthPotion;
     public Material hitMaterial;
     List<GameObject> liveMonster;
+    [Header("Stage Info")]
+    [SerializeField]int maxStage;
     [SerializeField]int stage;
+    
 
     //임시 게임 시작
     private void Start()
@@ -34,6 +37,7 @@ public class MonsterManager : MonoBehaviour
     public void GameStart()
     {
         ReadSpawnFile(stage);
+        GameManager.Instance.StartTimeCount();
     }
 
     void ReadSpawnFile(int stage)
@@ -72,9 +76,25 @@ public class MonsterManager : MonoBehaviour
     {
         this.liveMonster.Remove(liveMonster);
 
-        if (this.liveMonster.Count <= 0){
+        if (this.liveMonster.Count <= 0)
+        {
+            if (stage >= maxStage)
+            {
+                GameManager.Instance.GameVictroy();
+                return;
+            }
+
+
             stage += 1;
             ReadSpawnFile(stage);
+        }
+    }
+
+    public void MonsterWin()
+    {
+        foreach(GameObject monster in liveMonster)
+        {
+            monster.GetComponent<Monster>().Win();
         }
     }
 
