@@ -18,12 +18,13 @@ public enum BossState
 
 public class Boss : Monster
 {
-    BossState b_State;
+    public BossState b_State;
 
     ParticleSystem bossSkillEffect;
     List<Transform> bossFinishPoint;
     Transform bossSkillPos;
     int checkPoint = 0;
+    int savePoint = -1;
     int maxHealth = 100;
     int skillCount = 0;
     bool isHit = false;
@@ -35,6 +36,7 @@ public class Boss : Monster
         bossSkillPos = GameObject.Find("Boss Skill Pos").transform;
         bossFinishPoint = MonsterManager.Instance.GetBossPointList().ToList();
         bossSkillEffect = GetComponentInChildren<ParticleSystem>();
+        render = GetComponentsInChildren<Renderer>()[3];
         b_State = BossState.Walk;
         BossMove();
     }
@@ -88,10 +90,14 @@ public class Boss : Monster
 
     IEnumerator RandomMove()
     {
-        int pointNum = UnityEngine.Random.Range(0, 4);
+        int pointNum = 0;
+        while (savePoint == pointNum)
+            pointNum = UnityEngine.Random.Range(0, 4);
+        savePoint = pointNum;
+
         agent.SetDestination(bossFinishPoint[pointNum].position);
 
-        yield return new WaitForSeconds(0.5f);
+        yield return null;
     }
 
     private void FixedUpdate()
@@ -158,9 +164,13 @@ public class Boss : Monster
             return;
 
         health -= damage;
+        BossHealthBar.Instance.HealthUIUpdate(maxHealth, health);
         Debug.Log(health);
         if (health <= 0)
+        {
             Die();
+        }
+            
 
         StartCoroutine(HitOut());
     }
@@ -184,21 +194,18 @@ public class Boss : Monster
 
         isHit = true;
         health -= damage;
+        BossHealthBar.Instance.HealthUIUpdate(maxHealth, health);
         if (health <= 0)
         {
             b_State = BossState.Die;
             Die();
         }
-            
-
+           
         if (b_State == BossState.Skill)
         {
             StopAllCoroutines();
-            anim.SetBool("isHit", true);
-            anim.SetBool("isAttack", false);
-            bossSkillEffect.Stop();
-            StartCoroutine(CriticalHitOut());
-            BossMove();
+            StartCoroutine(StopSkill());
+            return;
         }
 
         StartCoroutine(CriticalHitOut());
@@ -210,13 +217,28 @@ public class Boss : Monster
         agent.speed = 0;
         Material saveMeterial = render.materials[0];
         render.material = hitMaterial;
-        anim.SetBool("isHit", true);
+        anim.SetTrigger("isHit");
 
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(0.733f);
 
         isHit = false;
         render.material = saveMeterial;
-        anim.SetBool("isHit", false);
         agent.speed = saveSpeed;
+    }
+
+    IEnumerator StopSkill()
+    {
+        anim.SetTrigger("isHit");
+        bossSkillEffect.Stop();
+        Material saveMeterial = render.materials[0];
+        render.material = hitMaterial;
+
+        yield return new WaitForSeconds(0.01f);
+        anim.SetBool("isAttack", false);
+
+        yield return new WaitForSeconds(0.733f);
+
+        render.material = saveMeterial;
+        BossMove();
     }
 }
