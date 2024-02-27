@@ -2011,7 +2011,6 @@ MonoBehaviour:
   skillPrefab:
   - {fileID: 1820680284854294, guid: d062b1b9af54ff44cafce626c130bc03, type: 3}
   - {fileID: 4363369793012898901, guid: df231382f485f09479905df6e182e7aa, type: 3}
-  con: {fileID: 0}
 --- !u!114 &455262404 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6960197560783718045, guid: 5ae3a338572ee624a90293aca3e632fd, type: 3}
@@ -5124,7 +5123,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6598815579406187037, guid: 18ddb545287c546e19cc77dc9fbb2189, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
