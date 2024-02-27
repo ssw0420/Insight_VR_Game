@@ -38,7 +38,7 @@ Shader "Custom/HitShaderWithShadow" {
             Tags {"Queue" = "Geometry"}
 
             CGPROGRAM
-            #pragma surface surf Lambert alpha:fade nolightmap
+            #pragma surface surf Lambert
 
             struct Input {
                 float2 uv_MainTex;
