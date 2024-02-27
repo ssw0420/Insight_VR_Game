@@ -74,6 +74,9 @@ public class WeaponManager : MonoBehaviour
             if (s_State[(int)SkillType.Ice] == SkillState.Fire || s_State[(int)SkillType.BlackHole] == SkillState.Fire)
                 return;
 
+            if (s_State[(int)SkillType.Ice] == SkillState.Reloading || s_State[(int)SkillType.BlackHole] == SkillState.Reloading)
+                return;
+
             switch (s_Type)
             {
                 case SkillType.Ice:
@@ -191,6 +194,7 @@ public class WeaponManager : MonoBehaviour
         {
             iceLance_time = 0.0f;
             GameObject iceLance = Instantiate(skillPrefab[(int)SkillType.Ice], transform);
+            iceLance.transform.position += Vector3.forward * 0.1f;
         }
 
         if (using_time[(int)SkillType.Ice] <= 0.0f)
