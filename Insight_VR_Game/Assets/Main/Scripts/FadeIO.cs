@@ -34,7 +34,7 @@ public class FadeIO : MonoBehaviour
             color.a = Mathf.Lerp(0, 1, time);
             image.color = color;
 
-            yield return new WaitForSeconds(0.001f);
+            yield return null;
         }
     }
 
@@ -49,7 +49,7 @@ public class FadeIO : MonoBehaviour
             color.a = Mathf.Lerp(1, 0, time);
             image.color = color;
 
-            yield return new WaitForSeconds(0.001f);
+            yield return null;
         }
     }
 }

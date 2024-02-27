@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using MagicPigGames;
 using Unity.Collections.LowLevel.Unsafe;
 using UnityEditor.Rendering;
 using UnityEngine;
@@ -123,7 +124,11 @@ public class Boss : Monster
         anim.SetBool("isAttack", true);
         Debug.Log("공격 시전");
         yield return new WaitForSeconds(0.733f);
-        PlayerStats.Instance.TakeDamage(1);
+        //PlayerStats.Instance.TakeDamage(1);
+        if (PlayerController.instance.HealthState == false)
+            ProgressBarInspectorTest.instance.progress -= 2.0f;
+        else if (PlayerController.instance.HealthState == true)
+            ProgressBarInspectorTest.instance.progress -= 1.0f;
         anim.SetBool("isAttack", false);
 
         if (b_State == BossState.Skill)

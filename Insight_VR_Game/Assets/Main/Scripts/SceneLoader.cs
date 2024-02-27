@@ -6,6 +6,7 @@ using UnityEngine.UI;
 
 public class SceneLoader : MonoBehaviour
 {
+    Camera player;
     FadeIO fade;
     protected static SceneLoader instance;
 
@@ -44,6 +45,14 @@ public class SceneLoader : MonoBehaviour
         }
         fade = GetComponentInChildren<FadeIO>();
         DontDestroyOnLoad(gameObject);
+        player = Camera.main;
+    }
+
+    private void FixedUpdate()
+    {
+        player = Camera.main;
+        gameObject.transform.position = player.transform.position;
+        gameObject.transform.rotation = player.transform.rotation;
     }
 
     public void LoadScene(string sceneName)
