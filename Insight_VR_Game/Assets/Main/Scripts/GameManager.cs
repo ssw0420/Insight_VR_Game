@@ -22,8 +22,7 @@ public class GameManager : MonoBehaviour
 
     [Header("Weapon Object")]
     [SerializeField] GameObject crossbow;
-    [SerializeField] GameObject iceBall;
-    [SerializeField] GameObject blackHole;
+    [SerializeField] GameObject skillBall;
 
     public static GameManager Instance
     {
@@ -96,8 +95,7 @@ public class GameManager : MonoBehaviour
     void ControllerSetting()
     {
         Destroy(crossbow);
-        Destroy(blackHole);
-        Destroy(iceBall);
+        Destroy(skillBall);
 
         GameObject rightController = GameObject.Find("Right Controller");
         rightController.GetComponent<LineRenderer>().enabled = true;

@@ -214,12 +214,4 @@ public class ArrowManager : MonoBehaviour
         }
 
     }
-    private void OnTriggerExit(Collider other)
-    {
-        if (other.CompareTag("Upgrade_1"))
-        {
-            Debug.Log("dmg업글1 exit 실행");
-            PlayerController.instance.DmgState = true;
-        }
-    }
 }

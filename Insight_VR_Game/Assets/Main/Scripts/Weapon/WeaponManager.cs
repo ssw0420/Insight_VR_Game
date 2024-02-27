@@ -25,8 +25,6 @@ public class WeaponManager : MonoBehaviour
     }
     [SerializeField]List<SkillState> s_State = new List<SkillState>();
 
-    XRGrabInteractable interactable;
-
     Renderer render;
 
     [Header("Skill Look")]
@@ -44,7 +42,6 @@ public class WeaponManager : MonoBehaviour
     private void Awake()
     {
         render = GetComponent<Renderer>();
-        interactable = GetComponent<XRGrabInteractable>();
 
         ParticleSystem[] effect = GetComponentsInChildren<ParticleSystem>();
         skillEffect.AddRange(effect);

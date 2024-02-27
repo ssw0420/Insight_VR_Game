@@ -30,6 +30,11 @@ namespace MagicPigGames
 
             _lastProgress = progress;
             _progressBar.SetProgress(progress);
+
+            if(progress <= 0f)
+            {
+                GameManager.Instance.GameLose();
+            }
         }
 
         private void OnValidate()
