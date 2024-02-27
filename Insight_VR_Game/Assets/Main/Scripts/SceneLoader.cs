@@ -6,8 +6,7 @@ using UnityEngine.UI;
 
 public class SceneLoader : MonoBehaviour
 {
-    Camera player;
-    FadeIO fade;
+    [SerializeField]FadeIO fade;
     protected static SceneLoader instance;
 
     public static SceneLoader Instance
@@ -43,16 +42,8 @@ public class SceneLoader : MonoBehaviour
             Destroy(gameObject);
             return;
         }
-        fade = GetComponentInChildren<FadeIO>();
+        fade = GameObject.Find("FadeIO").GetComponent<FadeIO>();
         DontDestroyOnLoad(gameObject);
-        player = Camera.main;
-    }
-
-    private void FixedUpdate()
-    {
-        player = Camera.main;
-        gameObject.transform.position = player.transform.position;
-        gameObject.transform.rotation = player.transform.rotation;
     }
 
     public void LoadScene(string sceneName)
@@ -67,9 +58,10 @@ public class SceneLoader : MonoBehaviour
         async.allowSceneActivation = false;
 
         fade.StartFadeIn();
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(2f);
+        
         async.allowSceneActivation = true;
+        fade = GameObject.Find("FadeIO").GetComponent<FadeIO>();
         fade.StartFadeOut();
     }
-
 }

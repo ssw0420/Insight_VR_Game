@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class FadeIO : MonoBehaviour
 {
     Image image;
-    [SerializeField]float fadeTime = 1;
+    [SerializeField]float fadeTime;
 
     private void Awake()
     {
@@ -40,6 +40,7 @@ public class FadeIO : MonoBehaviour
 
     IEnumerator FadeOut()
     {
+        image.color = Color.black;
         Color color = image.color;
         float time = 0f;
 

@@ -5,6 +5,8 @@ using UnityEngine.XR.Interaction.Toolkit;
 
 public class WeaponManager : MonoBehaviour
 {
+    public static WeaponManager instance;
+
     enum SkillType 
     { 
         Ice = 0,
@@ -26,6 +28,8 @@ public class WeaponManager : MonoBehaviour
     [SerializeField]List<SkillState> s_State = new List<SkillState>();
 
     Renderer render;
+    bool onIce = false;
+    bool onBlackHole = false;
 
     [Header("Skill Look")]
     [SerializeField] List<Material> skillMaterials;
@@ -41,6 +45,7 @@ public class WeaponManager : MonoBehaviour
 
     private void Awake()
     {
+        instance = this;
         render = GetComponent<Renderer>();
 
         ParticleSystem[] effect = GetComponentsInChildren<ParticleSystem>();
@@ -49,11 +54,9 @@ public class WeaponManager : MonoBehaviour
 
     private void Start()
     {
-        render.material = skillMaterials[0];
+        render.material = skillMaterials[(int)SkillType.None];
 
-        //test code
-        //if(Frist Skill is Ice)
-        s_Type = SkillType.Ice;
+        s_Type = SkillType.None;
         s_State.Add(SkillState.Idle);
         s_State.Add(SkillState.Idle);
 
@@ -74,6 +77,11 @@ public class WeaponManager : MonoBehaviour
             if (s_State[(int)SkillType.Ice] == SkillState.Reloading || s_State[(int)SkillType.BlackHole] == SkillState.Reloading)
                 return;
 
+            if (s_Type == SkillType.Ice && !onBlackHole)
+                return;
+            if (s_Type == SkillType.BlackHole && !onIce)
+                return;
+
             switch (s_Type)
             {
                 case SkillType.Ice:
@@ -90,6 +98,9 @@ public class WeaponManager : MonoBehaviour
 
     void SkillChange()
     {
+        if (s_Type == SkillType.None)
+            return;
+
         bool isCoolTime = CheckCoolTime((int)s_Type);
 
         if (isCoolTime)
@@ -248,5 +259,27 @@ public class WeaponManager : MonoBehaviour
         yield return new WaitForSeconds(1.7f);
         render.material = skillMaterials[skillType];
         s_State[skillType] = SkillState.Idle;
+    }
+
+    public void OnIce()
+    {
+        onIce = true;
+        CheckTypeNone((int)SkillType.Ice);
+    }
+
+    public void OnBlackHole()
+    {
+        onBlackHole = true;
+        CheckTypeNone((int)SkillType.BlackHole);
+    }
+
+    void CheckTypeNone(int skillType)
+    {
+        if(s_Type == SkillType.None)
+        {
+            s_Type = (SkillType)skillType;
+            SkillChange();
+            StartCoroutine(Reload(skillType));
+        }
     }
 }

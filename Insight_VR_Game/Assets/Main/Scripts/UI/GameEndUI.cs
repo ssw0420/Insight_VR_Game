@@ -17,7 +17,7 @@ public class GameEndUI : MonoBehaviour
     {
         int minute = (int)(time / 60);
         int second = (int)(time % 60);
-        Text clearTime = gameObject.GetComponentsInChildren<Text>()[1];
+        Text clearTime = gameObject.GetComponentsInChildren<Text>()[2];
         clearTime.text = minute + " : " + second;
     }
 

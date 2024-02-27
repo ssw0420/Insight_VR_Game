@@ -261,6 +261,8 @@ public class Monster : MonoBehaviour
     public void Win()
     {
         m_State = MonsterState.Win;
+        StopAllCoroutines();
+        agent.speed = 0;
 
         anim.SetTrigger("GameLose");
     }

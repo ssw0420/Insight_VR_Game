@@ -191,12 +191,14 @@ public class ArrowManager : MonoBehaviour
         {
             Debug.Log("블랙홀");
             ChoiceCard.instance.ChoiceBlackHole();
+            MonsterManager.Instance.ReadSpawnFile();
             //Destroy(gameObject);
         }
         else if (other.CompareTag("Ice"))
         {
             Debug.Log("아이스");
             ChoiceCard.instance.ChoiceIceBall();
+            MonsterManager.Instance.ReadSpawnFile();
             //Destroy(gameObject);
         }
         else if (other.CompareTag("Upgrade_1"))
@@ -204,12 +206,14 @@ public class ArrowManager : MonoBehaviour
             Debug.Log("공격력 2배");
             Debug.Log("PlayerController.instance.dmgstate = " + PlayerController.instance.DmgState);
             ChoiceCard.instance.ChoiceUpgrade_1();
+            MonsterManager.Instance.ReadSpawnFile();
             //Destroy(gameObject);
         }
         else if (other.CompareTag("Upgrade_2"))
         {
             Debug.Log("최대 체력 회복");
             ChoiceCard.instance.ChoiceUpgrade_2();
+            MonsterManager.Instance.ReadSpawnFile();
             //Destroy(gameObject);
         }
 
