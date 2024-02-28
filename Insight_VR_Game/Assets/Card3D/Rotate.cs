@@ -12,11 +12,11 @@ public class Rotate : MonoBehaviour {
 
     [Tooltip("Horizontal Rotation Speed")]
     [Range(-1, 1)]
-    public float rotationSpeedV = 0.4f;
+    public float rotationSpeedV = 1f;
 
     [Tooltip("Maximum Horizontal Angle")]
-    [Range(0, 60)]
-    public float angleH = 20;
+    [Range(0, 360)]
+    public float angleH = 200;
 
     [Tooltip("Maximum Vertical Angle")]
     [Range(0, 60)]
@@ -27,15 +27,17 @@ public class Rotate : MonoBehaviour {
     private Transform worldTransform;
 
     private void Awake() {
-        windowTransform = transform.GetChild(1);
-        worldTransform = transform.GetChild(2);
+        //windowTransform = transform.GetChild(1);
+        //worldTransform = transform.GetChild(2);
 
-        SetStencilMask(maskNumber);
+        //SetStencilMask(maskNumber);
+
+        transform.rotation = Quaternion.Euler(new Vector3(0, -115, 0));
     }
 
     void Update () {
         rotationCounter += Time.deltaTime;
-        transform.eulerAngles = new Vector3(Mathf.Sin(rotationCounter * rotationSpeedV) * angleV, Mathf.Sin(rotationCounter * rotationSpeedH) * angleH, 0);
+        //transform.eulerAngles = new Vector3(Mathf.Sin(rotationCounter * rotationSpeedV) * angleV, Mathf.Sin(rotationCounter * rotationSpeedH) * angleH, 0);
     }
 
     // Set the mask numbers of the shaders, so windows will fit to the card world objects

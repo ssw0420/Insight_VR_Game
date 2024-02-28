@@ -191,6 +191,7 @@ public class ArrowManager : MonoBehaviour
         {
             Debug.Log("블랙홀");
             ChoiceCard.instance.ChoiceBlackHole();
+            
             //Destroy(gameObject);
         }
         else if (other.CompareTag("Ice"))
