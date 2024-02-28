@@ -50,7 +50,6 @@ public class ChoiceCard : MonoBehaviour
     {
         GameObject[] allObjects = UnityEngine.Object.FindObjectsOfType<GameObject>();
 
-        
         foreach (GameObject obj in allObjects)
         {
             if (obj.layer == LayerMask.NameToLayer("Card"))

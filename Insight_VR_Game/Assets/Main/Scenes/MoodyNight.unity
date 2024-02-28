@@ -6490,7 +6490,7 @@ MonoBehaviour:
   - {fileID: 2050353708}
   HealthPotion: {fileID: 4381819813686442086, guid: 8e73e4d98f1c4524389d5d6c19de57dc, type: 3}
   hitMaterial: {fileID: 2100000, guid: 51bc79759a0545c4dae4e0206bcbe2ab, type: 2}
-  maxStage: 0
+  maxStage: 4
   stage: 1
 --- !u!1001 &1755235551
 PrefabInstance:
