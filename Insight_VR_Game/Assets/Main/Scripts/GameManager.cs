@@ -50,6 +50,11 @@ public class GameManager : MonoBehaviour
         isTimer = true;
     }
 
+    public void PauseTimeCount()
+    {
+        isTimer = false;
+    }
+
     public void GameVictroy()
     {
         //Timer Stop

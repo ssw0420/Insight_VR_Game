@@ -85,6 +85,7 @@ public class MonsterManager : MonoBehaviour
             }
 
             stage += 1;
+            GameManager.Instance.PauseTimeCount();
             StartCardTest.instance.ShowCard();
         }
     }
