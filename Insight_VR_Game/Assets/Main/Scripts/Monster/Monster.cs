@@ -159,9 +159,9 @@ public class Monster : MonoBehaviour
 
             //PlayerStats.Instance.TakeDamage(damage);
             if(PlayerController.instance.HealthState == false)
-                ProgressBarInspectorTest.instance.progress -= damage;
+                ProgressBarInspectorTest.instance.progress -= damage / 10.0f;
             else if(PlayerController.instance.HealthState == true)
-                ProgressBarInspectorTest.instance.progress -= damage / 2.0f;
+                ProgressBarInspectorTest.instance.progress -= damage / 10.0f / 2.0f;
 
             yield return new WaitForSeconds(hitDelay);
         }

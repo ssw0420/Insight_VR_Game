@@ -16,9 +16,6 @@ public class ArrowManager : MonoBehaviour
     float Timedir;
     float shootTime;
     float gravity;
-
-
-    AudioSource hitAudio;
     //private int dmgstate;
     // public bool dmgstate = false;
 
@@ -122,6 +119,7 @@ public class ArrowManager : MonoBehaviour
     
     private void OnTriggerEnter(Collider other)
     {
+        
         if (other.gameObject.layer == LayerMask.NameToLayer("Monster") && !PlayerController.instance.DmgState)
         {
             Debug.Log("1 적중");
@@ -189,34 +187,31 @@ public class ArrowManager : MonoBehaviour
         
 
 
-        if (other.CompareTag("BlackHole"))
+        if (other.gameObject.layer == LayerMask.NameToLayer("Card") && other.CompareTag("BlackHole"))
         {
             Debug.Log("블랙홀");
             ChoiceCard.instance.ChoiceBlackHole();
-            MonsterManager.Instance.ReadSpawnFile();
-            //Destroy(gameObject);
+            Destroy(gameObject);
         }
-        else if (other.CompareTag("Ice"))
+        if (other.gameObject.layer == LayerMask.NameToLayer("Card") && other.CompareTag("Ice"))
         {
             Debug.Log("아이스");
             ChoiceCard.instance.ChoiceIceBall();
-            MonsterManager.Instance.ReadSpawnFile();
-            //Destroy(gameObject);
+            Destroy(gameObject);
         }
-        else if (other.CompareTag("Upgrade_1"))
+        if (other.gameObject.layer == LayerMask.NameToLayer("Card") && other.CompareTag("Upgrade_1"))
         {
             Debug.Log("공격력 2배");
             Debug.Log("PlayerController.instance.dmgstate = " + PlayerController.instance.DmgState);
+            PlayerController.instance.DmgState = true;
             ChoiceCard.instance.ChoiceUpgrade_1();
-            MonsterManager.Instance.ReadSpawnFile();
-            //Destroy(gameObject);
+            Destroy(gameObject);
         }
-        else if (other.CompareTag("Upgrade_2"))
+        if (other.gameObject.layer == LayerMask.NameToLayer("Card") && other.CompareTag("Upgrade_2"))
         {
             Debug.Log("최대 체력 회복");
             ChoiceCard.instance.ChoiceUpgrade_2();
-            MonsterManager.Instance.ReadSpawnFile();
-            //Destroy(gameObject);
+            Destroy(gameObject);
         }
 
     }

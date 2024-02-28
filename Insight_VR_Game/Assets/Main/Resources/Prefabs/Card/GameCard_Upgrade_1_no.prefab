@@ -403,7 +403,7 @@ TextMesh:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1915919342119532}
-  m_Text: "\uC77C\uBC18 \uACF5\uACA9\uB825\uC774 2\uBC30\uAC00 \uB429\uB2C8\uB2E4.\n(\uC774\uBBF8
+  m_Text: "\uD654\uC0B4 \uACF5\uACA9\uB825\uC744 \n2\uBC30 \uC99D\uAC00\uC2DC\uD0B5\uB2C8\uB2E4.\n(\uC774\uBBF8
     \uCE74\uB4DC\uB97C \uC120\uD0DD\uD558\uC168\uC2B5\uB2C8\uB2E4)"
   m_OffsetZ: 0
   m_CharacterSize: 0.03
