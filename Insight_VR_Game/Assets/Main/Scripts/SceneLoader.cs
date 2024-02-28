@@ -29,6 +29,8 @@ public class SceneLoader : MonoBehaviour
         }
     }
 
+    bool isSceneMove = false;
+
     public static SceneLoader Create()
     {
         var SceneLoaderPrefab = Resources.Load<SceneLoader>("SceneLoader");
@@ -48,8 +50,14 @@ public class SceneLoader : MonoBehaviour
 
     public void LoadScene(string sceneName)
     {
-        gameObject.SetActive(true);
+        if (isSceneMove)
+            return;
+
+        isSceneMove = true;
+        //gameObject.SetActive(true);
         StartCoroutine(Load(sceneName));
+
+        AudioManager.instance.SetAudioSound();
     }
 
     IEnumerator Load(string sceneName)
@@ -58,10 +66,11 @@ public class SceneLoader : MonoBehaviour
         async.allowSceneActivation = false;
 
         fade.StartFadeIn();
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(2.5f);
         
         async.allowSceneActivation = true;
         fade = GameObject.Find("FadeIO").GetComponent<FadeIO>();
         fade.StartFadeOut();
+        isSceneMove = false;
     }
 }

@@ -145,6 +145,7 @@ GameObject:
   - component: {fileID: 7548784402623049626}
   - component: {fileID: -4316086226075108268}
   - component: {fileID: 198883344171771165}
+  - component: {fileID: 102830551714925474}
   m_Layer: 8
   m_Name: MushroomSmilePBR
   m_TagString: Untagged
@@ -348,6 +349,19 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &102830551714925474
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1997902569578628670}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3f878c0c7950f3945b9c58b2f1c3b71b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pullable: 1
 --- !u!1 &2411188951558394283
 GameObject:
   m_ObjectHideFlags: 0

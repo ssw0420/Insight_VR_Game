@@ -251,4 +251,9 @@ public class Boss : Monster
         render.material = saveMeterial;
         BossMove();
     }
+
+    public override void HitBlackHole(Vector3 hitPos)
+    {
+
+    }
 }

@@ -159,6 +159,7 @@ GameObject:
   - component: {fileID: -24185522449323160}
   - component: {fileID: 5902380069347661083}
   - component: {fileID: -2239008821937440009}
+  - component: {fileID: 6177915828976219611}
   m_Layer: 8
   m_Name: ChestMonsterPBRDefault
   m_TagString: Untagged
@@ -362,6 +363,19 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &6177915828976219611
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2219292830553907877}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3f878c0c7950f3945b9c58b2f1c3b71b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pullable: 1
 --- !u!1 &2219292830553907879
 GameObject:
   m_ObjectHideFlags: 0

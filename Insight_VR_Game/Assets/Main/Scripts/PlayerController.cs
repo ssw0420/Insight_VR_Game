@@ -18,7 +18,7 @@ public class PlayerController : MonoBehaviour
     public bool DmgState = false;
     public bool HealthState = false;
 
-    public int RoundCount = 0;
+    public int RoundCount = 1;
 
     GameObject HealthBar1;
     GameObject HealthBar2;

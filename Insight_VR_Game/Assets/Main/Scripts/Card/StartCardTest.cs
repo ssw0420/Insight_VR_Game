@@ -16,13 +16,4 @@ public class StartCardTest : MonoBehaviour
         CardControlManager.instance.OpenCard();
         BarController.instance.OpenBar();
     }
-
-    //void Update()
-    //{
-    //    if (Input.GetKeyDown(KeyCode.C))
-    //    {
-    //        CardControlManager.instance.OpenCard();
-    //        BarController.instance.OpenBar();
-    //    }
-    //}
 }

@@ -111,6 +111,7 @@ GameObject:
   - component: {fileID: -1352762100049372955}
   - component: {fileID: -4334662314116106536}
   - component: {fileID: -7558017254963615166}
+  - component: {fileID: -1642739135154734591}
   m_Layer: 8
   m_Name: CactusPBR
   m_TagString: Untagged
@@ -314,6 +315,19 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &-1642739135154734591
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 662468794185850985}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3f878c0c7950f3945b9c58b2f1c3b71b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pullable: 1
 --- !u!1 &1006438018938304421
 GameObject:
   m_ObjectHideFlags: 0

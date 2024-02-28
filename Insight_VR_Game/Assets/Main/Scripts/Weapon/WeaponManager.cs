@@ -9,15 +9,12 @@ public class WeaponManager : MonoBehaviour
 
     enum SkillType 
     { 
-        Ice = 0,
-        BlackHole = 1,
-        None = 2,
+        Ice,
+        BlackHole,
+        None,
     }
     [SerializeField]SkillType s_Type;
 
-    //index
-    //0 = IceLance
-    //1 = BlackHole
     enum SkillState
     {
         Idle,

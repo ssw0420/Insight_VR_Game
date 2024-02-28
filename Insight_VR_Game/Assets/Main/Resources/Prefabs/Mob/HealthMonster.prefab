@@ -428,6 +428,7 @@ GameObject:
   - component: {fileID: 3613640308292930762}
   - component: {fileID: -12396286581029854}
   - component: {fileID: 849881681602045612}
+  - component: {fileID: 6463823643798491017}
   m_Layer: 29
   m_Name: HealthMonster
   m_TagString: Untagged
@@ -631,3 +632,16 @@ MonoBehaviour:
   hitDelay: 2
   curHitAnimationTime: 0.833
   curAttackAnimationTime: 0.833
+--- !u!114 &6463823643798491017
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1931298151966786}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3f878c0c7950f3945b9c58b2f1c3b71b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pullable: 1

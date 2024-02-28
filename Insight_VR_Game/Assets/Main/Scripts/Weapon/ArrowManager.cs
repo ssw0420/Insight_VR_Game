@@ -5,7 +5,6 @@ using UnityEngine;
 public class ArrowManager : MonoBehaviour
 {
     ArrowManager arrowManager;
-    // [SerializeField] GameObject crossbow;
     Rigidbody rigid;
     TrailRenderer trailRenderer;
     BoxCollider boxCollider;
@@ -16,17 +15,7 @@ public class ArrowManager : MonoBehaviour
     float Timedir;
     float shootTime;
     float gravity;
-    //private int dmgstate;
-    // public bool dmgstate = false;
-
-
-
     bool isShoot;
-
-    // public void GetCrossbow(GameObject crossbow)
-    // {
-    //     this.crossbow = crossbow;
-    // }
 
     public static ArrowManager instance;
 
@@ -58,8 +47,6 @@ public class ArrowManager : MonoBehaviour
         boxCollider.enabled = true;
         rigid.useGravity = false;
         gameObject.transform.SetParent(null);
-        
-        // StartCoroutine("Move");
     }
 
     private void FixedUpdate()
@@ -80,46 +67,8 @@ public class ArrowManager : MonoBehaviour
         }
     }
 
-    // IEnumerator Move()
-    // {
-    //     while (true)
-    //     {
-    //         yield return new WaitForFixedUpdate();
-    //         shootTime += Time.deltaTime;
-    //         GetComponent<Rigidbody>().AddForce(transform.forward * speed);
-    //         // if(shootTime < 0.15f)
-    //         // {
-    //         //     GetComponent<Rigidbody>().AddForce(transform.forward * speed);
-    //         // }
-    //         // else
-    //         // {
-    //         //     Timedir += Time.deltaTime / 2;
-    //         //     rigid.isKinematic = false;
-    //         //     trailRenderer.enabled = true;
-    //         //     rigid.useGravity = true;
-    //         //     v1.z = power = Mathf.Cos(angle * Mathf.PI / 180.0f) * Timedir;
-    //         //     v1.y = power = Mathf.Cos(angle * Mathf.PI / 180.0f) * Timedir * gravity;
-    //         //     transform.Translate(v1);
-
-    //         //     transform.Rotate(new Vector3(Mathf.Cos(angle * Mathf.PI / 180.0f), 0, 0));
-    //         // }
-    //         // Timedir += Time.deltaTime;
-    //         // v1.z = power = Mathf.Cos(angle * Mathf.PI / 180.0f) * Timedir;
-    //         // v1.y = power = Mathf.Cos(angle * Mathf.PI / 180.0f) * Timedir * gravity;
-    //         // transform.Translate(v1);
-
-    //         // transform.Rotate(new Vector3(Mathf.Cos(angle * Mathf.PI / 180.0f), 0, 0));
-    //         if(shootTime >= 3.0f)
-    //         {
-    //             Destroy(gameObject);
-    //         }
-    //     }
-    // }
-
-    
     private void OnTriggerEnter(Collider other)
     {
-        
         if (other.gameObject.layer == LayerMask.NameToLayer("Monster") && !PlayerController.instance.DmgState)
         {
             Debug.Log("1 적중");
@@ -191,12 +140,18 @@ public class ArrowManager : MonoBehaviour
         {
             Debug.Log("블랙홀");
             ChoiceCard.instance.ChoiceBlackHole();
+            WeaponManager.instance.OnBlackHole();
+            MonsterManager.Instance.ReadSpawnFile();
+            BgmManager.Instance.StartRoundAudio();
             Destroy(gameObject);
         }
         if (other.gameObject.layer == LayerMask.NameToLayer("Card") && other.CompareTag("Ice"))
         {
             Debug.Log("아이스");
             ChoiceCard.instance.ChoiceIceBall();
+            WeaponManager.instance.OnIce();
+            MonsterManager.Instance.ReadSpawnFile();
+            BgmManager.Instance.StartRoundAudio();
             Destroy(gameObject);
         }
         if (other.gameObject.layer == LayerMask.NameToLayer("Card") && other.CompareTag("Upgrade_1"))
@@ -205,12 +160,16 @@ public class ArrowManager : MonoBehaviour
             Debug.Log("PlayerController.instance.dmgstate = " + PlayerController.instance.DmgState);
             PlayerController.instance.DmgState = true;
             ChoiceCard.instance.ChoiceUpgrade_1();
+            MonsterManager.Instance.ReadSpawnFile();
+            BgmManager.Instance.StartRoundAudio();
             Destroy(gameObject);
         }
         if (other.gameObject.layer == LayerMask.NameToLayer("Card") && other.CompareTag("Upgrade_2"))
         {
             Debug.Log("최대 체력 회복");
             ChoiceCard.instance.ChoiceUpgrade_2();
+            MonsterManager.Instance.ReadSpawnFile();
+            BgmManager.Instance.StartRoundAudio();
             Destroy(gameObject);
         }
 

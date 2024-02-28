@@ -98,6 +98,14 @@ public class MonsterManager : MonoBehaviour
         }
     }
 
+    public void ReDestination()
+    {
+        foreach(GameObject monster in liveMonster)
+        {
+            monster.GetComponent<Monster>().SetMonsterDestination();
+        }
+    }
+
     public List<Transform> GetBossPointList()
     {
         return bossFinishPoint;
@@ -111,5 +119,10 @@ public class MonsterManager : MonoBehaviour
     public Material GetHitMaterial()
     {
         return hitMaterial;
+    }
+
+    public int GetStage()
+    {
+        return stage;
     }
 }
