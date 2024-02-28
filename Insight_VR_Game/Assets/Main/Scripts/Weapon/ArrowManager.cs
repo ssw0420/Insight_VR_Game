@@ -16,6 +16,9 @@ public class ArrowManager : MonoBehaviour
     float Timedir;
     float shootTime;
     float gravity;
+
+
+    AudioSource hitAudio;
     //private int dmgstate;
     // public bool dmgstate = false;
 
@@ -119,7 +122,6 @@ public class ArrowManager : MonoBehaviour
     
     private void OnTriggerEnter(Collider other)
     {
-        
         if (other.gameObject.layer == LayerMask.NameToLayer("Monster") && !PlayerController.instance.DmgState)
         {
             Debug.Log("1 적중");
