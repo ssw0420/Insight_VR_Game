@@ -126,9 +126,9 @@ public class Boss : Monster
         yield return new WaitForSeconds(0.733f);
         //PlayerStats.Instance.TakeDamage(1);
         if (PlayerController.instance.HealthState == false)
-            ProgressBarInspectorTest.instance.progress -= 2.0f;
+            ProgressBarInspectorTest.instance.progress -= 0.4f;
         else if (PlayerController.instance.HealthState == true)
-            ProgressBarInspectorTest.instance.progress -= 1.0f;
+            ProgressBarInspectorTest.instance.progress -= 0.2f;
         anim.SetBool("isAttack", false);
 
         if (b_State == BossState.Skill)

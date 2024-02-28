@@ -187,39 +187,32 @@ public class ArrowManager : MonoBehaviour
         
 
 
-        if (other.CompareTag("BlackHole"))
+        if (other.gameObject.layer == LayerMask.NameToLayer("Card") && other.CompareTag("BlackHole"))
         {
             Debug.Log("블랙홀");
             ChoiceCard.instance.ChoiceBlackHole();
-            //Destroy(gameObject);
+            Destroy(gameObject);
         }
-        else if (other.CompareTag("Ice"))
+        if (other.gameObject.layer == LayerMask.NameToLayer("Card") && other.CompareTag("Ice"))
         {
             Debug.Log("아이스");
             ChoiceCard.instance.ChoiceIceBall();
-            //Destroy(gameObject);
+            Destroy(gameObject);
         }
-        else if (other.CompareTag("Upgrade_1"))
+        if (other.gameObject.layer == LayerMask.NameToLayer("Card") && other.CompareTag("Upgrade_1"))
         {
             Debug.Log("공격력 2배");
             Debug.Log("PlayerController.instance.dmgstate = " + PlayerController.instance.DmgState);
+            PlayerController.instance.DmgState = true;
             ChoiceCard.instance.ChoiceUpgrade_1();
-            //Destroy(gameObject);
+            Destroy(gameObject);
         }
-        else if (other.CompareTag("Upgrade_2"))
+        if (other.gameObject.layer == LayerMask.NameToLayer("Card") && other.CompareTag("Upgrade_2"))
         {
             Debug.Log("최대 체력 회복");
             ChoiceCard.instance.ChoiceUpgrade_2();
-            //Destroy(gameObject);
+            Destroy(gameObject);
         }
 
-    }
-    private void OnTriggerExit(Collider other)
-    {
-        if (other.CompareTag("Upgrade_1"))
-        {
-            Debug.Log("dmg업글1 exit 실행");
-            PlayerController.instance.DmgState = true;
-        }
     }
 }
