@@ -33,6 +33,7 @@ public class Monster : MonoBehaviour
 
     //Hit 관련 변수
     [Header("Hit variable")]
+    List<AudioClip> hitAudios;
     public Material hitMaterial;
     [SerializeField]float damage;
     [SerializeField]float hitDelay;
@@ -82,9 +83,9 @@ public class Monster : MonoBehaviour
         
     }
 
-    public void SetAudio(AudioClip hitAudio)
+    public void SetAudio(List<AudioClip> hitAudio)
     {
-        monsterAudio.clip = hitAudio;
+        hitAudios = hitAudio;
     }
 
     private void Update()
@@ -153,12 +154,22 @@ public class Monster : MonoBehaviour
     }
 
     //맞는 부분
-    public virtual void OnHit(int damage)
+    public virtual void OnHit(int damage, string weaponType)
     {
         if (m_State == MonsterState.Hit)
             return;
         if (m_State == MonsterState.Die)
             return;
+
+        switch (weaponType)
+        {
+            case "Arrow":
+                monsterAudio.clip = hitAudios[0];
+                break;
+            case "Ice":
+                monsterAudio.clip = hitAudios[1];
+                break;
+        }
 
         health -= damage;
         if (health <= 0)
@@ -176,9 +187,13 @@ public class Monster : MonoBehaviour
     IEnumerator HitOut()
     {
         monsterAudio.Play();
+        LayerMask saveLayer = gameObject.layer;
+        gameObject.layer = LayerMask.NameToLayer("Hit Monster");
+
         float saveSpeed = agent.speed;
         MonsterState saveState = m_State;
         agent.speed = 0;
+
         Material saveMaterial = render.materials[0];
         render.material = hitMaterial;
 
@@ -186,9 +201,13 @@ public class Monster : MonoBehaviour
         yield return new WaitForSeconds(curHitAnimationTime);
 
         monsterAudio.Stop();
+        gameObject.layer = saveLayer;
+
         agent.speed = saveSpeed;
+
         m_State = saveState;
         render.material = saveMaterial;
+
         anim.SetBool("isHit", false);
     }
 
@@ -236,12 +255,6 @@ public class Monster : MonoBehaviour
 
         MonsterManager.Instance.DeleteLiveMonsterList(this.gameObject);
         Destroy(gameObject);
-    }
-
-    private void OnParticleCollision(GameObject other)
-    {
-        Debug.Log("몬스터 스킬 히트 판정");
-        OnHit(1);
     }
 
     public virtual void HitBlackHole(Vector3 hitPos)

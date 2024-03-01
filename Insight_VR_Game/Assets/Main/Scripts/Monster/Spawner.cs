@@ -77,7 +77,7 @@ public class Spawner : MonoBehaviour
         }
 
         GameObject spawnMonster = Instantiate(monsterPrefabs[spawnType], transform);
-        spawnMonster.GetComponent<Monster>().SetAudio(monsterAudio[0]);
+        spawnMonster.GetComponent<Monster>().SetAudio(monsterAudio);
         MonsterManager.Instance.AddLiveMonsterList(spawnMonster);
     }
 }

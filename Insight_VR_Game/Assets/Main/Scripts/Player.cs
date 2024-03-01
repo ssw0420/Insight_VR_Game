@@ -7,8 +7,8 @@ public class Player : MonoBehaviour
 {
     public static Player Instance;
 
-    public XRBaseController leftController;
-    public XRBaseController rightController;
+    public XRController leftController;
+    public XRController rightController;
 
     AudioSource hitAudio;
 

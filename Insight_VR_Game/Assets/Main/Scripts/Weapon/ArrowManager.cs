@@ -72,45 +72,45 @@ public class ArrowManager : MonoBehaviour
         if (other.gameObject.layer == LayerMask.NameToLayer("Monster") && !PlayerController.instance.DmgState)
         {
             Debug.Log("1 적중");
-            other.GetComponent<Monster>().OnHit(1);
+            other.GetComponent<Monster>().OnHit(1, "Arrow");
             Destroy(gameObject);
         }
         else if(other.gameObject.layer == LayerMask.NameToLayer("Monster") && PlayerController.instance.DmgState)
         {
             Debug.Log("2 적중");
-            other.GetComponent<Monster>().OnHit(2);
+            other.GetComponent<Monster>().OnHit(2, "Arrow");
             Destroy(gameObject);
         }
 
         if(other.gameObject.layer == LayerMask.NameToLayer("HealthMonster") && !PlayerController.instance.DmgState)
         {
-            other.GetComponent<HealthMonster>().OnHit(1);
+            other.GetComponent<HealthMonster>().OnHit(1, "Arrow");
             Destroy(gameObject);
         }
         else if(other.gameObject.layer == LayerMask.NameToLayer("HealthMonster") && PlayerController.instance.DmgState)
         {
-            other.GetComponent<HealthMonster>().OnHit(2);
+            other.GetComponent<HealthMonster>().OnHit(2, "Arrow");
             Destroy(gameObject);
         }
 
         if(other.gameObject.layer == LayerMask.NameToLayer("Boss Monster") && !PlayerController.instance.DmgState)
         {
-            other.GetComponentInParent<Boss>().OnHit(1);
+            other.GetComponentInParent<Boss>().OnHit(1, "Arrow");
             Destroy(gameObject);
         }
         else if(other.gameObject.layer == LayerMask.NameToLayer("Boss Monster") && PlayerController.instance.DmgState)
         {
-            other.GetComponentInParent<Boss>().OnHit(2);
+            other.GetComponentInParent<Boss>().OnHit(2, "Arrow");
             Destroy(gameObject);
         }
         else if(other.gameObject.layer == LayerMask.NameToLayer("Boss Eye") && !PlayerController.instance.DmgState)
         {
-            other.GetComponentInParent<Boss>().OnHit(5);
+            other.GetComponentInParent<Boss>().OnHit(5, "Arrow");
             Destroy(gameObject);
         }
         else if(other.gameObject.layer == LayerMask.NameToLayer("Boss Eye") && PlayerController.instance.DmgState)
         {
-            other.GetComponentInParent<Boss>().OnHit(10);
+            other.GetComponentInParent<Boss>().OnHit(10, "Arrow");
             Destroy(gameObject);
         }
         else if(other.gameObject.layer == LayerMask.NameToLayer("Boss Leg") && !PlayerController.instance.DmgState)
@@ -131,9 +131,6 @@ public class ArrowManager : MonoBehaviour
             Destroy(gameObject, 1.0f);
         }
 
-
-
-        
 
 
         if (other.gameObject.layer == LayerMask.NameToLayer("Card") && other.CompareTag("BlackHole"))

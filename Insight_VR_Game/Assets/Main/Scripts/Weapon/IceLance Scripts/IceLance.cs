@@ -44,7 +44,8 @@ public class IceLance : MonoBehaviour
         if(other.layer == LayerMask.NameToLayer("Monster"))
         {
             Debug.Log("몬스터 스킬 히트 판정");
-            other.GetComponent<Monster>().OnHit(1);
+            other.GetComponent<Monster>().OnHit(2, "Ice");
+            Destroy(gameObject, 0.35f);
         }
             
     }
