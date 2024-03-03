@@ -17,6 +17,6 @@ public class Portal : MonoBehaviour
     {
         portalSound[0].Play();
         portalSound[1].Play();
-        SceneLoader.Instance.LoadScene(SceneName);
+        SceneTransitionManager.Instance.GoToSceneAsync(SceneName);
     }
 }
