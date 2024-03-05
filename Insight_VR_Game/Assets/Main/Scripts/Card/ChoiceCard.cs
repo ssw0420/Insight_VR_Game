@@ -2,7 +2,16 @@ using UnityEngine;
 
 public class ChoiceCard : MonoBehaviour
 {
+    enum CardType
+    {
+        BlackHole,
+        Ice,
+        PowerUp,
+        Heal,
+    }
+
     public static ChoiceCard instance;
+    [SerializeField] CardType cardType;
 
     private void Awake()
     {
@@ -54,6 +63,42 @@ public class ChoiceCard : MonoBehaviour
             if (obj.layer == LayerMask.NameToLayer("Card"))
             {
                 Destroy(obj);
+            }
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.gameObject.layer == LayerMask.NameToLayer("Arrow"))
+        {
+            switch (cardType) {
+                case CardType.BlackHole:
+                    ChoiceBlackHole();
+                    WeaponManager.instance.OnBlackHole();
+                    MonsterManager.Instance.ReadSpawnFile();
+                    BgmManager.Instance.StartRoundAudio();
+                    Destroy(other.gameObject);
+                    break;
+                case CardType.Ice:
+                    ChoiceCard.instance.ChoiceIceBall();
+                    WeaponManager.instance.OnIce();
+                    MonsterManager.Instance.ReadSpawnFile();
+                    BgmManager.Instance.StartRoundAudio();
+                    Destroy(other.gameObject);
+                    break;
+                case CardType.PowerUp:
+                    PlayerController.instance.DmgState = true;
+                    ChoiceCard.instance.ChoiceUpgrade_1();
+                    MonsterManager.Instance.ReadSpawnFile();
+                    BgmManager.Instance.StartRoundAudio();
+                    Destroy(other.gameObject);
+                    break;
+                case CardType.Heal:
+                    ChoiceCard.instance.ChoiceUpgrade_2();
+                    MonsterManager.Instance.ReadSpawnFile();
+                    BgmManager.Instance.StartRoundAudio();
+                    Destroy(other.gameObject);
+                    break;
             }
         }
     }

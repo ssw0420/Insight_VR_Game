@@ -133,42 +133,42 @@ public class ArrowManager : MonoBehaviour
 
 
 
-        if (other.gameObject.layer == LayerMask.NameToLayer("Card") && other.CompareTag("BlackHole"))
-        {
-            Debug.Log("블랙홀");
-            ChoiceCard.instance.ChoiceBlackHole();
-            WeaponManager.instance.OnBlackHole();
-            MonsterManager.Instance.ReadSpawnFile();
-            BgmManager.Instance.StartRoundAudio();
-            Destroy(gameObject);
-        }
-        if (other.gameObject.layer == LayerMask.NameToLayer("Card") && other.CompareTag("Ice"))
-        {
-            Debug.Log("아이스");
-            ChoiceCard.instance.ChoiceIceBall();
-            WeaponManager.instance.OnIce();
-            MonsterManager.Instance.ReadSpawnFile();
-            BgmManager.Instance.StartRoundAudio();
-            Destroy(gameObject);
-        }
-        if (other.gameObject.layer == LayerMask.NameToLayer("Card") && other.CompareTag("Upgrade_1"))
-        {
-            Debug.Log("공격력 2배");
-            Debug.Log("PlayerController.instance.dmgstate = " + PlayerController.instance.DmgState);
-            PlayerController.instance.DmgState = true;
-            ChoiceCard.instance.ChoiceUpgrade_1();
-            MonsterManager.Instance.ReadSpawnFile();
-            BgmManager.Instance.StartRoundAudio();
-            Destroy(gameObject);
-        }
-        if (other.gameObject.layer == LayerMask.NameToLayer("Card") && other.CompareTag("Upgrade_2"))
-        {
-            Debug.Log("최대 체력 회복");
-            ChoiceCard.instance.ChoiceUpgrade_2();
-            MonsterManager.Instance.ReadSpawnFile();
-            BgmManager.Instance.StartRoundAudio();
-            Destroy(gameObject);
-        }
+        //if (other.gameObject.layer == LayerMask.NameToLayer("Card") && other.CompareTag("BlackHole"))
+        //{
+        //    Debug.Log("블랙홀");
+        //    ChoiceCard.instance.ChoiceBlackHole();
+        //    WeaponManager.instance.OnBlackHole();
+        //    MonsterManager.Instance.ReadSpawnFile();
+        //    BgmManager.Instance.StartRoundAudio();
+        //    Destroy(gameObject);
+        //}
+        //if (other.gameObject.layer == LayerMask.NameToLayer("Card") && other.CompareTag("Ice"))
+        //{
+        //    Debug.Log("아이스");
+        //    ChoiceCard.instance.ChoiceIceBall();
+        //    WeaponManager.instance.OnIce();
+        //    MonsterManager.Instance.ReadSpawnFile();
+        //    BgmManager.Instance.StartRoundAudio();
+        //    Destroy(gameObject);
+        //}
+        //if (other.gameObject.layer == LayerMask.NameToLayer("Card") && other.CompareTag("Upgrade_1"))
+        //{
+        //    Debug.Log("공격력 2배");
+        //    Debug.Log("PlayerController.instance.dmgstate = " + PlayerController.instance.DmgState);
+        //    PlayerController.instance.DmgState = true;
+        //    ChoiceCard.instance.ChoiceUpgrade_1();
+        //    MonsterManager.Instance.ReadSpawnFile();
+        //    BgmManager.Instance.StartRoundAudio();
+        //    Destroy(gameObject);
+        //}
+        //if (other.gameObject.layer == LayerMask.NameToLayer("Card") && other.CompareTag("Upgrade_2"))
+        //{
+        //    Debug.Log("최대 체력 회복");
+        //    ChoiceCard.instance.ChoiceUpgrade_2();
+        //    MonsterManager.Instance.ReadSpawnFile();
+        //    BgmManager.Instance.StartRoundAudio();
+        //    Destroy(gameObject);
+        //}
 
     }
 }
