@@ -626,7 +626,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   finishPoint: {fileID: 0}
-  health: 1
+  health: 2
   hitMaterial: {fileID: 0}
   damage: 1
   hitDelay: 2

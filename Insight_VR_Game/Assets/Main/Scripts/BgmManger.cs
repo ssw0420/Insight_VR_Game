@@ -32,4 +32,12 @@ public class BgmManager : MonoBehaviour
                 break;
         }
     }
+
+    public void VictoryAudio()
+    {
+        foreach (AudioSource AS in backgroundAudioSource)
+            AS.Stop();
+
+        backgroundAudioSource[3].Play();
+    }
 }

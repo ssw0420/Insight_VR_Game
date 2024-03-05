@@ -22,6 +22,7 @@ public class SceneTransitionManager : MonoBehaviour
     IEnumerator GoToSceneAsyncRoutine(string sceneName)
     {
         fadeScreen.FadeOut();
+
         //Launch the new scene
         AsyncOperation operation = SceneManager.LoadSceneAsync(sceneName);
         operation.allowSceneActivation = false;

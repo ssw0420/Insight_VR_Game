@@ -1,1 +1,9 @@
-1,HealthMonster,0
+1,MushroomSmile,0
+8,HealthMonster,0
+9,MushroomSmile,0
+5,Cactus,1
+14,Cactus,1
+5,Cactus,2
+15,Cactus,2
+1,MushroomSmile,3
+20,MushroomSmile,3

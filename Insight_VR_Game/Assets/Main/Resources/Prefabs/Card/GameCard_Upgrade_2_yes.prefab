@@ -175,6 +175,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5652a8e17611679408d8531bae7fb19c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cardType: 3
 --- !u!65 &5761610196813636039
 BoxCollider:
   m_ObjectHideFlags: 0

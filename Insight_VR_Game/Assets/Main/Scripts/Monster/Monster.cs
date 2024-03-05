@@ -1,6 +1,7 @@
 using MagicPigGames;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
@@ -85,7 +86,7 @@ public class Monster : MonoBehaviour
 
     public void SetAudio(List<AudioClip> hitAudio)
     {
-        hitAudios = hitAudio;
+        hitAudios = hitAudio.ToList();
     }
 
     private void Update()
@@ -156,8 +157,7 @@ public class Monster : MonoBehaviour
     //맞는 부분
     public virtual void OnHit(int damage, string weaponType)
     {
-        if (m_State == MonsterState.Hit)
-            return;
+
         if (m_State == MonsterState.Die)
             return;
 

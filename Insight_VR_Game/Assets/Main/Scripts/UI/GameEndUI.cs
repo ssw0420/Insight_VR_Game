@@ -25,7 +25,6 @@ public class GameEndUI : MonoBehaviour
     {
         Debug.Log("Home");
         SceneTransitionManager.Instance.GoToSceneAsync("Home");
-        //SceneLoader.Instance.LoadScene("Home");
     }
 
     public void ClickExit()
