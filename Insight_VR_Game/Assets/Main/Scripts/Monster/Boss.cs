@@ -21,6 +21,7 @@ public class Boss : Monster
 {
     public BossState b_State;
 
+    List<GameObject> BossEyeHit;
     ParticleSystem bossSkillEffect;
     AudioSource skillAudio;
     List<Transform> bossFinishPoint;
@@ -251,6 +252,7 @@ public class Boss : Monster
         yield return new WaitForSeconds(0.733f);
 
         render.material = saveMeterial;
+        isHit = false;
         BossMove();
     }
 

@@ -28,6 +28,7 @@ public class Monster : MonoBehaviour
 
     //Fade Out 관련 변수
     protected Renderer render;
+    [SerializeField] float fadeDelay;
 
     [SerializeField]
     public int health = 5;
@@ -238,7 +239,7 @@ public class Monster : MonoBehaviour
 
     IEnumerator MonsterFadeOut()
     {
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(fadeDelay);
 
         Color color = render.materials[0].color;
         float time = 0f;

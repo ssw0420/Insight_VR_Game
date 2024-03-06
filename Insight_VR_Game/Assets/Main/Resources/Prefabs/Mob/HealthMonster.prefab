@@ -626,6 +626,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   finishPoint: {fileID: 0}
+  fadeDelay: 3
   health: 2
   hitMaterial: {fileID: 0}
   damage: 1
