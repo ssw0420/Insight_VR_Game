@@ -13,6 +13,7 @@ public class SceneTransitionManager : MonoBehaviour
     }
 
     public FadeScreen fadeScreen;
+    bool isSceenMove = false;
 
     public void GoToSceneAsync(string sceneName)
     {
@@ -21,6 +22,10 @@ public class SceneTransitionManager : MonoBehaviour
 
     IEnumerator GoToSceneAsyncRoutine(string sceneName)
     {
+        if (isSceenMove)
+            yield return null;
+
+        isSceenMove=true;
         fadeScreen.FadeOut();
 
         //Launch the new scene

@@ -61,6 +61,7 @@ public class GameManager : MonoBehaviour
         isTimer = false;
 
         //Victory Music Play
+        BgmManager.Instance.VictoryAudio();
         musicAudio.clip = victoryAudio;
         musicAudio.Play();
 

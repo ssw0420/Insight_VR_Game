@@ -223,7 +223,7 @@ public class WeaponManager : MonoBehaviour
         {
             iceLance_time = 0.0f;
             GameObject iceLance = Instantiate(skillPrefab[(int)SkillType.Ice], transform);
-            iceLance.transform.position += Vector3.forward * 0.1f;
+            //iceLance.transform.localPosition += Vector3.forward * 2f;
         }
 
         if (using_time[(int)SkillType.Ice] <= 0.0f)

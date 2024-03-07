@@ -23,34 +23,27 @@ public class ChoiceCard : MonoBehaviour
 
     public void ChoiceBlackHole()
     {
-        Debug.Log("블랙홀 함수 활성화");
         PlayerController.instance.BlackHoleState = true;
-        GameObject BlackHolePrefab = Resources.Load("Prefabs/Skill/BlackHole Sphere") as GameObject;
-        if(BlackHolePrefab != null ) { Debug.Log("블랙홀 프리팹 연결 성공"); }
+        //GameObject BlackHolePrefab = Resources.Load("Prefabs/Skill/BlackHole Sphere") as GameObject;
         DestroyCards();
     }
 
     public void ChoiceIceBall()
     {
-        Debug.Log("아이스 함수 활성화");
         PlayerController.instance.IceState = true;
-        GameObject IceBallPrefab = Resources.Load("Prefabs/Skill/IceBall Sphere") as GameObject;
-        if (IceBallPrefab != null) { Debug.Log("아이스 프리팹 연결 성공"); }
+        //GameObject IceBallPrefab = Resources.Load("Prefabs/Skill/IceBall Sphere") as GameObject;
         DestroyCards();
     }
 
     public void ChoiceUpgrade_1()
     {
-        Debug.Log("업그레이드 1 함수 활성화");
         PlayerController.instance.DmgState = true;
         DestroyCards();
     }
 
     public void ChoiceUpgrade_2()
     {
-        Debug.Log("업그레이드 2 함수 활성화");
         PlayerController.instance.HealthState = true;
-
         DestroyCards();
     }
 
@@ -80,21 +73,20 @@ public class ChoiceCard : MonoBehaviour
                     Destroy(other.gameObject);
                     break;
                 case CardType.Ice:
-                    ChoiceCard.instance.ChoiceIceBall();
+                    ChoiceIceBall();
                     WeaponManager.instance.OnIce();
                     MonsterManager.Instance.ReadSpawnFile();
                     BgmManager.Instance.StartRoundAudio();
                     Destroy(other.gameObject);
                     break;
                 case CardType.PowerUp:
-                    PlayerController.instance.DmgState = true;
-                    ChoiceCard.instance.ChoiceUpgrade_1();
+                    ChoiceUpgrade_1();
                     MonsterManager.Instance.ReadSpawnFile();
                     BgmManager.Instance.StartRoundAudio();
                     Destroy(other.gameObject);
                     break;
                 case CardType.Heal:
-                    ChoiceCard.instance.ChoiceUpgrade_2();
+                    ChoiceUpgrade_2();
                     MonsterManager.Instance.ReadSpawnFile();
                     BgmManager.Instance.StartRoundAudio();
                     Destroy(other.gameObject);
