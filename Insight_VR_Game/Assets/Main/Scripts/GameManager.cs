@@ -50,12 +50,18 @@ public class GameManager : MonoBehaviour
         isTimer = true;
     }
 
+    public void PauseTimeCount()
+    {
+        isTimer = false;
+    }
+
     public void GameVictroy()
     {
         //Timer Stop
         isTimer = false;
 
         //Victory Music Play
+        BgmManager.Instance.VictoryAudio();
         musicAudio.clip = victoryAudio;
         musicAudio.Play();
 

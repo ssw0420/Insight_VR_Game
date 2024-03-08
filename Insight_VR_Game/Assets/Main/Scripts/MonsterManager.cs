@@ -36,11 +36,11 @@ public class MonsterManager : MonoBehaviour
 
     public void GameStart()
     {
-        ReadSpawnFile(stage);
+        ReadSpawnFile();
         GameManager.Instance.StartTimeCount();
     }
 
-    void ReadSpawnFile(int stage)
+    public void ReadSpawnFile()
     {
         //리스폰 파일 읽기
         TextAsset textFile = Resources.Load("Stages/Stage" + stage) as TextAsset;
@@ -84,9 +84,9 @@ public class MonsterManager : MonoBehaviour
                 return;
             }
 
-
             stage += 1;
-            ReadSpawnFile(stage);
+            GameManager.Instance.PauseTimeCount();
+            StartCardTest.instance.ShowCard();
         }
     }
 
@@ -95,6 +95,14 @@ public class MonsterManager : MonoBehaviour
         foreach(GameObject monster in liveMonster)
         {
             monster.GetComponent<Monster>().Win();
+        }
+    }
+
+    public void ReDestination()
+    {
+        foreach(GameObject monster in liveMonster)
+        {
+            monster.GetComponent<Monster>().SetMonsterDestination();
         }
     }
 
@@ -111,5 +119,10 @@ public class MonsterManager : MonoBehaviour
     public Material GetHitMaterial()
     {
         return hitMaterial;
+    }
+
+    public int GetStage()
+    {
+        return stage;
     }
 }

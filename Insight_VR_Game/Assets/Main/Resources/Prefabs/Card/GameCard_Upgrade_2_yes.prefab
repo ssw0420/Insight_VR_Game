@@ -118,7 +118,6 @@ GameObject:
   - component: {fileID: 114697580309060016}
   - component: {fileID: 5436589351192249281}
   - component: {fileID: 5761610196813636039}
-  - component: {fileID: 9208598448326778333}
   m_Layer: 20
   m_Name: GameCard_Upgrade_2_yes
   m_TagString: Upgrade_2
@@ -153,7 +152,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1379305409004934}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2acf02c8bf12bfe42b0ca8eda4f581f6, type: 3}
   m_Name: 
@@ -175,11 +174,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5652a8e17611679408d8531bae7fb19c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CardChoice: 0
-  BlackHoleChoice: 0
-  IceBallChoice: 0
-  Upgrade_1_Choice: 0
-  Upgrade_2_Choice: 0
+  cardType: 3
 --- !u!65 &5761610196813636039
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -199,35 +194,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.9118943, y: 1.2567487, z: 0.010000003}
-  m_Center: {x: -0.0032190084, y: 0.005204946, z: -0.0468}
---- !u!54 &9208598448326778333
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1379305409004934}
-  serializedVersion: 4
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_CenterOfMass: {x: 0, y: 0, z: 0}
-  m_InertiaTensor: {x: 1, y: 1, z: 1}
-  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ImplicitCom: 1
-  m_ImplicitTensor: 1
-  m_UseGravity: 0
-  m_IsKinematic: 1
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
+  m_Size: {x: 0.9118943, y: 1.2567487, z: 0.1}
+  m_Center: {x: -0.0032190084, y: 0.005204946, z: 5.734479e-19}
 --- !u!1 &1501282826037758
 GameObject:
   m_ObjectHideFlags: 0
@@ -408,7 +376,7 @@ TextMesh:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1915919342119532}
-  m_Text: "\uCD5C\uB300 \uCCB4\uB825\uC774 5\uAC1C \uC99D\uAC00\uD569\uB2C8\uB2E4."
+  m_Text: "\uCD5C\uB300 \uCCB4\uB825\uC774 2\uBC30\uAC00 \uB429\uB2C8\uB2E4."
   m_OffsetZ: 0
   m_CharacterSize: 0.03
   m_LineSpacing: 1

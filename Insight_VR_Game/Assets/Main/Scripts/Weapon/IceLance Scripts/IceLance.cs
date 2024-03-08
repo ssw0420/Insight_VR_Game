@@ -6,6 +6,7 @@ public class IceLance : MonoBehaviour
 {
     private AudioSource audioSource;
     private float iceLance_time = 0.0f;
+    private int icelance_dmg = 2;
     //public ParticleSystem myParticleSystem;
     // Start is called before the first frame update
 
@@ -28,30 +29,19 @@ public class IceLance : MonoBehaviour
         }
     }
 
-    // private void OnTriggerEnter(Collider other)
-    // {
-    //     if (other.gameObject.layer == LayerMask.NameToLayer("Monster"))
-    //     {
-    //         other.GetComponent<Monster>().OnHit(1);
-    //     }
-    //     else if(other.gameObject.layer == LayerMask.NameToLayer("HealthMonster"))
-    //     {
-    //         other.GetComponent<HealthMonster>().OnHit(1);
-    //     }
-    // }
     private void OnParticleCollision(GameObject other)
     {
         if(other.layer == LayerMask.NameToLayer("Monster"))
         {
-            Debug.Log("몬스터 스킬 히트 판정");
-            other.GetComponent<Monster>().OnHit(1);
+            other.GetComponent<Monster>().OnHit(icelance_dmg, "Ice");
+            Destroy(gameObject, 0.3f);
         }
+        else if (other.layer == LayerMask.NameToLayer("Hit Monster"))
+        {
+            other.GetComponent<Monster>().OnHit(icelance_dmg, "Ice");
+            Destroy(gameObject);
+        }    
             
     }
-
-    //private void OnParticleTrigger()
-    //{
-    //    Debug.Log("IceLance Trigger");
-    //}
 
 }

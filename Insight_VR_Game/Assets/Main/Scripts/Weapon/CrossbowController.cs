@@ -13,39 +13,27 @@ public class CrossbowController : MonoBehaviour
     private bool isShoot = false;
 
     public float shootDelay = 0.55f;
-    private float animaitionShootDelay = 0.1f;
+    private float animaitionShootDelay = 0.06f;
 
     public GameObject arrowPrefab;
 
     private AudioSource audioSource;
 
-    //Transform pos;
     private bool isFilling = false;
-    // public Transform shootPoint;
 
     [SerializeField] ArrowManager arrowManagerScript;
+    [SerializeField] AudioSource drawAudio;
 
-    // public UnityEvent<Vector3> OnShootSuccess;
-    // public UnityEvent OnShootFail;
 
     private void Awake()
     {
-        // GameObject arrow = Instantiate(arrowPrefab, transform);
-        // arrowManagerScript = arrow.GetComponent<ArrowManager>();
-        // arrowManagerScript.GetCrossbow(gameObject);
-        // LoadArrow();
-        Debug.Log("시작");
-        // animator.SetBool("isEmpty", true);
-        // LoadArrow();
-        //pos = GetComponent<Transform>();
+        audioSource = GetComponent<AudioSource>();
+        animator = GetComponent<Animator>();
+        drawAudio = GetComponentInChildren<AudioSource>();
     }
     private void Start()
     {
-        audioSource = GetComponent<AudioSource>();
-        animator = GetComponent<Animator>();
-        Debug.Log("애니메이션, 오디오 호출");
         StartCoroutine(Fill());
-        // LoadArrow();
     }
 
     private IEnumerator Fill()
@@ -97,6 +85,6 @@ public class CrossbowController : MonoBehaviour
     {
         Debug.Log("장전");
         animator.SetBool("isEmpty", true);
-        GameObject.Find("Bow Line").GetComponent<AudioSource>().Play();
+        drawAudio.Play();
     }
 }

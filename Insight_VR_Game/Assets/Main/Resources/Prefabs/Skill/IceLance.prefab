@@ -4766,7 +4766,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 10}
-  m_LocalScale: {x: 0.4, y: 0.4, z: 0.4}
+  m_LocalScale: {x: 0.2, y: 0.2, z: 0.2}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 4572393023880310}
@@ -8539,7 +8539,7 @@ ParticleSystem:
     radiusScale: 0.2
     collidesWith:
       serializedVersion: 2
-      m_Bits: 536887552
+      m_Bits: 3758129408
     maxCollisionShapes: 256
     quality: 0
     voxelSize: 0.5
@@ -9615,10 +9615,10 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 85fba9d6942a2f248b81196d317af84a, type: 3}
+  m_audioClip: {fileID: 8300000, guid: fd7807fc7ef2f464789d9ca8ae719a50, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0
-  m_Pitch: -1
+  m_Volume: 0.22
+  m_Pitch: 1
   Loop: 0
   Mute: 0
   Spatialize: 0

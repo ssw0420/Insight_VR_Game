@@ -1,21 +1,21 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.XR;
 using UnityEngine.XR.Interaction.Toolkit;
 
 public class WeaponManager : MonoBehaviour
 {
+    public static WeaponManager instance;
+
     enum SkillType 
     { 
-        Ice = 0,
-        BlackHole = 1,
-        None = 2,
+        Ice,
+        BlackHole,
+        None,
     }
     [SerializeField]SkillType s_Type;
 
-    //index
-    //0 = IceLance
-    //1 = BlackHole
     enum SkillState
     {
         Idle,
@@ -25,11 +25,17 @@ public class WeaponManager : MonoBehaviour
     }
     [SerializeField]List<SkillState> s_State = new List<SkillState>();
 
+    [SerializeField] XRController controller;
     Renderer render;
+    bool isHomeButtonPress = false;
+    bool onIce = false;
+    bool onBlackHole = false;
+    bool isNoneSkill = true;
 
     [Header("Skill Look")]
     [SerializeField] List<Material> skillMaterials;
     [SerializeField]List<ParticleSystem> skillEffect;
+    [SerializeField]List<AudioSource> audiosources;
 
     [Header("Skill Info")]
     [SerializeField] List<float> cooldown_time;// = 8.0f;
@@ -41,19 +47,21 @@ public class WeaponManager : MonoBehaviour
 
     private void Awake()
     {
+        instance = this;
         render = GetComponent<Renderer>();
 
         ParticleSystem[] effect = GetComponentsInChildren<ParticleSystem>();
         skillEffect.AddRange(effect);
+
+        AudioSource[] source = GetComponentsInChildren<AudioSource>();
+        audiosources.AddRange(source);
     }
 
     private void Start()
     {
-        render.material = skillMaterials[0];
+        render.material = skillMaterials[(int)SkillType.None];
 
-        //test code
-        //if(Frist Skill is Ice)
-        s_Type = SkillType.Ice;
+        s_Type = SkillType.None;
         s_State.Add(SkillState.Idle);
         s_State.Add(SkillState.Idle);
 
@@ -63,8 +71,13 @@ public class WeaponManager : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.P))
+        if (controller.inputDevice.TryGetFeatureValue(CommonUsages.menuButton, out bool isPressed) && isPressed)
         {
+            if (isHomeButtonPress)
+                return;
+
+            isHomeButtonPress = true;
+
             if (s_Type == SkillType.None)
                 return;
 
@@ -72,6 +85,11 @@ public class WeaponManager : MonoBehaviour
                 return;
 
             if (s_State[(int)SkillType.Ice] == SkillState.Reloading || s_State[(int)SkillType.BlackHole] == SkillState.Reloading)
+                return;
+
+            if (s_Type == SkillType.Ice && !onBlackHole)
+                return;
+            if (s_Type == SkillType.BlackHole && !onIce)
                 return;
 
             switch (s_Type)
@@ -86,14 +104,28 @@ public class WeaponManager : MonoBehaviour
 
             SkillChange();
         }
+        else
+            isHomeButtonPress = false;
     }
 
     void SkillChange()
     {
+        if (s_Type == SkillType.None)
+            return;
+
+        if (!isNoneSkill)
+        {
+            skillEffect[0].Play();
+            audiosources[0].Play();
+        }
+
+        isNoneSkill = false;
         bool isCoolTime = CheckCoolTime((int)s_Type);
 
         if (isCoolTime)
-            render.material = skillMaterials[(int)SkillType.None];
+        {
+            render.material = skillMaterials[(int)s_Type + 3];
+        }
         else
             render.material = skillMaterials[(int)s_Type];
     }
@@ -187,11 +219,11 @@ public class WeaponManager : MonoBehaviour
         using_time[(int)SkillType.Ice] -= Time.fixedDeltaTime;
         iceLance_time += Time.fixedDeltaTime;
 
-        if (iceLance_time >= 0.2f)
+        if (iceLance_time >= 0.25f)
         {
             iceLance_time = 0.0f;
             GameObject iceLance = Instantiate(skillPrefab[(int)SkillType.Ice], transform);
-            iceLance.transform.position += Vector3.forward * 0.1f;
+            //iceLance.transform.localPosition += Vector3.forward * 2f;
         }
 
         if (using_time[(int)SkillType.Ice] <= 0.0f)
@@ -218,8 +250,9 @@ public class WeaponManager : MonoBehaviour
     IEnumerator ChangeBall()
     {
         skillEffect[0].Play();
+        audiosources[0].Play();
         yield return new WaitForSeconds(0.8f);
-        render.material = skillMaterials[2];
+        render.material = skillMaterials[(int)s_Type + 3];
     }
 
     void UpdateCooldown(int skillType)
@@ -245,8 +278,31 @@ public class WeaponManager : MonoBehaviour
 
         Debug.Log("스킬 재장전 중");
         skillEffect[1].Play();
+        audiosources[1].Play();
         yield return new WaitForSeconds(1.7f);
         render.material = skillMaterials[skillType];
         s_State[skillType] = SkillState.Idle;
+    }
+
+    public void OnIce()
+    {
+        onIce = true;
+        CheckTypeNone((int)SkillType.Ice);
+    }
+
+    public void OnBlackHole()
+    {
+        onBlackHole = true;
+        CheckTypeNone((int)SkillType.BlackHole);
+    }
+
+    void CheckTypeNone(int skillType)
+    {
+        if(s_Type == SkillType.None)
+        {
+            s_Type = (SkillType)skillType;
+            SkillChange();
+            StartCoroutine(Reload(skillType));
+        }
     }
 }

@@ -5,7 +5,6 @@ using UnityEngine;
 public class ArrowManager : MonoBehaviour
 {
     ArrowManager arrowManager;
-    // [SerializeField] GameObject crossbow;
     Rigidbody rigid;
     TrailRenderer trailRenderer;
     BoxCollider boxCollider;
@@ -16,17 +15,7 @@ public class ArrowManager : MonoBehaviour
     float Timedir;
     float shootTime;
     float gravity;
-    //private int dmgstate;
-    // public bool dmgstate = false;
-
-
-
     bool isShoot;
-
-    // public void GetCrossbow(GameObject crossbow)
-    // {
-    //     this.crossbow = crossbow;
-    // }
 
     public static ArrowManager instance;
 
@@ -58,8 +47,6 @@ public class ArrowManager : MonoBehaviour
         boxCollider.enabled = true;
         rigid.useGravity = false;
         gameObject.transform.SetParent(null);
-        
-        // StartCoroutine("Move");
     }
 
     private void FixedUpdate()
@@ -80,88 +67,48 @@ public class ArrowManager : MonoBehaviour
         }
     }
 
-    // IEnumerator Move()
-    // {
-    //     while (true)
-    //     {
-    //         yield return new WaitForFixedUpdate();
-    //         shootTime += Time.deltaTime;
-    //         GetComponent<Rigidbody>().AddForce(transform.forward * speed);
-    //         // if(shootTime < 0.15f)
-    //         // {
-    //         //     GetComponent<Rigidbody>().AddForce(transform.forward * speed);
-    //         // }
-    //         // else
-    //         // {
-    //         //     Timedir += Time.deltaTime / 2;
-    //         //     rigid.isKinematic = false;
-    //         //     trailRenderer.enabled = true;
-    //         //     rigid.useGravity = true;
-    //         //     v1.z = power = Mathf.Cos(angle * Mathf.PI / 180.0f) * Timedir;
-    //         //     v1.y = power = Mathf.Cos(angle * Mathf.PI / 180.0f) * Timedir * gravity;
-    //         //     transform.Translate(v1);
-
-    //         //     transform.Rotate(new Vector3(Mathf.Cos(angle * Mathf.PI / 180.0f), 0, 0));
-    //         // }
-    //         // Timedir += Time.deltaTime;
-    //         // v1.z = power = Mathf.Cos(angle * Mathf.PI / 180.0f) * Timedir;
-    //         // v1.y = power = Mathf.Cos(angle * Mathf.PI / 180.0f) * Timedir * gravity;
-    //         // transform.Translate(v1);
-
-    //         // transform.Rotate(new Vector3(Mathf.Cos(angle * Mathf.PI / 180.0f), 0, 0));
-    //         if(shootTime >= 3.0f)
-    //         {
-    //             Destroy(gameObject);
-    //         }
-    //     }
-    // }
-
-    
     private void OnTriggerEnter(Collider other)
     {
-        
-        if (other.gameObject.layer == LayerMask.NameToLayer("Monster") && !PlayerController.instance.DmgState)
+        if ((other.gameObject.layer == LayerMask.NameToLayer("Monster") || other.gameObject.layer == LayerMask.NameToLayer("Hit Monster")) && !PlayerController.instance.DmgState)
         {
-            Debug.Log("1 적중");
-            other.GetComponent<Monster>().OnHit(1);
+            other.GetComponent<Monster>().OnHit(1, "Arrow");
             Destroy(gameObject);
         }
-        else if(other.gameObject.layer == LayerMask.NameToLayer("Monster") && PlayerController.instance.DmgState)
+        else if((other.gameObject.layer == LayerMask.NameToLayer("Monster") || other.gameObject.layer == LayerMask.NameToLayer("Hit Monster")) && PlayerController.instance.DmgState)
         {
-            Debug.Log("2 적중");
-            other.GetComponent<Monster>().OnHit(2);
+            other.GetComponent<Monster>().OnHit(2, "Arrow");
             Destroy(gameObject);
         }
 
         if(other.gameObject.layer == LayerMask.NameToLayer("HealthMonster") && !PlayerController.instance.DmgState)
         {
-            other.GetComponent<HealthMonster>().OnHit(1);
+            other.GetComponent<HealthMonster>().OnHit(1, "Arrow");
             Destroy(gameObject);
         }
         else if(other.gameObject.layer == LayerMask.NameToLayer("HealthMonster") && PlayerController.instance.DmgState)
         {
-            other.GetComponent<HealthMonster>().OnHit(2);
+            other.GetComponent<HealthMonster>().OnHit(2, "Arrow");
             Destroy(gameObject);
         }
 
         if(other.gameObject.layer == LayerMask.NameToLayer("Boss Monster") && !PlayerController.instance.DmgState)
         {
-            other.GetComponentInParent<Boss>().OnHit(1);
+            other.GetComponentInParent<Boss>().OnHit(1, "Arrow");
             Destroy(gameObject);
         }
         else if(other.gameObject.layer == LayerMask.NameToLayer("Boss Monster") && PlayerController.instance.DmgState)
         {
-            other.GetComponentInParent<Boss>().OnHit(2);
+            other.GetComponentInParent<Boss>().OnHit(2, "Arrow");
             Destroy(gameObject);
         }
         else if(other.gameObject.layer == LayerMask.NameToLayer("Boss Eye") && !PlayerController.instance.DmgState)
         {
-            other.GetComponentInParent<Boss>().OnHit(5);
+            other.GetComponentInParent<Boss>().OnHit(5, "Arrow");
             Destroy(gameObject);
         }
         else if(other.gameObject.layer == LayerMask.NameToLayer("Boss Eye") && PlayerController.instance.DmgState)
         {
-            other.GetComponentInParent<Boss>().OnHit(10);
+            other.GetComponentInParent<Boss>().OnHit(10, "Arrow");
             Destroy(gameObject);
         }
         else if(other.gameObject.layer == LayerMask.NameToLayer("Boss Leg") && !PlayerController.instance.DmgState)
@@ -178,41 +125,7 @@ public class ArrowManager : MonoBehaviour
         if (other.CompareTag("Terrain"))
         {
             GetComponent<Rigidbody>().AddForce(transform.forward * 0);
-            Debug.Log("지형 오브젝트에 적중");
             Destroy(gameObject, 1.0f);
         }
-
-
-
-        
-
-
-        if (other.CompareTag("BlackHole"))
-        {
-            Debug.Log("블랙홀");
-            ChoiceCard.instance.ChoiceBlackHole();
-            
-            //Destroy(gameObject);
-        }
-        else if (other.CompareTag("Ice"))
-        {
-            Debug.Log("아이스");
-            ChoiceCard.instance.ChoiceIceBall();
-            //Destroy(gameObject);
-        }
-        else if (other.CompareTag("Upgrade_1"))
-        {
-            Debug.Log("공격력 2배");
-            Debug.Log("PlayerController.instance.dmgstate = " + PlayerController.instance.DmgState);
-            ChoiceCard.instance.ChoiceUpgrade_1();
-            //Destroy(gameObject);
-        }
-        else if (other.CompareTag("Upgrade_2"))
-        {
-            Debug.Log("최대 체력 회복");
-            ChoiceCard.instance.ChoiceUpgrade_2();
-            //Destroy(gameObject);
-        }
-
     }
 }

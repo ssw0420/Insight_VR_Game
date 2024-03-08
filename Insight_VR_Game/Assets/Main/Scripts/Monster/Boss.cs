@@ -21,7 +21,9 @@ public class Boss : Monster
 {
     public BossState b_State;
 
+    List<GameObject> BossEyeHit;
     ParticleSystem bossSkillEffect;
+    AudioSource skillAudio;
     List<Transform> bossFinishPoint;
     Transform bossSkillPos;
     int checkPoint = 0;
@@ -126,9 +128,9 @@ public class Boss : Monster
         yield return new WaitForSeconds(0.733f);
         //PlayerStats.Instance.TakeDamage(1);
         if (PlayerController.instance.HealthState == false)
-            ProgressBarInspectorTest.instance.progress -= 2.0f;
+            ProgressBarInspectorTest.instance.progress -= 0.4f;
         else if (PlayerController.instance.HealthState == true)
-            ProgressBarInspectorTest.instance.progress -= 1.0f;
+            ProgressBarInspectorTest.instance.progress -= 0.2f;
         anim.SetBool("isAttack", false);
 
         if (b_State == BossState.Skill)
@@ -155,11 +157,12 @@ public class Boss : Monster
 
         yield return new WaitForSeconds(3f);
         bossSkillEffect.Play();
+        skillAudio.Play();
 
         if (PlayerController.instance.HealthState == false)
-            ProgressBarInspectorTest.instance.progress -= 3.0f;
+            ProgressBarInspectorTest.instance.progress -= 0.3f;
         else if (PlayerController.instance.HealthState == true)
-            ProgressBarInspectorTest.instance.progress -= 1.5f;
+            ProgressBarInspectorTest.instance.progress -= 0.15f;
 
         yield return new WaitForSeconds(2f);
         anim.SetBool("isAttack", false);
@@ -168,7 +171,7 @@ public class Boss : Monster
     }
 
     //보스 맞는 부분
-    public override void OnHit(int damage)
+    public override void OnHit(int damage, string weaponType)
     {
         if (isHit || b_State == BossState.Die)
             return;
@@ -249,6 +252,12 @@ public class Boss : Monster
         yield return new WaitForSeconds(0.733f);
 
         render.material = saveMeterial;
+        isHit = false;
         BossMove();
+    }
+
+    public override void HitBlackHole(Vector3 hitPos)
+    {
+
     }
 }

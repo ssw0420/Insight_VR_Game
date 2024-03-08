@@ -10,12 +10,10 @@ public class StartCardTest : MonoBehaviour
     {
         instance = this;
     }
-    void Update()
+
+    public void ShowCard()
     {
-        if (Input.GetKeyDown(KeyCode.C))
-        {
-            CardControlManager.instance.OpenCard();
-            BarController.instance.OpenBar();
-        }
+        CardControlManager.instance.OpenCard();
+        BarController.instance.OpenBar();
     }
 }

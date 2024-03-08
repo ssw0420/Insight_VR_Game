@@ -118,7 +118,6 @@ GameObject:
   - component: {fileID: 114697580309060016}
   - component: {fileID: 5868862358505223335}
   - component: {fileID: 6379400557710197385}
-  - component: {fileID: 6308098228492508193}
   m_Layer: 20
   m_Name: GameCard_Skill_ice_no
   m_TagString: Ice
@@ -153,7 +152,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1379305409004934}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2acf02c8bf12bfe42b0ca8eda4f581f6, type: 3}
   m_Name: 
@@ -175,11 +174,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5652a8e17611679408d8531bae7fb19c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CardChoice: 0
-  BlackHoleChoice: 0
-  IceBallChoice: 0
-  Upgrade_1_Choice: 0
-  Upgrade_2_Choice: 0
+  cardType: 1
 --- !u!65 &6379400557710197385
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -199,35 +194,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 0
   serializedVersion: 3
-  m_Size: {x: 0.89422065, y: 1.2579691, z: 0.010000003}
-  m_Center: {x: -0.005848974, y: 0.0109374225, z: -0.0468}
---- !u!54 &6308098228492508193
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1379305409004934}
-  serializedVersion: 4
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_CenterOfMass: {x: 0, y: 0, z: 0}
-  m_InertiaTensor: {x: 1, y: 1, z: 1}
-  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ImplicitCom: 1
-  m_ImplicitTensor: 1
-  m_UseGravity: 0
-  m_IsKinematic: 1
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
+  m_Size: {x: 0.89422065, y: 1.2579691, z: 0.1}
+  m_Center: {x: -0.005848974, y: 0.0109374225, z: 5.734479e-19}
 --- !u!1 &1501282826037758
 GameObject:
   m_ObjectHideFlags: 0
@@ -408,8 +376,9 @@ TextMesh:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1915919342119532}
-  m_Text: "\uC544\uC774\uC2A4\uBCFC \uC2A4\uD0AC\uC744 \uC5BB\uC2B5\uB2C8\uB2E4.\n(\uC774\uBBF8
-    \uCE74\uB4DC\uB97C \uC120\uD0DD\uD558\uC168\uC2B5\uB2C8\uB2E4)"
+  m_Text: "\uC544\uC774\uC2A4\uBCFC\uC744 \uC5F0\uC18D\uC801\uC73C\uB85C\n\uB358\uC838
+    \uB370\uBBF8\uC9C0\uB97C \uC785\uD790 \uC218 \uC788\uB294\n\uC2A4\uD0AC\uC744
+    \uC5BB\uC2B5\uB2C8\uB2E4.\n(\uC774\uBBF8 \uCE74\uB4DC\uB97C \uC120\uD0DD\uD558\uC168\uC2B5\uB2C8\uB2E4)"
   m_OffsetZ: 0
   m_CharacterSize: 0.03
   m_LineSpacing: 1

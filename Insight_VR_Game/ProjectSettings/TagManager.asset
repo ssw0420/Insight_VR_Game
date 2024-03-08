@@ -10,6 +10,8 @@ TagManager:
   - BlackHole
   - Upgrade_1
   - Upgrade_2
+  - Home
+  - Restart
   layers:
   - Default
   - TransparentFX
@@ -27,7 +29,7 @@ TagManager:
   - Bomb
   - Environment
   - Boss Monster
-  - 
+  - Hit Monster
   - 
   - 
   - 
