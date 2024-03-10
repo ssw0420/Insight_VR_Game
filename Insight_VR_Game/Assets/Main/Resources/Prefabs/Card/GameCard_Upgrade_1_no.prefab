@@ -376,8 +376,8 @@ TextMesh:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1915919342119532}
-  m_Text: "\uD654\uC0B4 \uACF5\uACA9\uB825\uC744 \n2\uBC30 \uC99D\uAC00\uC2DC\uD0B5\uB2C8\uB2E4.\n(\uC774\uBBF8
-    \uCE74\uB4DC\uB97C \uC120\uD0DD\uD558\uC168\uC2B5\uB2C8\uB2E4)"
+  m_Text: "\uD65C\uC744 \uAC15\uD654\uC2DC\uCF1C \uD654\uC0B4 \uACF5\uACA9\uB825\uC744\n2\uBC30
+    \uC99D\uAC00\uC2DC\uD0B5\uB2C8\uB2E4.\n(\uC774\uBBF8 \uCE74\uB4DC\uB97C \uC120\uD0DD\uD558\uC168\uC2B5\uB2C8\uB2E4)"
   m_OffsetZ: 0
   m_CharacterSize: 0.03
   m_LineSpacing: 1

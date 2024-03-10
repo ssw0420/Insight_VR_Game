@@ -179,7 +179,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 525, y: 212.5, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 3, y: 3, z: 3}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 4966232716812818}
@@ -421,9 +421,9 @@ TextMesh:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1915919342119532}
   m_Text: "\uBE14\uB799\uD640 \uAD6C\uB97C \uD3EC\uBB3C\uC120\uC73C\uB85C \uB358\uC838
-    \n\uAD6C \uC911\uC2EC\uC73C\uB85C \uBAAC\uC2A4\uD130\uB4E4\uC744\n\uB04C\uC5B4\uB2F9\uAE30\uB294
-    \uC2A4\uD0AC\uC744 \uC5BB\uC2B5\uB2C8\uB2E4.\n\uCFE8\uD0C0\uC784 : 8\uCD08\n\uC2A4\uD0AC
-    \uC0AC\uC6A9\uC2DC\uAC04 : 4.5\uCD08\n(\uC774\uBBF8 \uCE74\uB4DC\uB97C \uC120\uD0DD\uD558\uC168\uC2B5\uB2C8\uB2E4)"
+    \n\uAD6C \uC911\uC2EC\uC73C\uB85C \uBAAC\uC2A4\uD130\uB4E4\uC744\n\uB04C\uC5B4\uB2F9\uAE30\uBA70
+    \uD53C\uD574\uB97C \uC785\uD799\uB2C8\uB2E4.\n\uCFE8\uD0C0\uC784 : 8\uCD08\n\uC2DC\uC804
+    \uC2DC\uAC04 : 4.5\uCD08\n(\uC774\uBBF8 \uCE74\uB4DC\uB97C \uC120\uD0DD\uD558\uC168\uC2B5\uB2C8\uB2E4)"
   m_OffsetZ: 0
   m_CharacterSize: 0.03
   m_LineSpacing: 1
@@ -607,7 +607,7 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
-  m_PresetInfoIsWorld: 0
+  m_PresetInfoIsWorld: 1
 --- !u!114 &860023779594787000
 MonoBehaviour:
   m_ObjectHideFlags: 0

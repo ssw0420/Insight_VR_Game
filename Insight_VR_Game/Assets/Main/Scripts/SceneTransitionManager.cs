@@ -17,13 +17,14 @@ public class SceneTransitionManager : MonoBehaviour
 
     public void GoToSceneAsync(string sceneName)
     {
-        StartCoroutine(GoToSceneAsyncRoutine(sceneName));
+        if(!isSceenMove)
+        {
+            StartCoroutine(GoToSceneAsyncRoutine(sceneName));
+        }
     }
 
     IEnumerator GoToSceneAsyncRoutine(string sceneName)
     {
-        if (isSceenMove)
-            yield return null;
 
         isSceenMove=true;
         fadeScreen.FadeOut();

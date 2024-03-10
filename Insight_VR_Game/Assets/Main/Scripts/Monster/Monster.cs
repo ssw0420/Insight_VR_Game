@@ -49,6 +49,8 @@ public class Monster : MonoBehaviour
     protected AudioSource monsterAudio;
 
     float saveSpeed;
+    int randZ = Random.Range(-2, 2);
+    float spawn_delay_time;
 
     private void Awake()
     {
@@ -61,13 +63,14 @@ public class Monster : MonoBehaviour
         {
             instance = this;
         }
+
+        
     }
 
     protected virtual void Start()
     {
         m_State = MonsterState.Walk;
         finishPoint = GameObject.Find("Finish Point Box").transform;
-        int randZ = Random.Range(-2, 2);
         agent.SetDestination(finishPoint.position + new Vector3(0, 0, randZ));
         saveSpeed = agent.speed;
         hitMaterial = MonsterManager.Instance.GetHitMaterial();
@@ -80,7 +83,6 @@ public class Monster : MonoBehaviour
 
         m_State = MonsterState.Walk;
         finishPoint = GameObject.Find("Finish Point Box").transform;
-        int randZ = Random.Range(-2, 2);
         agent.SetDestination(finishPoint.position + new Vector3(0, 0, randZ));
         
     }
@@ -92,14 +94,18 @@ public class Monster : MonoBehaviour
 
     private void Update()
     {
-        switch (m_State)
+        spawn_delay_time += Time.deltaTime;
+        if(spawn_delay_time >= 2.0f)
         {
-            case MonsterState.Walk:
-                if (agent.velocity.sqrMagnitude >= 0.2f * 0.2f && agent.remainingDistance <= 0.5f)
-                {
-                    StartCoroutine(OnAttack());
-                }
-                break;
+            switch (m_State)
+            {
+                case MonsterState.Walk:
+                    if (agent.velocity.sqrMagnitude >= 0.2f * 0.2f && agent.remainingDistance <= 0.5f)
+                    {
+                        StartCoroutine(OnAttack());
+                    }
+                    break;
+            }
         }
     }
 
@@ -229,7 +235,6 @@ public class Monster : MonoBehaviour
         gameObject.layer = LayerMask.NameToLayer("Default");
         anim.SetTrigger("isDie");
         agent.enabled = false;
-
         StartCoroutine("MonsterHitEffect");
         StartCoroutine(MonsterFadeOut());
     }
