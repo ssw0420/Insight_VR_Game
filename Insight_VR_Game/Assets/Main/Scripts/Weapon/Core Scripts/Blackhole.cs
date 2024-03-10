@@ -6,7 +6,7 @@ using UnityEngine.XR.Interaction.Toolkit;
 public class BlackHole : MonoBehaviour
 {
     private bool onGround = false;
-    private float blackHole_time = 4.0f;
+    private float blackHole_time = 4.5f;
 
     private SphereCollider sphereCollider;
     public void Start()
