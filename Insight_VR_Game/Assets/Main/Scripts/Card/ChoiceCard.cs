@@ -1,3 +1,4 @@
+using MagicPigGames;
 using UnityEngine;
 
 public class ChoiceCard : MonoBehaviour
@@ -44,6 +45,7 @@ public class ChoiceCard : MonoBehaviour
     public void ChoiceUpgrade_2()
     {
         PlayerController.instance.HealthState = true;
+        ProgressBarInspectorTest.instance.progress += ProgressBarInspectorTest.instance.progress / 2;
         DestroyCards();
     }
 

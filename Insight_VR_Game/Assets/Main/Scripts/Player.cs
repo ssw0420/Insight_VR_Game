@@ -24,8 +24,8 @@ public class Player : MonoBehaviour
 
     public void PlayerHit()
     {
-        hitAudio.Play();
-        leftController.SendHapticImpulse(0.3f, 0.3f);
-        rightController.SendHapticImpulse(0.3f, 0.3f);
+        //hitAudio.Play();
+        //leftController.SendHapticImpulse(0.3f, 0.3f);
+        //rightController.SendHapticImpulse(0.3f, 0.3f);
     }
 }
