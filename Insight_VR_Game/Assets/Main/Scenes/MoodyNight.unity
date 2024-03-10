@@ -1505,7 +1505,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1407636342966099738, guid: 953a7bdb2444c1d4e87666ad5fc5881a, type: 3}
       propertyPath: monsterAudio.Array.size
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 1407636342966099738, guid: 953a7bdb2444c1d4e87666ad5fc5881a, type: 3}
       propertyPath: monsterPrefabs.Array.size
@@ -1517,6 +1517,10 @@ PrefabInstance:
       objectReference: {fileID: 8300000, guid: a27f3a0b742ce304bb1a953c5a099496, type: 3}
     - target: {fileID: 1407636342966099738, guid: 953a7bdb2444c1d4e87666ad5fc5881a, type: 3}
       propertyPath: monsterAudio.Array.data[1]
+      value: 
+      objectReference: {fileID: 8300000, guid: 537690cb01228c24c823311956f39d0b, type: 3}
+    - target: {fileID: 1407636342966099738, guid: 953a7bdb2444c1d4e87666ad5fc5881a, type: 3}
+      propertyPath: monsterAudio.Array.data[2]
       value: 
       objectReference: {fileID: 8300000, guid: ca3c6400bdf92c040a0520199e952138, type: 3}
     - target: {fileID: 1407636342966099738, guid: 953a7bdb2444c1d4e87666ad5fc5881a, type: 3}
@@ -3118,7 +3122,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1407636342966099738, guid: 953a7bdb2444c1d4e87666ad5fc5881a, type: 3}
       propertyPath: monsterAudio.Array.size
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 1407636342966099738, guid: 953a7bdb2444c1d4e87666ad5fc5881a, type: 3}
       propertyPath: monsterPrefabs.Array.size
@@ -3130,6 +3134,10 @@ PrefabInstance:
       objectReference: {fileID: 8300000, guid: a27f3a0b742ce304bb1a953c5a099496, type: 3}
     - target: {fileID: 1407636342966099738, guid: 953a7bdb2444c1d4e87666ad5fc5881a, type: 3}
       propertyPath: monsterAudio.Array.data[1]
+      value: 
+      objectReference: {fileID: 8300000, guid: 537690cb01228c24c823311956f39d0b, type: 3}
+    - target: {fileID: 1407636342966099738, guid: 953a7bdb2444c1d4e87666ad5fc5881a, type: 3}
+      propertyPath: monsterAudio.Array.data[2]
       value: 
       objectReference: {fileID: 8300000, guid: ca3c6400bdf92c040a0520199e952138, type: 3}
     - target: {fileID: 1407636342966099738, guid: 953a7bdb2444c1d4e87666ad5fc5881a, type: 3}
@@ -7111,7 +7119,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1407636342966099738, guid: 953a7bdb2444c1d4e87666ad5fc5881a, type: 3}
       propertyPath: monsterAudio.Array.size
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 1407636342966099738, guid: 953a7bdb2444c1d4e87666ad5fc5881a, type: 3}
       propertyPath: monsterPrefabs.Array.size
@@ -7123,6 +7131,10 @@ PrefabInstance:
       objectReference: {fileID: 8300000, guid: a27f3a0b742ce304bb1a953c5a099496, type: 3}
     - target: {fileID: 1407636342966099738, guid: 953a7bdb2444c1d4e87666ad5fc5881a, type: 3}
       propertyPath: monsterAudio.Array.data[1]
+      value: 
+      objectReference: {fileID: 8300000, guid: 537690cb01228c24c823311956f39d0b, type: 3}
+    - target: {fileID: 1407636342966099738, guid: 953a7bdb2444c1d4e87666ad5fc5881a, type: 3}
+      propertyPath: monsterAudio.Array.data[2]
       value: 
       objectReference: {fileID: 8300000, guid: ca3c6400bdf92c040a0520199e952138, type: 3}
     - target: {fileID: 1407636342966099738, guid: 953a7bdb2444c1d4e87666ad5fc5881a, type: 3}
@@ -7315,7 +7327,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1407636342966099738, guid: 953a7bdb2444c1d4e87666ad5fc5881a, type: 3}
       propertyPath: monsterAudio.Array.size
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 1407636342966099738, guid: 953a7bdb2444c1d4e87666ad5fc5881a, type: 3}
       propertyPath: monsterPrefabs.Array.size
@@ -7327,6 +7339,10 @@ PrefabInstance:
       objectReference: {fileID: 8300000, guid: a27f3a0b742ce304bb1a953c5a099496, type: 3}
     - target: {fileID: 1407636342966099738, guid: 953a7bdb2444c1d4e87666ad5fc5881a, type: 3}
       propertyPath: monsterAudio.Array.data[1]
+      value: 
+      objectReference: {fileID: 8300000, guid: 537690cb01228c24c823311956f39d0b, type: 3}
+    - target: {fileID: 1407636342966099738, guid: 953a7bdb2444c1d4e87666ad5fc5881a, type: 3}
+      propertyPath: monsterAudio.Array.data[2]
       value: 
       objectReference: {fileID: 8300000, guid: ca3c6400bdf92c040a0520199e952138, type: 3}
     - target: {fileID: 1407636342966099738, guid: 953a7bdb2444c1d4e87666ad5fc5881a, type: 3}

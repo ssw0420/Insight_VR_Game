@@ -169,9 +169,15 @@ public class Monster : MonoBehaviour
         {
             case "Arrow":
                 monsterAudio.clip = hitAudios[0];
+                monsterAudio.volume = 0.4f;
+                break;
+            case "BlackHole":
+                monsterAudio.clip = hitAudios[1];
+                monsterAudio.volume = 0.25f;
                 break;
             case "Ice":
-                monsterAudio.clip = hitAudios[1];
+                monsterAudio.clip = hitAudios[2];
+                monsterAudio.volume = 0.4f;
                 break;
         }
 
@@ -263,6 +269,9 @@ public class Monster : MonoBehaviour
 
     public virtual void HitBlackHole(Vector3 hitPos)
     {
+        if (m_State == MonsterState.Die)
+            return;
+
         m_State = MonsterState.SkillHit;
 
         anim.SetBool("isWalk", true);

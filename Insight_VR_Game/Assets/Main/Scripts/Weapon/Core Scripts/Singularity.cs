@@ -18,7 +18,6 @@ public class Singularity : MonoBehaviour
     
     void OnTriggerStay (Collider other) {
         if(other.GetComponent<SingularityPullable>()) {
-            Debug.Log("몬스터 블랙홀 맞음");
             other.GetComponent<Monster>().HitBlackHole(transform.position);
 
             //float gravityIntensity = Vector3.Distance(transform.position, other.transform.position) / m_GravityRadius;

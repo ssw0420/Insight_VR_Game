@@ -24,6 +24,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameObject crossbow;
     [SerializeField] GameObject skillBall;
 
+    bool isEnd = false;
+
     public static GameManager Instance
     {
         get { return instance; }
@@ -57,6 +59,10 @@ public class GameManager : MonoBehaviour
 
     public void GameVictroy()
     {
+        if (isEnd)
+            return;
+        isEnd = true;
+
         //Timer Stop
         isTimer = false;
 
@@ -78,6 +84,10 @@ public class GameManager : MonoBehaviour
 
     public void GameLose()
     {
+        if (isEnd)
+            return;
+        isEnd = true;
+
         //Timer Stop
         isTimer = false;
 

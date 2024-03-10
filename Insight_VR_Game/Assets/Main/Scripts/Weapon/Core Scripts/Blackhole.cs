@@ -41,7 +41,7 @@ public class BlackHole : MonoBehaviour
     private void StartSkill()
     {
          transform.GetChild(0).gameObject.SetActive(true);
-         transform.GetChild(3).gameObject.SetActive(true);
+         transform.GetChild(2).gameObject.SetActive(true);
          GetComponent<Rigidbody>().isKinematic = true;
     }
 
