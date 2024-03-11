@@ -6,7 +6,7 @@ public class IceLance : MonoBehaviour
 {
     private AudioSource audioSource;
     private float iceLance_time = 0.0f;
-    private int icelance_dmg = 2;
+    private int icelance_dmg = 3;
     //public ParticleSystem myParticleSystem;
     // Start is called before the first frame update
 

@@ -46,7 +46,7 @@ public class SingularityCore : MonoBehaviour
             if (!isBomb)
                 return;
 
-            other.GetComponent<Monster>().OnHit(1, "BlackHole");
+            other.GetComponent<Monster>().OnHit(2, "BlackHole");
             Debug.Log("ontrigger");
         }
     }
