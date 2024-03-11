@@ -49,8 +49,8 @@ public class Monster : MonoBehaviour
     protected AudioSource monsterAudio;
 
     float saveSpeed;
-    int randZ = Random.Range(-2, 2);
     float spawn_delay_time;
+    int randZ;
 
     private void Awake()
     {
@@ -71,6 +71,7 @@ public class Monster : MonoBehaviour
     {
         m_State = MonsterState.Walk;
         finishPoint = GameObject.Find("Finish Point Box").transform;
+        randZ = Random.Range(-2, 2);
         agent.SetDestination(finishPoint.position + new Vector3(0, 0, randZ));
         saveSpeed = agent.speed;
         hitMaterial = MonsterManager.Instance.GetHitMaterial();
@@ -81,6 +82,7 @@ public class Monster : MonoBehaviour
         if (m_State != MonsterState.SkillHit)
             return;
 
+        randZ = Random.Range(-2, 2);
         m_State = MonsterState.Walk;
         finishPoint = GameObject.Find("Finish Point Box").transform;
         agent.SetDestination(finishPoint.position + new Vector3(0, 0, randZ));

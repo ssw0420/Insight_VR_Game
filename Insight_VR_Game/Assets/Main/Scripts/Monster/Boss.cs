@@ -24,6 +24,7 @@ public class Boss : Monster
     List<GameObject> BossEyeHit;
     ParticleSystem bossSkillEffect;
     AudioSource skillAudio;
+    List<AudioClip> hitAudios;
     List<Transform> bossFinishPoint;
     Transform bossSkillPos;
     int checkPoint = 0;
@@ -40,6 +41,7 @@ public class Boss : Monster
         bossFinishPoint = MonsterManager.Instance.GetBossPointList().ToList();
         bossSkillEffect = GetComponentInChildren<ParticleSystem>();
         render = GetComponentsInChildren<Renderer>()[3];
+        skillAudio = GetComponentInChildren<AudioSource>();
         b_State = BossState.Walk;
         BossMove();
     }
@@ -126,7 +128,6 @@ public class Boss : Monster
         anim.SetBool("isAttack", true);
         Debug.Log("공격 시전");
         yield return new WaitForSeconds(0.733f);
-        //PlayerStats.Instance.TakeDamage(1);
         if (PlayerController.instance.HealthState == false)
             ProgressBarInspectorTest.instance.progress -= 0.4f;
         else if (PlayerController.instance.HealthState == true)
@@ -157,6 +158,7 @@ public class Boss : Monster
 
         yield return new WaitForSeconds(3f);
         bossSkillEffect.Play();
+        skillAudio.clip = hitAudios[1];
         skillAudio.Play();
 
         if (PlayerController.instance.HealthState == false)
@@ -192,6 +194,8 @@ public class Boss : Monster
     {
         Material saveMeterial = render.materials[0];
         render.material = hitMaterial;
+        skillAudio.clip = hitAudios[0];
+        skillAudio.Play();
         isHit = true;
 
         yield return new WaitForSeconds(0.5f);

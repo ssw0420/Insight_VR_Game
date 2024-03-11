@@ -575,7 +575,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 3
+  m_Speed: 3.5
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
@@ -601,7 +601,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   finishPoint: {fileID: 0}
   fadeDelay: 3
-  health: 2
+  health: 1
   hitMaterial: {fileID: 2100000, guid: 51bc79759a0545c4dae4e0206bcbe2ab, type: 2}
   damage: 1
   hitDelay: 2

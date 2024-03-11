@@ -1,1 +1,9 @@
-1,MushroomAngry,0
+1,ChestMonster,0
+3,MushroomAngry,0
+3,MushroomAngry,0
+1,Turtle,1
+10,ChestMonster,1
+3,Cactus,2
+2,MushroomAngry,2
+2,MushroomSmile,3
+2,MushroomSmile,3
