@@ -397,6 +397,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c6df8953546664469af5c0ff570cada, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  victoryUI: {fileID: 0}
+  loseUI: {fileID: 0}
+  victoryAudio: {fileID: 0}
+  loseAudio: {fileID: 0}
+  isTimer: 0
+  playTime: 0
+  crossbow: {fileID: 0}
+  skillBall: {fileID: 0}
 --- !u!1 &188225529
 GameObject:
   m_ObjectHideFlags: 0
@@ -2009,6 +2017,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ee72955f3498354b93992e9eb6a415e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  fade: {fileID: 0}
 --- !u!225 &1243798622
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -3396,6 +3405,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: caac5990442bd38448a275b67ecb79d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  portalSound: []
+  SceneName: 
 --- !u!1 &2110347825
 GameObject:
   m_ObjectHideFlags: 0
