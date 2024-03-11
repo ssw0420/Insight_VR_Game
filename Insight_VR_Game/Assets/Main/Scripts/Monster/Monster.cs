@@ -89,7 +89,7 @@ public class Monster : MonoBehaviour
         
     }
 
-    public void SetAudio(List<AudioClip> hitAudio)
+    public virtual void SetAudio(List<AudioClip> hitAudio)
     {
         hitAudios = hitAudio.ToList();
     }

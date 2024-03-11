@@ -14,6 +14,7 @@ public class Spawner : MonoBehaviour
 
     public List<GameObject> monsterPrefabs;
     public List<AudioClip> monsterAudio;
+    public List<AudioClip> bossAudio;
 
     private void Awake()
     {
@@ -77,7 +78,10 @@ public class Spawner : MonoBehaviour
         }
 
         GameObject spawnMonster = Instantiate(monsterPrefabs[spawnType], transform);
-        spawnMonster.GetComponent<Monster>().SetAudio(monsterAudio);
+        if (spawnType == 6)
+            spawnMonster.GetComponent<Boss>().SetAudio(bossAudio);
+        else
+            spawnMonster.GetComponent<Monster>().SetAudio(monsterAudio);
         MonsterManager.Instance.AddLiveMonsterList(spawnMonster);
     }
 }

@@ -24,7 +24,7 @@ public class Boss : Monster
     List<GameObject> BossEyeHit;
     ParticleSystem bossSkillEffect;
     AudioSource skillAudio;
-    List<AudioClip> hitAudios;
+    List<AudioClip> bossAudio;
     List<Transform> bossFinishPoint;
     Transform bossSkillPos;
     int checkPoint = 0;
@@ -44,6 +44,11 @@ public class Boss : Monster
         skillAudio = GetComponentInChildren<AudioSource>();
         b_State = BossState.Walk;
         BossMove();
+    }
+
+    public override void SetAudio(List<AudioClip> hitAudio)
+    {
+        bossAudio = hitAudio.ToList();
     }
 
     private void Update()
@@ -128,6 +133,7 @@ public class Boss : Monster
         anim.SetBool("isAttack", true);
         Debug.Log("공격 시전");
         yield return new WaitForSeconds(0.733f);
+        Player.Instance.PlayerHit();
         if (PlayerController.instance.HealthState == false)
             ProgressBarInspectorTest.instance.progress -= 0.4f;
         else if (PlayerController.instance.HealthState == true)
@@ -158,9 +164,10 @@ public class Boss : Monster
 
         yield return new WaitForSeconds(3f);
         bossSkillEffect.Play();
-        skillAudio.clip = hitAudios[1];
+        skillAudio.clip = bossAudio[1];
         skillAudio.Play();
 
+        Player.Instance.PlayerHit();
         if (PlayerController.instance.HealthState == false)
             ProgressBarInspectorTest.instance.progress -= 0.3f;
         else if (PlayerController.instance.HealthState == true)
@@ -180,12 +187,10 @@ public class Boss : Monster
 
         health -= damage;
         BossHealthBar.Instance.HealthUIUpdate(maxHealth, health);
-        Debug.Log(health);
         if (health <= 0)
         {
             Die();
         }
-            
 
         StartCoroutine(HitOut());
     }
@@ -194,7 +199,7 @@ public class Boss : Monster
     {
         Material saveMeterial = render.materials[0];
         render.material = hitMaterial;
-        skillAudio.clip = hitAudios[0];
+        skillAudio.clip = bossAudio[0];
         skillAudio.Play();
         isHit = true;
 

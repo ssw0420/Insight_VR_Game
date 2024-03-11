@@ -886,6 +886,18 @@ PrefabInstance:
     m_TransformParent: {fileID: 1050115111}
     m_Modifications:
     - target: {fileID: 1407636342966099738, guid: 953a7bdb2444c1d4e87666ad5fc5881a, type: 3}
+      propertyPath: bossAudio.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1407636342966099738, guid: 953a7bdb2444c1d4e87666ad5fc5881a, type: 3}
+      propertyPath: bossAudio.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: a27f3a0b742ce304bb1a953c5a099496, type: 3}
+    - target: {fileID: 1407636342966099738, guid: 953a7bdb2444c1d4e87666ad5fc5881a, type: 3}
+      propertyPath: bossAudio.Array.data[1]
+      value: 
+      objectReference: {fileID: 8300000, guid: dc171a962d65f0c40877a398ec943afa, type: 3}
+    - target: {fileID: 1407636342966099738, guid: 953a7bdb2444c1d4e87666ad5fc5881a, type: 3}
       propertyPath: monsterAudio.Array.size
       value: 1
       objectReference: {fileID: 0}
@@ -3290,6 +3302,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1050115111}
     m_Modifications:
+    - target: {fileID: 1407636342966099738, guid: 953a7bdb2444c1d4e87666ad5fc5881a, type: 3}
+      propertyPath: bossAudio.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1407636342966099738, guid: 953a7bdb2444c1d4e87666ad5fc5881a, type: 3}
+      propertyPath: bossAudio.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: a27f3a0b742ce304bb1a953c5a099496, type: 3}
+    - target: {fileID: 1407636342966099738, guid: 953a7bdb2444c1d4e87666ad5fc5881a, type: 3}
+      propertyPath: bossAudio.Array.data[1]
+      value: 
+      objectReference: {fileID: 8300000, guid: dc171a962d65f0c40877a398ec943afa, type: 3}
     - target: {fileID: 1407636342966099738, guid: 953a7bdb2444c1d4e87666ad5fc5881a, type: 3}
       propertyPath: monsterAudio.Array.size
       value: 1
@@ -7054,6 +7078,18 @@ PrefabInstance:
     m_TransformParent: {fileID: 1050115111}
     m_Modifications:
     - target: {fileID: 1407636342966099738, guid: 953a7bdb2444c1d4e87666ad5fc5881a, type: 3}
+      propertyPath: bossAudio.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1407636342966099738, guid: 953a7bdb2444c1d4e87666ad5fc5881a, type: 3}
+      propertyPath: bossAudio.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: a27f3a0b742ce304bb1a953c5a099496, type: 3}
+    - target: {fileID: 1407636342966099738, guid: 953a7bdb2444c1d4e87666ad5fc5881a, type: 3}
+      propertyPath: bossAudio.Array.data[1]
+      value: 
+      objectReference: {fileID: 8300000, guid: dc171a962d65f0c40877a398ec943afa, type: 3}
+    - target: {fileID: 1407636342966099738, guid: 953a7bdb2444c1d4e87666ad5fc5881a, type: 3}
       propertyPath: monsterAudio.Array.size
       value: 1
       objectReference: {fileID: 0}
@@ -7248,6 +7284,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1050115111}
     m_Modifications:
+    - target: {fileID: 1407636342966099738, guid: 953a7bdb2444c1d4e87666ad5fc5881a, type: 3}
+      propertyPath: bossAudio.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1407636342966099738, guid: 953a7bdb2444c1d4e87666ad5fc5881a, type: 3}
+      propertyPath: bossAudio.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: a27f3a0b742ce304bb1a953c5a099496, type: 3}
+    - target: {fileID: 1407636342966099738, guid: 953a7bdb2444c1d4e87666ad5fc5881a, type: 3}
+      propertyPath: bossAudio.Array.data[1]
+      value: 
+      objectReference: {fileID: 8300000, guid: dc171a962d65f0c40877a398ec943afa, type: 3}
     - target: {fileID: 1407636342966099738, guid: 953a7bdb2444c1d4e87666ad5fc5881a, type: 3}
       propertyPath: monsterAudio.Array.size
       value: 1
