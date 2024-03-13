@@ -57,7 +57,7 @@ public class ChoiceCard : MonoBehaviour
         {
             if (obj.layer == LayerMask.NameToLayer("Card"))
             {
-                Destroy(obj);
+                Destroy(obj, 3.0f);
             }
         }
     }
