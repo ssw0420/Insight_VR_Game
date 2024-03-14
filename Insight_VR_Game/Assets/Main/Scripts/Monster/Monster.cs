@@ -19,7 +19,7 @@ public enum MonsterState {
 
 public class Monster : MonoBehaviour
 {
-    MonsterState m_State;
+   [SerializeField] MonsterState m_State;
     public static Monster instance;
     //움직임 및 애니메이션
     protected Animator anim;
@@ -124,7 +124,7 @@ public class Monster : MonoBehaviour
 
     protected void MonsterVision()
     {
-        Vector3 lookDir = (player.transform.position - transform.position).normalized;
+        Vector3 lookDir = (player.transform.position - transform.position - Vector3.up).normalized;
 
         Quaternion from = transform.rotation;
         Quaternion to = Quaternion.LookRotation(lookDir);
@@ -138,6 +138,7 @@ public class Monster : MonoBehaviour
         agent.speed = 0f;
         anim.SetBool("isWalk", false);
         m_State = MonsterState.Attack;
+        agent.enabled = false;
 
         while (true)
         {
@@ -155,7 +156,11 @@ public class Monster : MonoBehaviour
 
             //PlayerStats.Instance.TakeDamage(damage);
             if(PlayerController.instance.HealthState == false)
+            {
+                monsterAudio.Play();
                 ProgressBarInspectorTest.instance.progress -= damage / 10.0f;
+                monsterAudio.Play();
+            }
             else if(PlayerController.instance.HealthState == true)
                 ProgressBarInspectorTest.instance.progress -= damage / 10.0f / 2.0f;
 
@@ -280,6 +285,7 @@ public class Monster : MonoBehaviour
             return;
 
         m_State = MonsterState.SkillHit;
+        agent.enabled = true;
 
         anim.SetBool("isWalk", true);
         agent.speed = 2f;

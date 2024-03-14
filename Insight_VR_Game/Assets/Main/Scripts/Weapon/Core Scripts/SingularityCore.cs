@@ -40,14 +40,19 @@ public class SingularityCore : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        if(other.gameObject.layer == LayerMask.NameToLayer("Monster") || other.gameObject.layer == LayerMask.NameToLayer("Health Monster"))
+        if(other.gameObject.layer == LayerMask.NameToLayer("Monster"))
         {
-            Debug.Log("onBlackHoleHitMonster");
             if (!isBomb)
                 return;
 
             other.GetComponent<Monster>().OnHit(1, "BlackHole");
-            Debug.Log("ontrigger");
+        }
+        else if(other.gameObject.layer == LayerMask.NameToLayer("Health Monster"))
+        {
+            if (!isBomb)
+                return;
+
+            other.GetComponent<HealthMonster>().OnHit(1, "BlackHole");
         }
     }
 }

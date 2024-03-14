@@ -11,12 +11,6 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Main/Scenes/MoodyNight.unity
     guid: b69ee083015cb424ea4eee2cef7bc6d4
-  - enabled: 1
-    path: Assets/Main/Scenes/HandTest_SSW/SSW_BugFix.unity
-    guid: bac511e32ce4a6945875a1494f7a7475
-  - enabled: 1
-    path: Assets/Main/Scenes/YMH_Scene/YMH_MoodyNight 4.unity
-    guid: 608af0977cbd18a45bb20a5eab771b50
   m_configObjects:
     com.unity.xr.management.loader_settings: {fileID: 11400000, guid: 67b9b43c3a0af704385fc67b64104f63, type: 2}
     com.unity.xr.openxr.settings4: {fileID: 11400000, guid: ad2425a2d8aa2dc449d2e4b3ac01191d, type: 2}
