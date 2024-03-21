@@ -19,7 +19,7 @@ public enum MonsterState {
 
 public class Monster : MonoBehaviour
 {
-   [SerializeField] MonsterState m_State;
+    MonsterState m_State;
     public static Monster instance;
     //움직임 및 애니메이션
     protected Animator anim;

@@ -6,7 +6,7 @@ public class IceLance : MonoBehaviour
 {
     private AudioSource audioSource;
     private float iceLance_time = 0.0f;
-    private int icelance_dmg = 2;
+    private int icelance_dmg = 1;
     //public ParticleSystem myParticleSystem;
     // Start is called before the first frame update
 
@@ -35,6 +35,14 @@ public class IceLance : MonoBehaviour
         {
             other.GetComponent<Monster>().OnHit(icelance_dmg, "Ice");
             Destroy(gameObject, 0.3f);
+        }
+        else if(other.layer == LayerMask.NameToLayer("Health Monster"))
+        {
+            other.GetComponent<HealthMonster>().OnHit(icelance_dmg, "Ice");
+        }
+        else if (other.layer == LayerMask.NameToLayer("Boss"))
+        {
+            other.GetComponent<Boss>().OnHit(icelance_dmg, "Ice");
         }
         else if (other.layer == LayerMask.NameToLayer("Hit Monster"))
         {
